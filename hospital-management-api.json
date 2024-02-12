@@ -1,0 +1,13 @@
+{
+    "displayName": "hospital-management-apI",
+    "appName": "hospital-management-api",
+    "description": "API OF IMH(international medical hospital) ",
+    "lastModified": "2024-02-12T12:51:58.199Z",
+    "imgSourcePath": "appIcon-1707742317603.png",
+    "version": "1.0.0",
+    "appType": "apiOnly",
+    "templateName": "blank",
+    "createDate": "2024-02-12T12:51:57.598Z",
+    "analyticsId": "308dec63-4269-2826-08bd-5b6d9a7e5a59",
+    "createdStudioVersion": "9.2.1"
+}
