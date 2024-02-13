@@ -7,9 +7,9 @@ import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx from './find_a_department_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from './filter_doctor_service'; //_splitter_
 //append_imports_end
-export class find_a_department_api {
+export class filter_doctor_api {
   private sdService = new SDBaseService();
   private tracerService = new TracerService();
   private app;
@@ -25,7 +25,7 @@ export class find_a_department_api {
     middlewareCall,
     globalTimers
   ) {
-    this.serviceName = 'find_a_department_api';
+    this.serviceName = 'filter_doctor_api';
     this.app = app;
     this.serviceBasePath = this.app.settings.base;
     this.generatedMiddlewares = generatedeMiddlewares;
@@ -40,7 +40,7 @@ export class find_a_department_api {
     globalTimers?
   ) {
     if (!instance) {
-      instance = new find_a_department_api(
+      instance = new filter_doctor_api(
         app,
         generatedeMiddlewares,
         routeCall,
@@ -69,19 +69,19 @@ export class find_a_department_api {
   }
 
   async mountTimers() {
-    //appendnew_flow_find_a_department_api_TimerStart
+    //appendnew_flow_filter_doctor_api_TimerStart
   }
 
   private mountAllMiddlewares() {
-    log.debug('mounting all middlewares for service :: find_a_department_api');
-    //appendnew_flow_find_a_department_api_MiddlewareStart
+    log.debug('mounting all middlewares for service :: filter_doctor_api');
+    //appendnew_flow_filter_doctor_api_MiddlewareStart
   }
 
   private mountAllPaths() {
-    log.debug('mounting all paths for service :: find_a_department_api');
+    log.debug('mounting all paths for service :: filter_doctor_api');
 
-    this.app['get'](
-      `${this.serviceBasePath}/department/get`,
+    this.app['post'](
+      `${this.serviceBasePath}/doctorfilter/post`,
       cookieParser(),
       this.sdService.getMiddlesWaresBySequenceId(
         null,
@@ -99,10 +99,10 @@ export class find_a_department_api {
             next
           );
           let parentSpanInst = null;
-          bh = await this.allDepartmentFlows(bh, parentSpanInst);
-          //appendnew_next_sd_j9wbI8lf5aIGqhqJ
+          bh = await this.sd_bAoAnjKoApT4gESB(bh, parentSpanInst);
+          //appendnew_next_sd_tdnWYSU7UxtMf9qn
         } catch (e) {
-          return await this.errorHandler(bh, e, 'sd_j9wbI8lf5aIGqhqJ');
+          return await this.errorHandler(bh, e, 'sd_tdnWYSU7UxtMf9qn');
         }
       },
       this.sdService.getMiddlesWaresBySequenceId(
@@ -111,37 +111,65 @@ export class find_a_department_api {
         this.generatedMiddlewares
       )
     );
-    //appendnew_flow_find_a_department_api_HttpIn
+    //appendnew_flow_filter_doctor_api_HttpIn
   }
-  //   service flows_find_a_department_api
+  //   service flows_filter_doctor_api
 
-  //appendnew_flow_find_a_department_api_start
+  //appendnew_flow_filter_doctor_api_start
 
-  async allDepartmentFlows(bh, parentSpanInst) {
+  async sd_bAoAnjKoApT4gESB(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'allDepartmentFlows',
+      'sd_bAoAnjKoApT4gESB',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCxInstance: SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx.find_a_department_service =
-        SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx.find_a_department_service.getInstance();
-      let outputVariables =
-        await SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCxInstance.getAllDepartment(
-          spanInst
-        );
-      bh.local.response = outputVariables.local.response;
-
+      // console.log(bh,bh.input,"hiiiii")
+      // console.log("drtghbjk")
+      // console.log(bh)
+      // console.log(bh.input.body)
+      // console.log(bh.local.body)
+      // console.log(bh.local)
       this.tracerService.sendData(spanInst, bh);
-      await this.departmentHttpOut(bh, parentSpanInst);
-      //appendnew_next_allDepartmentFlows
+      bh = await this.filterDepartmentFlow(bh, parentSpanInst);
+      //appendnew_next_sd_bAoAnjKoApT4gESB
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_DYimibKXd81BiPiG',
+        'sd_bAoAnjKoApT4gESB',
         spanInst,
-        'allDepartmentFlows'
+        'sd_bAoAnjKoApT4gESB'
+      );
+    }
+  }
+
+  async filterDepartmentFlow(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'filterDepartmentFlow',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance: SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service =
+        SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance.getADoctor(
+          spanInst,
+          bh.input.body
+        );
+      bh.local.response = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      await this.departmentHttpOut(bh, parentSpanInst);
+      //appendnew_next_filterDepartmentFlow
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_hrzNagdoVJSblmOm',
+        spanInst,
+        'filterDepartmentFlow'
       );
     }
   }
@@ -154,7 +182,7 @@ export class find_a_department_api {
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_vaYWXonGZjr8cLsT');
+      return await this.errorHandler(bh, e, 'sd_2lEfIThZi1GmM9pq');
     }
   }
 
@@ -176,7 +204,7 @@ export class find_a_department_api {
       return await this.errorHandler(
         bh,
         e,
-        'sd_R8W2CuaiU4cCw6Wv',
+        'sd_eK7616VEGERujrhU',
         spanInst,
         'statusReport'
       );
@@ -191,7 +219,7 @@ export class find_a_department_api {
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_o9a71nc7xJfH6IQq');
+      return await this.errorHandler(bh, e, 'sd_mqoX1NHg4K4PTIOQ');
     }
   }
 
@@ -225,7 +253,7 @@ export class find_a_department_api {
     }
   }
   async errorHandle(bh, parentSpanInst) {
-    const catchConnectedNodes = ['sd_R8W2CuaiU4cCw6Wv', 'sd_o9a71nc7xJfH6IQq'];
+    const catchConnectedNodes = ['sd_eK7616VEGERujrhU', 'sd_mqoX1NHg4K4PTIOQ'];
     if (catchConnectedNodes.includes(bh.errorSource)) {
       return false;
     }
@@ -233,5 +261,5 @@ export class find_a_department_api {
     //appendnew_next_errorHandle
     return true;
   }
-  //appendnew_flow_find_a_department_api_Catch
+  //appendnew_flow_filter_doctor_api_Catch
 }

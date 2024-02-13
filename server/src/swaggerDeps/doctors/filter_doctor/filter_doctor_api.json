@@ -1,0 +1,22 @@
+{
+    "/doctorfilter/post": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "data",
+                    "description": "filter datas for doctor",
+                    "required": true
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "filter_doctor_api"
+            ]
+        }
+    }
+}
