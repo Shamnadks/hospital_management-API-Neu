@@ -1,0 +1,113 @@
+{
+    "name": "department",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_6ajjf9pg1n",
+    "y": 10,
+    "properties": {
+        "id": {
+            "name": "id",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_l4efmmzk9n",
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": true,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {
+                    "primaryGenerated": true
+                }
+            }
+        },
+        "name": {
+            "name": "name",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_7wy0m424oi",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "info": {
+            "name": "info",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_k6i8zd4wez",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "status": {
+            "name": "status",
+            "format": "",
+            "type": "boolean",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_x96zcxvvbh",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "boolean",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        }
+    },
+    "required": [
+        "name",
+        "info",
+        "status"
+    ],
+    "value": "",
+    "__attributeExpansion__": true,
+    "__operationExpansion__": false,
+    "x": 440,
+    "__check__": {},
+    "__unique__": {
+        "department": [
+            "id",
+            "name"
+        ]
+    },
+    "__index__": {},
+    "userList": {
+        "SSD_SERVICE_ID_sd_7wo0dUAyZGNCRTQn": [
+            "sd_OcTE3BdGyLolikdb"
+        ],
+        "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS": [
+            "sd_a3tYvmGq0Z8JzbA5"
+        ],
+        "SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq": [
+            "sd_9yBVV1PP0o5tup9M"
+        ],
+        "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ": [
+            "sd_wPgv3lBwbkw1Of2g"
+        ],
+        "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m": [
+            "sd_OzHkZ6ljAaL9OqCE"
+        ]
+    }
+}

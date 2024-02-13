@@ -1,0 +1,124 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx",
+        "type": "tab",
+        "createdDate": "2024-02-12T16:58:02.229Z",
+        "label": "find_a_department_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "find_a_department_service",
+        "relativeParentPath": "department/find_all_department"
+    },
+    {
+        "id": "sd_qPmbARv2gzmtcnAB",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 545,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "find_a_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_2dqzT43llQsLsKPS",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "get_a_department_sql",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "resultdata"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "query"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "dbType": "postgres",
+        "functionName": "getADepartmentSql",
+        "category": "Storage",
+        "x": 385,
+        "y": 80,
+        "wires": [
+            [
+                "sd_qPmbARv2gzmtcnAB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "find_a_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_iszE7gDtRt942hKw",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "psql_query",
+        "script": "bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.department`\n",
+        "functionName": "psqlQuery",
+        "category": "Function",
+        "x": 265,
+        "y": 80,
+        "wires": [
+            [
+                "sd_2dqzT43llQsLsKPS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "find_a_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_dXhTqDzLaft1nZkP",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "get_all_department",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "getAllDepartment",
+        "category": "General",
+        "x": 125,
+        "y": 80,
+        "wires": [
+            [
+                "sd_iszE7gDtRt942hKw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "find_a_department_service"
+    }
+]

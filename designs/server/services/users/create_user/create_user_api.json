@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_UvhLjLBfo8HXDZJS",
+        "disabled": false,
+        "info": "",
+        "label": "create_user_api",
+        "createdDate": "2024-02-12T17:14:34.031Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "create_user_api",
+        "relativeParentPath": "users/create_user"
+    }
+]

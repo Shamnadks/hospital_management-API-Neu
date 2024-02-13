@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
+        "disabled": false,
+        "info": "",
+        "label": "find_all_doctor_api",
+        "createdDate": "2024-02-12T17:09:26.707Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "find_all_doctor_api",
+        "relativeParentPath": "doctors/find_all_doctor"
+    }
+]

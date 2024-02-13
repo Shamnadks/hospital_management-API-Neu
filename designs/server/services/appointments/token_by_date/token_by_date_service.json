@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo",
+        "disabled": false,
+        "info": "",
+        "label": "token_by_date_service",
+        "createdDate": "2024-02-12T17:35:19.195Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "token_by_date_service",
+        "relativeParentPath": "appointments/token_by_date"
+    }
+]

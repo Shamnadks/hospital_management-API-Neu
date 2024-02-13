@@ -1,0 +1,29 @@
+{
+    "/department/put": {
+        "put": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "department",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "department": {
+                                "$ref": "#/definitions/hospital ~ department"
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "update_department_api"
+            ]
+        }
+    }
+}

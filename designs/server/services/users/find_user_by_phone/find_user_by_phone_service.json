@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_mo0SqSSi7ZxTtxA6",
+        "disabled": false,
+        "info": "",
+        "label": "find_user_by_phone_service",
+        "createdDate": "2024-02-12T17:23:11.570Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "find_user_by_phone_service",
+        "relativeParentPath": "users/find_user_by_phone"
+    }
+]

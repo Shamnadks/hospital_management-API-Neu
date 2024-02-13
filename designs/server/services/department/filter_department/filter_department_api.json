@@ -1,0 +1,215 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "type": "tab",
+        "createdDate": "2024-02-13T09:14:58.372Z",
+        "label": "filter_department_api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "filter_department_api",
+        "relativeParentPath": "department/filter_department"
+    },
+    {
+        "id": "sd_OzHkZ6ljAaL9OqCE",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "departmentfilter",
+        "path": "departmentfilter/post",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "_DM_kxoe18g2p",
+        "erdName": "hospital",
+        "entity": "department",
+        "entityId": "_EN_6ajjf9pg1n",
+        "ref": "#/definitions/hospital ~ department",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "data",
+                    "desc": "ghjgjhg",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_dcWU21yQdrC43uD1",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 205,
+        "y": 100,
+        "wires": [
+            [
+                "sd_8YFgzAL66WsGBuK8"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "filter_department_api",
+        "functionName": "sd_OzHkZ6ljAaL9OqCE",
+        "generated": false
+    },
+    {
+        "id": "sd_h9APgiV2F0fMwZz2",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "department_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response.data",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response.data",
+            "send": "bh.local.response.data"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "departmentHttpOut",
+        "category": "HTTP",
+        "x": 565,
+        "y": 120,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_7F6CWTQH2jTk6MXk",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "filter department flow",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5",
+            "type": "tab",
+            "createdDate": "2024-02-13T09:15:14.316Z",
+            "label": "filter_department_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_VXhTdZzj3e1Eobnq",
+            "flowName": "getADepartment"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./filter_department_service",
+        "startName": "getADepartment",
+        "inputParams": [
+            "bh.input.body"
+        ],
+        "accept_bh": false,
+        "functionName": "filterDepartmentFlow",
+        "category": "General",
+        "x": 425,
+        "y": 100,
+        "wires": [
+            [
+                "sd_h9APgiV2F0fMwZz2"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "filter_department_api"
+    },
+    {
+        "id": "sd_8YFgzAL66WsGBuK8",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "// console.log(bh,bh.input,\"hiiiii\")\n// console.log(\"drtghbjk\")\n// console.log(bh)\n// console.log(bh.input.body)\n// console.log(bh.local.body)\n// console.log(bh.local)",
+        "functionName": "sd_8YFgzAL66WsGBuK8",
+        "category": "Function",
+        "x": 325,
+        "y": 100,
+        "wires": [
+            [
+                "sd_7F6CWTQH2jTk6MXk"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_department_api",
+        "generated": true
+    }
+]

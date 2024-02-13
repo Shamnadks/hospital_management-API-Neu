@@ -1,0 +1,22 @@
+{
+    "/departmentfilter/post": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "data",
+                    "description": "ghjgjhg",
+                    "required": true
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "filter_department_api"
+            ]
+        }
+    }
+}

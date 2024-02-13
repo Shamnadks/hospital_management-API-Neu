@@ -1,0 +1,17 @@
+{
+    "/doctor/get": {
+        "get": {
+            "summary": "API to get all departments",
+            "description": "",
+            "consumes": [
+                "application/json"
+            ],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "find_a_doctor_api"
+            ]
+        }
+    }
+}

@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a",
+        "disabled": false,
+        "info": "",
+        "label": "create_appointment_service",
+        "createdDate": "2024-02-12T17:24:13.883Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "create_appointment_service",
+        "relativeParentPath": "appointments/create_appointment"
+    }
+]

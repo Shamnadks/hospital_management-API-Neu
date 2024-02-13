@@ -1,0 +1,223 @@
+{
+    "name": "doctors",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_9t9ccwr01x",
+    "y": 10,
+    "properties": {
+        "id": {
+            "name": "id",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_dnbaatqfh",
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": true,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {
+                    "primaryGenerated": true
+                }
+            }
+        },
+        "name": {
+            "name": "name",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_xmth1pf0kx",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "phone_no": {
+            "name": "phone_no",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_lq1pygrw2r",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "email": {
+            "name": "email",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_qi3u79nnk",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "address": {
+            "name": "address",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_07592qnx7y",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "age": {
+            "name": "age",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_ynlw4flifz",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "department_id": {
+            "name": "department_id",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_63rgelksyn",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "education": {
+            "name": "education",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_dw9zmb1u56",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "salary": {
+            "name": "salary",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_l99te7iums",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "token_limit": {
+            "name": "token_limit",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_n0pktey80n",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "status": {
+            "name": "status",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_m9uyelghfs",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        }
+    },
+    "required": [
+        "name",
+        "phone_no",
+        "email",
+        "address",
+        "age",
+        "department_id",
+        "education",
+        "salary",
+        "token_limit",
+        "status"
+    ],
+    "value": "",
+    "__attributeExpansion__": true,
+    "__operationExpansion__": true,
+    "x": 860,
+    "__n__metadata__": {},
+    "userList": {
+        "SSD_SERVICE_ID_sd_45JgZ7OwsjvEYUcg": [
+            "sd_FsJXi3bJIJEOCGcl"
+        ],
+        "SSD_SERVICE_ID_sd_XiO53B7Cd7Fbrhn3": [
+            "sd_dPbu5IPabD0WeD8s"
+        ]
+    }
+}

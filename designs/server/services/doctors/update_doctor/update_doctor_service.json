@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX",
+        "disabled": false,
+        "info": "",
+        "label": "update_doctor_service",
+        "createdDate": "2024-02-12T17:10:30.719Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "update_doctor_service",
+        "relativeParentPath": "doctors/update_doctor"
+    }
+]

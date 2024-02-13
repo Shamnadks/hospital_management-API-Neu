@@ -1,0 +1,126 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:03:47.711Z",
+        "label": "update_department_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "update_department_service",
+        "relativeParentPath": "department/update_department"
+    },
+    {
+        "id": "sd_a3tYvmGq0Z8JzbA5",
+        "type": "update",
+        "z": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "sql_update_department",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_6ajjf9pg1n",
+        "_UI_entityName": "department",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "operationType": "updateByID",
+        "filterBy": "",
+        "updateObject": "bh.input.data",
+        "resultMapping": "bh.local.resultdata",
+        "functionName": "sqlUpdateDepartment",
+        "category": "Data Model",
+        "x": 385,
+        "y": 80,
+        "wires": [
+            [
+                "sd_0Aqjn4ft5KJO3h4Z"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "filterBy": {
+                "type": "bh.model",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            },
+            "updateObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "resultdata",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "filterBy": true
+        },
+        "generateNext": false,
+        "serviceName": "update_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_0Aqjn4ft5KJO3h4Z",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}\n\n",
+        "functionName": "sd_0Aqjn4ft5KJO3h4Z",
+        "category": "Function",
+        "x": 645,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_KAACRYFghFUaFe10",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "update_department",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "updateDepartment",
+        "category": "General",
+        "x": 165,
+        "y": 80,
+        "wires": [
+            [
+                "sd_a3tYvmGq0Z8JzbA5"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_department_service"
+    }
+]

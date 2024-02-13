@@ -1,0 +1,31 @@
+{
+    "/department/post": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "department",
+                    "required": true,
+                    "schema": {
+                        "type": "array",
+                        "properties": {
+                            "department": {
+                                "items": {
+                                    "$ref": "#/definitions/hospital ~ department"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "create_department_api"
+            ]
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "/doctors/post": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "doctors",
+                    "required": true,
+                    "schema": {
+                        "type": "array",
+                        "properties": {
+                            "doctors": {
+                                "items": {
+                                    "$ref": "#/definitions/hospital ~ doctors"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "create_doctor_api"
+            ]
+        }
+    }
+}

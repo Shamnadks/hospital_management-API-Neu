@@ -1,0 +1,117 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_7wo0dUAyZGNCRTQn",
+        "type": "tab",
+        "createdDate": "2024-02-12T16:56:51.803Z",
+        "label": "create_department_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "create_department_service",
+        "relativeParentPath": "department/create_department"
+    },
+    {
+        "id": "sd_8WtObzBghtbS8lDH",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_7wo0dUAyZGNCRTQn",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 565,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "create_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_OcTE3BdGyLolikdb",
+        "type": "insert",
+        "z": "SSD_SERVICE_ID_sd_7wo0dUAyZGNCRTQn",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "insert department",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_6ajjf9pg1n",
+        "_UI_entityName": "department",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "insertObject": "bh.input.data",
+        "resultMapping": "bh.local.resultdata",
+        "functionName": "insertDepartment",
+        "category": "Data Model",
+        "x": 345,
+        "y": 80,
+        "wires": [
+            [
+                "sd_8WtObzBghtbS8lDH"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "insertObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "resultdata",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "create_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_Bb6xmtxiAQDd60jq",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_7wo0dUAyZGNCRTQn",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "create_department_flow",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "createDepartmentFlow",
+        "category": "General",
+        "x": 165,
+        "y": 80,
+        "wires": [
+            [
+                "sd_OcTE3BdGyLolikdb"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "create_department_service"
+    }
+]

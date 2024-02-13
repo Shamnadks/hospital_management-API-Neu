@@ -1,0 +1,136 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_yKj2YERnp5ndUcCA",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:06:07.783Z",
+        "label": "find_a_doctor_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "find_a_doctor_service",
+        "relativeParentPath": "doctors/find_a_doctor"
+    },
+    {
+        "id": "sd_TO2xAnBdgwBnNTR3",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yKj2YERnp5ndUcCA",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 585,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "find_a_doctor_service",
+        "generated": true
+    },
+    {
+        "id": "sd_MI6oLZ6eBCokStjg",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_yKj2YERnp5ndUcCA",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "all_department_sql",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "resultdata"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "query"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "queryvalues"
+        },
+        "dbType": "postgres",
+        "functionName": "allDepartmentSql",
+        "category": "Storage",
+        "x": 425,
+        "y": 80,
+        "wires": [
+            [
+                "sd_TO2xAnBdgwBnNTR3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "find_a_doctor_service",
+        "generated": true
+    },
+    {
+        "id": "sd_3mHvBLv0q1yvEJbd",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yKj2YERnp5ndUcCA",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "psql_query",
+        "script": "bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.doctors`\nbh.local.querydata=[]\nif(bh.local.filter){\n    bh.loacl.query+='where'\n    for(item in filter){\n        bh.local.querydata.push()\n    }\n}",
+        "functionName": "psqlQuery",
+        "category": "Function",
+        "x": 305,
+        "y": 80,
+        "wires": [
+            [
+                "sd_MI6oLZ6eBCokStjg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "find_a_doctor_service",
+        "generated": true
+    },
+    {
+        "id": "sd_PhVrybdSMGgWgpbb",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_yKj2YERnp5ndUcCA",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "get_a_doctor",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "filter",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "getADoctor",
+        "category": "General",
+        "x": 165,
+        "y": 80,
+        "wires": [
+            [
+                "sd_3mHvBLv0q1yvEJbd"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "find_a_doctor_service"
+    }
+]

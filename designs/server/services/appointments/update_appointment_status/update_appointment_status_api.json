@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "disabled": false,
+        "info": "",
+        "label": "update_appointment_status_api",
+        "createdDate": "2024-02-12T17:25:25.289Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "update_appointment_status_api",
+        "relativeParentPath": "appointments/update_appointment_status"
+    }
+]

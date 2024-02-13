@@ -13,7 +13,13 @@
             "SSD_DEFAULT_PORT": "server",
             "webAppMountpoint": "both",
             "CLOCK_TOLERANCE": "server",
-            "NGFORAGE_MOBILE_DRIVER": "client"
+            "NGFORAGE_MOBILE_DRIVER": "client",
+            "DB_PORT": "server",
+            "DB_HOST": "server",
+            "DB_USER": "server",
+            "DB_PASSWORD": "server",
+            "DB_SCHEMA": "server",
+            "DB_NAME": "server"
         }
     },
     "dev": {
@@ -30,7 +36,13 @@
             "SSD_DEFAULT_PORT": "8081",
             "webAppMountpoint": "web",
             "CLOCK_TOLERANCE": "5",
-            "NGFORAGE_MOBILE_DRIVER": "INDEXED_DB"
+            "NGFORAGE_MOBILE_DRIVER": "INDEXED_DB",
+            "DB_PORT": "5432",
+            "DB_HOST": "testdb.crsawim4uwy1.ap-south-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "DB_PASSWORD": "Rafhath123456",
+            "DB_SCHEMA": "hospital",
+            "DB_NAME": "postgres"
         }
     },
     "prod": {
@@ -47,7 +59,13 @@
             "SSD_DEFAULT_PORT": "8081",
             "webAppMountpoint": "web",
             "CLOCK_TOLERANCE": "5",
-            "NGFORAGE_MOBILE_DRIVER": "INDEXED_DB"
+            "NGFORAGE_MOBILE_DRIVER": "INDEXED_DB",
+            "DB_PORT": "5432",
+            "DB_HOST": "testdb.crsawim4uwy1.ap-south-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "DB_PASSWORD": "Rafhath123456",
+            "DB_SCHEMA": "hospital",
+            "DB_NAME": "postgres"
         }
     }
 }

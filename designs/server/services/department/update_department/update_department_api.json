@@ -1,0 +1,314 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:03:33.320Z",
+        "label": "update_department_api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "update_department_api",
+        "relativeParentPath": "department/update_department"
+    },
+    {
+        "id": "sd_wPgv3lBwbkw1Of2g",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "update_department",
+        "path": "department/put",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "put",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": true,
+        "dataModelIsArray": false,
+        "erd": "_DM_kxoe18g2p",
+        "erdName": "hospital",
+        "entity": "department",
+        "entityId": "_EN_6ajjf9pg1n",
+        "ref": "#/definitions/hospital ~ department",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": [
+                {
+                    "key": "application/json",
+                    "rowId": "sd_cvsrDqEPKXwLTNnG",
+                    "valid": true
+                }
+            ]
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 60,
+        "wires": [
+            [
+                "sd_T7WkaVhiRF8TAgE4"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_department_api",
+        "functionName": "sd_wPgv3lBwbkw1Of2g"
+    },
+    {
+        "id": "sd_N9thtspxbcQefnhe",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_depatrment_flow",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:03:47.711Z",
+            "label": "update_department_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_KAACRYFghFUaFe10",
+            "flowName": "updateDepartment"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body?.department"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./update_department_service",
+        "startName": "updateDepartment",
+        "inputParams": [
+            "bh.input.body?.department"
+        ],
+        "accept_bh": false,
+        "functionName": "updateDepatrmentFlow",
+        "category": "General",
+        "x": 505,
+        "y": 60,
+        "wires": [
+            [
+                "sd_2sTEoe3dFbBr303C"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_T7WkaVhiRF8TAgE4",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_department_script",
+        "script": "// if(!bh.input.body?.name?.title || bh.input.body?.name?.trim()?.length==0){  \n// throw new Error(\"Enter some task\");\n// }",
+        "functionName": "updateDepartmentScript",
+        "category": "Function",
+        "x": 345,
+        "y": 60,
+        "wires": [
+            [
+                "sd_N9thtspxbcQefnhe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_2sTEoe3dFbBr303C",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "department_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response.data",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response.data",
+            "send": "bh.local.response.data"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "departmentHttpOut",
+        "category": "HTTP",
+        "x": 725,
+        "y": 60,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_eF8LlPtUksrMn1Yi",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 405,
+        "y": 240,
+        "wires": [
+            [
+                "sd_nvjyS3cLg4V9K0U8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_VQpb2brvAxR5zxij",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_eF8LlPtUksrMn1Yi",
+            "sd_nvjyS3cLg4V9K0U8"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 245,
+        "y": 240,
+        "wires": [
+            [
+                "sd_eF8LlPtUksrMn1Yi"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_department_api"
+    },
+    {
+        "id": "sd_nvjyS3cLg4V9K0U8",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_OnBEHsyGSJtuYIHJ",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "error_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response.error",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response.error",
+            "send": "bh.local.response.error"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "errorHttpOut",
+        "category": "HTTP",
+        "x": 545,
+        "y": 240,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_api",
+        "generated": true
+    }
+]

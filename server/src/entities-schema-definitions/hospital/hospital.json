@@ -1,0 +1,9 @@
+{
+    "_DM_kxoe18g2p": {
+        "id": "_DM_kxoe18g2p",
+        "name": "hospital",
+        "dbType": "dbModel",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "dbName": "postgres"
+    }
+}

@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD",
+        "disabled": false,
+        "info": "",
+        "label": "find_user_by_id_service",
+        "createdDate": "2024-02-12T17:20:03.261Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "find_user_by_id_service",
+        "relativeParentPath": "users/find_user_by_id"
+    }
+]
