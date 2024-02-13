@@ -1,12 +1,12 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-filter_doctor_service-SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS
+import { filter_doctor_service as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS } from './sd-services/doctors/filter_doctor/filter_doctor_service';
+//CORE_REFERENCE_IMPORT-filter_doctor_api-SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY
+import { filter_doctor_api as SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY } from './sd-services/doctors/filter_doctor/filter_doctor_api';
 //CORE_REFERENCE_IMPORT-filter_department_service-SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5
 import { filter_department_service as SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5 } from './sd-services/department/filter_department/filter_department_service';
 //CORE_REFERENCE_IMPORT-filter_department_api-SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m
 import { filter_department_api as SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m } from './sd-services/department/filter_department/filter_department_api';
-//CORE_REFERENCE_IMPORT-find_a_department_service-SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx
-import { find_a_department_service as SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx } from './sd-services/department/find_all_department/find_a_department_service';
-//CORE_REFERENCE_IMPORT-find_a_department_api-SSD_SERVICE_ID_sd_xLrnXFScfMeieUY4
-import { find_a_department_api as SSD_SERVICE_ID_sd_xLrnXFScfMeieUY4 } from './sd-services/department/find_all_department/find_a_department_api';
 //CORE_REFERENCE_IMPORT-token_by_date_service-SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo
 import { token_by_date_service as SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo } from './sd-services/appointments/token_by_date/token_by_date_service';
 //CORE_REFERENCE_IMPORT-token_by_date_api-SSD_SERVICE_ID_sd_qI1FgEF5Qg6Su2HR
@@ -35,10 +35,6 @@ import { create_user_api as SSD_SERVICE_ID_sd_UvhLjLBfo8HXDZJS } from './sd-serv
 import { update_doctor_service as SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX } from './sd-services/doctors/update_doctor/update_doctor_service';
 //CORE_REFERENCE_IMPORT-update_doctor_api-SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox
 import { update_doctor_api as SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox } from './sd-services/doctors/update_doctor/update_doctor_api';
-//CORE_REFERENCE_IMPORT-find_all_doctor_service-SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS
-import { find_all_doctor_service as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS } from './sd-services/doctors/find_all_doctor/find_all_doctor_service';
-//CORE_REFERENCE_IMPORT-find_all_doctor_api-SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY
-import { find_all_doctor_api as SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY } from './sd-services/doctors/find_all_doctor/find_all_doctor_api';
 //CORE_REFERENCE_IMPORT-find_doctor_by_department_service-SSD_SERVICE_ID_sd_g9fifOjKOOcCuPU4
 import { find_doctor_by_department_service as SSD_SERVICE_ID_sd_g9fifOjKOOcCuPU4 } from './sd-services/doctors/find_doctor_by_department/find_doctor_by_department_service';
 //CORE_REFERENCE_IMPORT-find_doctor_by_department_api-SSD_SERVICE_ID_sd_BD0aT7xadKpR7xba
@@ -62,14 +58,14 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-filter_doctor_service-SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS
+SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-filter_doctor_api-SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY
+SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-filter_department_service-SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5
 SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-filter_department_api-SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m
 SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-find_a_department_service-SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx
-SSD_SERVICE_ID_sd_n5PTUHI2gkktQUCx,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-find_a_department_api-SSD_SERVICE_ID_sd_xLrnXFScfMeieUY4
-SSD_SERVICE_ID_sd_xLrnXFScfMeieUY4,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-token_by_date_service-SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo
 SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-token_by_date_api-SSD_SERVICE_ID_sd_qI1FgEF5Qg6Su2HR
@@ -98,10 +94,6 @@ SSD_SERVICE_ID_sd_UvhLjLBfo8HXDZJS,
 SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-update_doctor_api-SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox
 SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-find_all_doctor_service-SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS
-SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-find_all_doctor_api-SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY
-SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-find_doctor_by_department_service-SSD_SERVICE_ID_sd_g9fifOjKOOcCuPU4
 SSD_SERVICE_ID_sd_g9fifOjKOOcCuPU4,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-find_doctor_by_department_api-SSD_SERVICE_ID_sd_BD0aT7xadKpR7xba

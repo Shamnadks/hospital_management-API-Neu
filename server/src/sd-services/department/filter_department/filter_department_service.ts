@@ -130,7 +130,7 @@ export class filter_department_service {
       bh.local.queryvalues = [];
       let keys = Object.keys(bh.input.filter);
       let count = 0;
-      if (bh.input.filter) {
+      if (keys.length > 0) {
         bh.local.query += ' where ';
         keys.forEach((key, index) => {
           bh.local.query += key + ` IN (`;

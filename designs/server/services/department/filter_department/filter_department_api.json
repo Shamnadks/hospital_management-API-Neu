@@ -73,8 +73,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "filter_department_api",
-        "functionName": "sd_OzHkZ6ljAaL9OqCE",
-        "generated": false
+        "functionName": "sd_OzHkZ6ljAaL9OqCE"
     },
     {
         "id": "sd_h9APgiV2F0fMwZz2",
@@ -186,9 +185,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "filter_department_api"
+        "serviceName": "filter_department_api",
+        "generated": true
     },
     {
         "id": "sd_8YFgzAL66WsGBuK8",
@@ -207,6 +206,108 @@
                 "sd_7F6CWTQH2jTk6MXk"
             ]
         ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_dgw8DkwY1xjx5hh3",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 405,
+        "y": 300,
+        "wires": [
+            [
+                "sd_EABCrn2UU2dw0BzU"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_BgDxklE6Kuqa4giR",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_dgw8DkwY1xjx5hh3",
+            "sd_EABCrn2UU2dw0BzU"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 245,
+        "y": 300,
+        "wires": [
+            [
+                "sd_dgw8DkwY1xjx5hh3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "filter_department_api"
+    },
+    {
+        "id": "sd_EABCrn2UU2dw0BzU",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "error_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response.error",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response.error",
+            "send": "bh.local.response.error"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "errorHttpOut",
+        "category": "HTTP",
+        "x": 545,
+        "y": 300,
+        "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "filter_department_api",

@@ -186,6 +186,43 @@ export class filter_department_api {
     }
   }
 
+  async statusReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 400,
+        error: bh.error.message,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      await this.errorHttpOut(bh, parentSpanInst);
+      //appendnew_next_statusReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_dgw8DkwY1xjx5hh3',
+        spanInst,
+        'statusReport'
+      );
+    }
+  }
+
+  async errorHttpOut(bh, parentSpanInst) {
+    try {
+      bh.web.res
+        .status(bh.local.response.statusCode)
+        .send(bh.local.response.error);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_EABCrn2UU2dw0BzU');
+    }
+  }
+
   //appendnew_node
 
   // error_handler_slot
@@ -201,11 +238,28 @@ export class filter_department_api {
     bh.errorSource = src;
     bh.errorFunName = functionName;
     this.tracerService.sendData(parentSpanInst, bh, true);
-    if (bh.web.next) {
-      bh.web.next(e);
+    if (
+      false ||
+      (await this.errorHandle(bh, parentSpanInst))
+      /*appendnew_next_Catch*/
+    ) {
+      return bh;
     } else {
-      throw e;
+      if (bh.web.next) {
+        bh.web.next(e);
+      } else {
+        throw e;
+      }
     }
+  }
+  async errorHandle(bh, parentSpanInst) {
+    const catchConnectedNodes = ['sd_dgw8DkwY1xjx5hh3', 'sd_EABCrn2UU2dw0BzU'];
+    if (catchConnectedNodes.includes(bh.errorSource)) {
+      return false;
+    }
+    bh = await this.statusReport(bh, parentSpanInst);
+    //appendnew_next_errorHandle
+    return true;
   }
   //appendnew_flow_filter_department_api_Catch
 }

@@ -8,7 +8,7 @@ import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
 import { GenericRDBMSOperations } from '../../../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
 //append_imports_end
-export class find_a_department_service {
+export class filter_doctor_service {
   private sdService = new SDBaseService();
   private tracerService = new TracerService();
   private app;
@@ -24,7 +24,7 @@ export class find_a_department_service {
     middlewareCall,
     globalTimers
   ) {
-    this.serviceName = 'find_a_department_service';
+    this.serviceName = 'filter_doctor_service';
     this.app = app;
     this.serviceBasePath = this.app.settings.base;
     this.generatedMiddlewares = generatedeMiddlewares;
@@ -39,7 +39,7 @@ export class find_a_department_service {
     globalTimers?
   ) {
     if (!instance) {
-      instance = new find_a_department_service(
+      instance = new filter_doctor_service(
         app,
         generatedeMiddlewares,
         routeCall,
@@ -68,29 +68,29 @@ export class find_a_department_service {
   }
 
   async mountTimers() {
-    //appendnew_flow_find_a_department_service_TimerStart
+    //appendnew_flow_filter_doctor_service_TimerStart
   }
 
   private mountAllMiddlewares() {
-    log.debug(
-      'mounting all middlewares for service :: find_a_department_service'
-    );
-    //appendnew_flow_find_a_department_service_MiddlewareStart
+    log.debug('mounting all middlewares for service :: filter_doctor_service');
+    //appendnew_flow_filter_doctor_service_MiddlewareStart
   }
 
   private mountAllPaths() {
-    log.debug('mounting all paths for service :: find_a_department_service');
-    //appendnew_flow_find_a_department_service_HttpIn
+    log.debug('mounting all paths for service :: filter_doctor_service');
+    //appendnew_flow_filter_doctor_service_HttpIn
   }
-  //   service flows_find_a_department_service
+  //   service flows_filter_doctor_service
 
-  async getAllDepartment(parentSpanInst, ...others) {
+  async getADoctor(parentSpanInst, filter: any = undefined, ...others) {
     const spanInst = this.tracerService.createSpan(
-      'getAllDepartment',
+      'getADoctor',
       parentSpanInst
     );
     let bh: any = {
-      input: {},
+      input: {
+        filter,
+      },
       local: {
         response: undefined,
       },
@@ -99,7 +99,7 @@ export class find_a_department_service {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.psqlQuery(bh, parentSpanInst);
-      //appendnew_next_getAllDepartment
+      //appendnew_next_getADoctor
       return (
         // formatting output variables
         {
@@ -113,37 +113,60 @@ export class find_a_department_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_dXhTqDzLaft1nZkP',
+        'sd_8BHWhDa3GVzpn7tx',
         spanInst,
-        'getAllDepartment'
+        'getADoctor'
       );
     }
   }
-  //appendnew_flow_find_a_department_service_start
+  //appendnew_flow_filter_doctor_service_start
 
   async psqlQuery(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan('psqlQuery', parentSpanInst);
     try {
-      bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.department`;
-
+      bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.doctors`;
+      bh.local.queryvalues = [];
+      let keys = Object.keys(bh.input.filter);
+      let count = 0;
+      if (keys.length > 0) {
+        bh.local.query += ' where ';
+        keys.forEach((key, index) => {
+          bh.local.query += key + ` IN (`;
+          bh.input.filter[key].forEach((element, index) => {
+            bh.local.query += `$${count + 1}`;
+            bh.local.queryvalues.push(element);
+            if (
+              bh.input.filter[key].length > 1 &&
+              index < bh.input.filter[key].length - 1
+            ) {
+              bh.local.query += ', ';
+            }
+            count++;
+          });
+          bh.local.query += `)`;
+          if (keys.length > 1 && index < keys.length - 1) {
+            bh.local.query += ' AND ';
+          }
+        });
+      }
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.getADepartmentSql(bh, parentSpanInst);
+      bh = await this.getADoctorSql(bh, parentSpanInst);
       //appendnew_next_psqlQuery
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_iszE7gDtRt942hKw',
+        'sd_nlIK0u1OsdK18P2Z',
         spanInst,
         'psqlQuery'
       );
     }
   }
 
-  async getADepartmentSql(bh, parentSpanInst) {
+  async getADoctorSql(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'getADepartmentSql',
+      'getADoctorSql',
       parentSpanInst
     );
     try {
@@ -161,7 +184,7 @@ export class find_a_department_service {
       } else {
         throw new Error('Cannot find the selected config name');
       }
-      let params = [];
+      let params = bh.local.queryvalues;
       params = params ? params : [];
       bh.local.resultdata = await new GenericRDBMSOperations().executeSQL(
         connectionName,
@@ -170,15 +193,15 @@ export class find_a_department_service {
       );
       this.tracerService.sendData(spanInst, bh);
       bh = await this.statusReport(bh, parentSpanInst);
-      //appendnew_next_getADepartmentSql
+      //appendnew_next_getADoctorSql
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_2dqzT43llQsLsKPS',
+        'sd_ushAandQIe3HRiov',
         spanInst,
-        'getADepartmentSql'
+        'getADoctorSql'
       );
     }
   }
@@ -200,7 +223,7 @@ export class find_a_department_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_qPmbARv2gzmtcnAB',
+        'sd_jHv1WaodugOLVP0b',
         spanInst,
         'statusReport'
       );
@@ -228,5 +251,5 @@ export class find_a_department_service {
       throw e;
     }
   }
-  //appendnew_flow_find_a_department_service_Catch
+  //appendnew_flow_filter_doctor_service_Catch
 }
