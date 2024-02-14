@@ -1,0 +1,323 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "type": "tab",
+        "createdDate": "2024-02-13T19:33:36.848Z",
+        "label": "get_appointment_api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "get_appointment_api",
+        "relativeParentPath": "common/get_appointments"
+    },
+    {
+        "id": "sd_wsNVTVmwWivqRej0",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "get_appointment",
+        "path": "appointment/post",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": true,
+        "erd": "_DM_zlf6ik8qk",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "data",
+                    "desc": "data of entire body",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_bqLqiYBlnIgmD1Du",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": [
+                {
+                    "key": "application/json",
+                    "rowId": "sd_Ivcsz9Vlf9o1GZhJ",
+                    "valid": true
+                }
+            ]
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 105,
+        "y": 100,
+        "wires": [
+            [
+                "sd_dclWlg04ZFKPNXXG"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "get_appointment_api",
+        "functionName": "sd_wsNVTVmwWivqRej0"
+    },
+    {
+        "id": "sd_qg9b7pmCegv5dYQI",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_qg9b7pmCegv5dYQI",
+        "category": "HTTP",
+        "x": 785,
+        "y": 100,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_dclWlg04ZFKPNXXG",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "// if(bh.input.body?.name?.trim()?.length){  \n// }\n// throw new Error(\"Enter some task\");\nconsole.log(bh.input.body)",
+        "functionName": "sd_dclWlg04ZFKPNXXG",
+        "category": "Function",
+        "x": 305,
+        "y": 100,
+        "wires": [
+            [
+                "sd_H4XatPBmkz1SZrBi"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_uLH869UGuLEvSF1B",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 345,
+        "y": 300,
+        "wires": [
+            [
+                "sd_YB6pfx8ZpUqi1tMZ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_FUKmbm9KTXJzIsIr",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_uLH869UGuLEvSF1B",
+            "sd_YB6pfx8ZpUqi1tMZ"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 185,
+        "y": 300,
+        "wires": [
+            [
+                "sd_uLH869UGuLEvSF1B"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "get_appointment_api"
+    },
+    {
+        "id": "sd_YB6pfx8ZpUqi1tMZ",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "error_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "errorHttpOut",
+        "category": "HTTP",
+        "x": 485,
+        "y": 300,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_H4XatPBmkz1SZrBi",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+            "type": "tab",
+            "createdDate": "2024-02-13T12:57:35.383Z",
+            "label": "appointment_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_qkPyDTRY2em7dUSR",
+            "flowName": "createAppointmentFlow"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "../create_appointment/appointment_service",
+        "startName": "createAppointmentFlow",
+        "inputParams": [
+            "bh.input.body"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_H4XatPBmkz1SZrBi",
+        "category": "General",
+        "x": 440,
+        "y": 100,
+        "wires": [
+            [
+                "sd_qg9b7pmCegv5dYQI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_api",
+        "generated": true
+    }
+]

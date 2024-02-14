@@ -500,6 +500,123 @@
                     }
                 }
             ]
+        },
+        {
+            "_id": "5fe4a1da4f4cbf2fca03d39b",
+            "name": "neutrinos-crypto",
+            "averageRating": 0,
+            "description": "A Server Designer Nodes bundle to consume Crypto ",
+            "displayName": "Crypto",
+            "lastUpdated": "2021-08-21T15:38:55.886Z",
+            "numberOfDownloads": 0,
+            "packageType": [
+                "studio-nodes"
+            ],
+            "path": "C:\\Users\\Neutrinos\\neutrinos-plugins\\neutrinos-crypto\\package-icon\\neutrinos-crypto.png",
+            "platformSupportVersion": "7.4.0",
+            "publisher": "Neutrinos",
+            "uploadedDate": "2020-12-24T14:12:41.964Z",
+            "username": "avinash.gupta@neutrinos.co",
+            "version": "1.0.7",
+            "versions": {
+                "1.0.0": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-crypto",
+                            "displayName": "Crypto",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.0",
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "5981dd1a-2b59-81e1-89f0-a440e4625762",
+                                        "displayName": "Crypto"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "7.4.0"
+                    },
+                    "metadata": {
+                        "name": "neutrinos-crypto",
+                        "displayName": "Crypto",
+                        "version": "1.0.0",
+                        "username": "avinash.gupta@neutrinos.co",
+                        "publisher": "Neutrinos",
+                        "platformSupportVersion": {
+                            "min": "7.4.0"
+                        },
+                        "description": "A Server Designer Nodes bundle to consume Crypto ",
+                        "path": "C:\\Users\\Neutrinos\\neutrinos-plugins\\neutrinos-crypto\\package-icon\\neutrinos-crypto.png"
+                    },
+                    "version": "1.0.0"
+                },
+                "1.0.7": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-crypto",
+                            "displayName": "Crypto",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.7",
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "5981dd1a-2b59-81e1-89f0-a440e4625762",
+                                        "displayName": "Crypto"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "7.4.0"
+                    },
+                    "metadata": {
+                        "name": "neutrinos-crypto",
+                        "displayName": "Crypto",
+                        "version": "1.0.7",
+                        "username": "avinash.gupta@neutrinos.co",
+                        "publisher": "Neutrinos",
+                        "platformSupportVersion": {
+                            "min": "7.4.0"
+                        },
+                        "description": "A Server Designer Nodes bundle to consume Crypto ",
+                        "path": "C:\\Users\\Neutrinos\\neutrinos-plugins\\neutrinos-crypto\\package-icon\\neutrinos-crypto.png",
+                        "pluginImage": "neutrinos-crypto.png"
+                    },
+                    "version": "1.0.7"
+                }
+            },
+            "archiveFile": "api/zips/undefined",
+            "guide": "61211e118a1f27001c94f07d",
+            "icon": "api/resource/icons/61211e108a1f27001c94f075",
+            "screenshots": [
+                "api/resource/screenshots/61211e108a1f27001c94f077",
+                "api/resource/screenshots/61211e108a1f27001c94f079",
+                "api/resource/screenshots/61211e108a1f27001c94f07b"
+            ],
+            "no_of_downloads_by_packages": {
+                "neutrinos-crypto": 189
+            },
+            "pluginImage": "neutrinos-crypto.png",
+            "dependencies": [
+                {
+                    "name": "neutrinos-crypto",
+                    "displayName": "Crypto",
+                    "packageType": "studio-nodes",
+                    "version": "1.0.7",
+                    "nodes": {
+                        "server": [
+                            {
+                                "name": "5981dd1a-2b59-81e1-89f0-a440e4625762",
+                                "displayName": "Crypto"
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     ]
 }

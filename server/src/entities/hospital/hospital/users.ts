@@ -10,8 +10,13 @@ export class users {
   name: string;
   @Column({ name: 'phone_no', nullable: false, type: 'bigint', primary: false })
   phone_no: number;
-  @Column({ name: 'age', nullable: false, type: 'bigint', primary: false })
-  age: number;
+  @Column({
+    name: 'dob',
+    nullable: false,
+    type: 'timestamp with time zone',
+    primary: false,
+  })
+  dob: Date;
   @Column({ name: 'place', nullable: false, type: 'text', primary: false })
   place: string;
   @Column({ name: 'address', nullable: false, type: 'text', primary: false })

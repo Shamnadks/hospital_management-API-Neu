@@ -1,1 +1,29 @@
-{}
+{
+    "/doctor/put": {
+        "put": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "doctors",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "doctors": {
+                                "$ref": "#/definitions/hospital ~ doctors"
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "update_doctor_api"
+            ]
+        }
+    }
+}

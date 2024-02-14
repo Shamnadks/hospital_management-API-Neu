@@ -75,6 +75,23 @@
                 "constraints": {}
             }
         },
+        "age": {
+            "name": "age",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_2dh75yawng",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
         "token_number": {
             "name": "token_number",
             "format": "",
@@ -86,23 +103,6 @@
                 "subCategoryType": null,
                 "nullable": false,
                 "dbType": "bigint",
-                "primary": false,
-                "placeholder": "",
-                "dbColName": "",
-                "constraints": {}
-            }
-        },
-        "payment_method": {
-            "name": "payment_method",
-            "format": "",
-            "type": "string",
-            "description": "",
-            "default": "",
-            "__n__metadata__": {
-                "id": "_Att_4t4f7xs095",
-                "subCategoryType": null,
-                "nullable": false,
-                "dbType": "text",
                 "primary": false,
                 "placeholder": "",
                 "dbColName": "",
@@ -149,12 +149,17 @@
         "doctor_id",
         "appointment_date",
         "token_number",
-        "payment_method",
         "cash",
-        "status"
+        "status",
+        "age"
     ],
     "value": "",
     "__attributeExpansion__": true,
     "__operationExpansion__": false,
-    "x": 1280
+    "x": 1280,
+    "userList": {
+        "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a": [
+            "sd_7dbhIjvX6na8z8Cf"
+        ]
+    }
 }

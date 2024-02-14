@@ -58,17 +58,17 @@
                 "constraints": {}
             }
         },
-        "age": {
-            "name": "age",
-            "format": "",
-            "type": "number",
+        "dob": {
+            "name": "dob",
+            "format": "date-time",
+            "type": "string",
             "description": "",
             "default": "",
             "__n__metadata__": {
                 "id": "_Att_xbea3nexho",
-                "subCategoryType": null,
+                "subCategoryType": "date",
                 "nullable": false,
-                "dbType": "bigint",
+                "dbType": "timestamp with time zone",
                 "primary": false,
                 "placeholder": "",
                 "dbColName": "",
@@ -164,15 +164,20 @@
     "required": [
         "name",
         "phone_no",
-        "age",
         "place",
         "address",
         "pin_code",
         "email",
-        "blood_group"
+        "blood_group",
+        "dob"
     ],
     "value": "",
     "__attributeExpansion__": true,
     "__operationExpansion__": false,
-    "x": 20
+    "x": 20,
+    "userList": {
+        "SSD_SERVICE_ID_sd_1utwBDtR9iw7QRXa": [
+            "sd_vmGcuV758MAz2RDw"
+        ]
+    }
 }

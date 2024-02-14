@@ -176,9 +176,7 @@ export class update_department_api {
 
   async departmentHttpOut(bh, parentSpanInst) {
     try {
-      bh.web.res
-        .status(bh.local.response.statusCode)
-        .send(bh.local.response.data);
+      bh.web.res.status(bh.local.response.statusCode).send(bh.local.response);
 
       return bh;
     } catch (e) {
@@ -213,9 +211,7 @@ export class update_department_api {
 
   async errorHttpOut(bh, parentSpanInst) {
     try {
-      bh.web.res
-        .status(bh.local.response.statusCode)
-        .send(bh.local.response.error);
+      bh.web.res.status(bh.local.response.statusCode).send(bh.local.response);
 
       return bh;
     } catch (e) {

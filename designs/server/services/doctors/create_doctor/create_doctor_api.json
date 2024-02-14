@@ -81,21 +81,21 @@
         "name": "doctor_http_out",
         "headers": {},
         "responseBody": {
-            "type": "bh.input",
-            "value": "response.data",
+            "type": "bh.local",
+            "value": "response",
             "ssd_typedInputField": true
         },
         "httpcode": {
-            "type": "bh.input",
+            "type": "bh.local",
             "value": "response.statusCode",
             "ssd_typedInputField": true
         },
         "responseType": "obj",
         "swaggerResponse": {},
         "responseMapping": {
-            "status": "bh.input.response.statusCode",
-            "obj": "bh.input.response.data",
-            "send": "bh.input.response.data"
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
         },
         "dataModelIsArray": false,
         "inputs": 1,
@@ -267,7 +267,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh.local",
-            "value": "response.error",
+            "value": "response",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -279,8 +279,8 @@
         "swaggerResponse": {},
         "responseMapping": {
             "status": "bh.local.response.statusCode",
-            "obj": "bh.local.response.error",
-            "send": "bh.local.response.error"
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
         },
         "dataModelIsArray": false,
         "inputs": 1,

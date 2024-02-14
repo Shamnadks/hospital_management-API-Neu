@@ -1,14 +1,117 @@
 [
     {
-        "type": "tab",
         "id": "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:24:13.883Z",
+        "label": "create_appointment_service",
         "disabled": false,
         "info": "",
-        "label": "create_appointment_service",
-        "createdDate": "2024-02-12T17:24:13.883Z",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "create_appointment_service",
         "relativeParentPath": "appointments/create_appointment"
+    },
+    {
+        "id": "sd_k2EsUWWzWCq2sSMY",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 565,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "create_appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_7dbhIjvX6na8z8Cf",
+        "type": "insert",
+        "z": "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "insert_appointment",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_smqy2nds0d",
+        "_UI_entityName": "appointments",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "insertObject": "bh.input.data",
+        "resultMapping": "bh.local.resultdata",
+        "functionName": "insertAppointment",
+        "category": "Data Model",
+        "x": 345,
+        "y": 100,
+        "wires": [
+            [
+                "sd_k2EsUWWzWCq2sSMY"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "insertObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "resultdata",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "create_appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_1R0EhmuVGDk0Ltj1",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "create_appointment_flow",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "createAppointmentFlow",
+        "category": "General",
+        "x": 165,
+        "y": 100,
+        "wires": [
+            [
+                "sd_7dbhIjvX6na8z8Cf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "create_appointment_service"
     }
 ]

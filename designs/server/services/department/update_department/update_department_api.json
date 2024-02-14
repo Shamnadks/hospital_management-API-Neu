@@ -30,6 +30,7 @@
         "acceptFileUpload": false,
         "useDataModel": true,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "_DM_kxoe18g2p",
         "erdName": "hospital",
         "entity": "department",
@@ -166,7 +167,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh.local",
-            "value": "response.data",
+            "value": "response",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -178,11 +179,10 @@
         "swaggerResponse": {},
         "responseMapping": {
             "status": "bh.local.response.statusCode",
-            "obj": "bh.local.response.data",
-            "send": "bh.local.response.data"
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -268,7 +268,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh.local",
-            "value": "response.error",
+            "value": "response",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -280,11 +280,10 @@
         "swaggerResponse": {},
         "responseMapping": {
             "status": "bh.local.response.statusCode",
-            "obj": "bh.local.response.error",
-            "send": "bh.local.response.error"
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",

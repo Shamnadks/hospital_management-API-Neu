@@ -6,6 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
+import { DmUtils } from '../../../utils/ndefault-datamodel/find/dmUtils'; //_splitter_
 //append_imports_end
 export class update_doctor_service {
   private sdService = new SDBaseService();
@@ -81,7 +82,96 @@ export class update_doctor_service {
   }
   //   service flows_update_doctor_service
 
+  async updateDoctor(parentSpanInst, data: any = undefined, ...others) {
+    const spanInst = this.tracerService.createSpan(
+      'updateDoctor',
+      parentSpanInst
+    );
+    let bh: any = {
+      input: {
+        data,
+      },
+      local: {
+        response: undefined,
+      },
+    };
+    try {
+      bh = this.sdService.__constructDefault(bh);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sqlUpdateDoctor(bh, parentSpanInst);
+      //appendnew_next_updateDoctor
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            response: bh.local.response,
+          },
+        }
+      );
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_h0Odv8abqr7tqhP5',
+        spanInst,
+        'updateDoctor'
+      );
+    }
+  }
   //appendnew_flow_update_doctor_service_start
+
+  async sqlUpdateDoctor(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sqlUpdateDoctor',
+      parentSpanInst
+    );
+    try {
+      const dmUtilsInst = new DmUtils('sd_JFEzq9BaWr7Csm3t');
+      bh.local.resultdata = await dmUtilsInst.updateById(
+        '_EN_9t9ccwr01x',
+        bh.input.data
+      );
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_sqlUpdateDoctor
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_QZRet94Zx8q1HiCD',
+        spanInst,
+        'sqlUpdateDoctor'
+      );
+    }
+  }
+
+  async statusReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 200,
+        data: bh.local.resultdata,
+      };
+
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_statusReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_jRUvrZy5MaJUUWG5',
+        spanInst,
+        'statusReport'
+      );
+    }
+  }
 
   //appendnew_node
 

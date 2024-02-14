@@ -17,6 +17,8 @@ export class appointments {
     primary: false,
   })
   appointment_date: Date;
+  @Column({ name: 'age', nullable: false, type: 'bigint', primary: false })
+  age: number;
   @Column({
     name: 'token_number',
     nullable: false,
@@ -24,13 +26,6 @@ export class appointments {
     primary: false,
   })
   token_number: number;
-  @Column({
-    name: 'payment_method',
-    nullable: false,
-    type: 'text',
-    primary: false,
-  })
-  payment_method: string;
   @Column({ name: 'cash', nullable: false, type: 'text', primary: false })
   cash: string;
   @Column({ name: 'status', nullable: false, type: 'text', primary: false })
