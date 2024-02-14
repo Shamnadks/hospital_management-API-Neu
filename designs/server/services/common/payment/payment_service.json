@@ -1,0 +1,109 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+        "type": "tab",
+        "createdDate": "2024-02-13T18:41:12.714Z",
+        "label": "payment_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "payment_service",
+        "relativeParentPath": "common\\payment"
+    },
+    {
+        "id": "sd_OltPj8Vq7BJ2EAWq",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "payment script",
+        "script": "let userId=bh.input.userId;\nlet appointmentId=bh.input.appointmentId;\nlet priceInSmallestUnit = bh.input.price * 100;\nconst options = {\n    amount: priceInSmallestUnit,\n    currency: \"INR\",\n    receipt: bh.input.orderId,\n    notes: {\n      userId,\n      appointmentId\n    },\n};\nbh.local.order = await bh.input.instance.orders.create(options);\n\nconsole.log(bh.local.order)",
+        "functionName": "paymentScript",
+        "category": "Function",
+        "x": 365,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_lcf9BiVc0vKivpzD",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "generateRazorPayOrder",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "userId",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "appointmentId",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "orderId",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "price",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "instance",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "order",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "generateRazorPayOrder",
+        "category": "General",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "sd_OltPj8Vq7BJ2EAWq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payment_service",
+        "generated": false
+    }
+]

@@ -3,11 +3,11 @@ let instance = null;
 //CORE_REFERENCE_IMPORTS
 //append_imports_start
 
-import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
-import { TracerService } from '../../services/TracerService'; //_splitter_
-import log from '../../utils/Logger'; //_splitter_
+import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
+import { TracerService } from '../../../services/TracerService'; //_splitter_
+import log from '../../../utils/Logger'; //_splitter_
 //append_imports_end
-export class payment_api {
+export class create_payment_api {
   private sdService = new SDBaseService();
   private tracerService = new TracerService();
   private app;
@@ -23,7 +23,7 @@ export class payment_api {
     middlewareCall,
     globalTimers
   ) {
-    this.serviceName = 'payment_api';
+    this.serviceName = 'create_payment_api';
     this.app = app;
     this.serviceBasePath = this.app.settings.base;
     this.generatedMiddlewares = generatedeMiddlewares;
@@ -38,7 +38,7 @@ export class payment_api {
     globalTimers?
   ) {
     if (!instance) {
-      instance = new payment_api(
+      instance = new create_payment_api(
         app,
         generatedeMiddlewares,
         routeCall,
@@ -67,21 +67,21 @@ export class payment_api {
   }
 
   async mountTimers() {
-    //appendnew_flow_payment_api_TimerStart
+    //appendnew_flow_create_payment_api_TimerStart
   }
 
   private mountAllMiddlewares() {
-    log.debug('mounting all middlewares for service :: payment_api');
-    //appendnew_flow_payment_api_MiddlewareStart
+    log.debug('mounting all middlewares for service :: create_payment_api');
+    //appendnew_flow_create_payment_api_MiddlewareStart
   }
 
   private mountAllPaths() {
-    log.debug('mounting all paths for service :: payment_api');
-    //appendnew_flow_payment_api_HttpIn
+    log.debug('mounting all paths for service :: create_payment_api');
+    //appendnew_flow_create_payment_api_HttpIn
   }
-  //   service flows_payment_api
+  //   service flows_create_payment_api
 
-  //appendnew_flow_payment_api_start
+  //appendnew_flow_create_payment_api_start
 
   //appendnew_node
 
@@ -104,5 +104,5 @@ export class payment_api {
       throw e;
     }
   }
-  //appendnew_flow_payment_api_Catch
+  //appendnew_flow_create_payment_api_Catch
 }

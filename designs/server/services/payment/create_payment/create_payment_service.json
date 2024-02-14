@@ -1,0 +1,117 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd",
+        "type": "tab",
+        "createdDate": "2024-02-14T06:19:41.154Z",
+        "label": "create_payment_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "create_payment_service",
+        "relativeParentPath": "payment/create_payment"
+    },
+    {
+        "id": "sd_RPJIvOEjTcGpHK69",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 645,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "create_payment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_0TG7EAyPlhSxsnNB",
+        "type": "insert",
+        "z": "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "create_payment",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_w35q2w92rw",
+        "_UI_entityName": "payments",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "insertObject": "bh.input.data",
+        "resultMapping": "bh.local.resultdata",
+        "functionName": "createPayment",
+        "category": "Data Model",
+        "x": 425,
+        "y": 100,
+        "wires": [
+            [
+                "sd_RPJIvOEjTcGpHK69"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "insertObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "resultdata",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "create_payment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_evnbK1J0p907eVa0",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "create_payment_flow",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "createPaymentFlow",
+        "category": "General",
+        "x": 245,
+        "y": 100,
+        "wires": [
+            [
+                "sd_0TG7EAyPlhSxsnNB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "create_payment_service"
+    }
+]

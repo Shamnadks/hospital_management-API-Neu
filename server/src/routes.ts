@@ -1,4 +1,12 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-create_payment_service-SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd
+import { create_payment_service as SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd } from './sd-services/payment/create_payment/create_payment_service';
+//CORE_REFERENCE_IMPORT-create_payment_api-SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv
+import { create_payment_api as SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv } from './sd-services/payment/create_payment/create_payment_api';
+//CORE_REFERENCE_IMPORT-payment_service-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa
+import { payment_service as SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa } from './sd-services/common/payment/payment_service';
+//CORE_REFERENCE_IMPORT-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
+import { payment_api as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD } from './sd-services/common/payment/payment_api';
 //CORE_REFERENCE_IMPORT-get_appointment_flow-SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok
 import { get_appointment_flow as SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok } from './sd-services/common/get_appointments/get_appointment_flow';
 //CORE_REFERENCE_IMPORT-get_appointment_api-SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8
@@ -7,10 +15,6 @@ import { get_appointment_api as SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8 } from './sd-
 import { appointment_api as SSD_SERVICE_ID_sd_xBgpGrAxrMfgsKKs } from './sd-services/common/create_appointment/appointment_api';
 //CORE_REFERENCE_IMPORT-appointment_service-SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ
 import { appointment_service as SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ } from './sd-services/common/create_appointment/appointment_service';
-//CORE_REFERENCE_IMPORT-payment_service-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa
-import { payment_service as SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa } from './sd-services/payment/payment_service';
-//CORE_REFERENCE_IMPORT-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
-import { payment_api as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD } from './sd-services/payment/payment_api';
 //CORE_REFERENCE_IMPORT-filter_specific_service-SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j
 import { filter_specific_service as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j } from './sd-services/appointments/filter_specfic/filter_specific_service';
 //CORE_REFERENCE_IMPORT-appointments_filter_api-SSD_SERVICE_ID_sd_qI1FgEF5Qg6Su2HR
@@ -56,6 +60,14 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-create_payment_service-SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd
+SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-create_payment_api-SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv
+SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_service-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa
+SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
+SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-get_appointment_flow-SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok
 SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-get_appointment_api-SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8
@@ -64,10 +76,6 @@ SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8,
 SSD_SERVICE_ID_sd_xBgpGrAxrMfgsKKs,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-appointment_service-SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ
 SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_service-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa
-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-filter_specific_service-SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j
 SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-appointments_filter_api-SSD_SERVICE_ID_sd_qI1FgEF5Qg6Su2HR

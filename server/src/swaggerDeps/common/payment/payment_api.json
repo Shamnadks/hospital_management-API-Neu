@@ -1,0 +1,22 @@
+{
+    "/razorpay": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "data",
+                    "description": "erfwdsa",
+                    "required": false
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "payment_api"
+            ]
+        }
+    }
+}

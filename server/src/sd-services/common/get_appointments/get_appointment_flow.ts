@@ -218,7 +218,7 @@ export class get_appointment_flow {
       bh.local.doctor_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.userScrip(bh, parentSpanInst);
+      bh = await this.doctorErrorHandler(bh, parentSpanInst);
       //appendnew_next_doctorFlow
       return bh;
     } catch (e) {
@@ -228,6 +228,33 @@ export class get_appointment_flow {
         'sd_Ca3pZvBga2AEYLXx',
         spanInst,
         'doctorFlow'
+      );
+    }
+  }
+
+  async doctorErrorHandler(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'doctorErrorHandler',
+      parentSpanInst
+    );
+    try {
+      if (bh.local.doctor_response.statusCode == 200) {
+        bh.local.doctor_response = bh.local.doctor_response?.data?.[0];
+      } else {
+        throw new Error('Some error Occured try again later');
+      }
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.userScrip(bh, parentSpanInst);
+      //appendnew_next_doctorErrorHandler
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_M3IfIl4c6OUbC4st',
+        spanInst,
+        'doctorErrorHandler'
       );
     }
   }
@@ -264,7 +291,7 @@ export class get_appointment_flow {
       bh.local.doctor_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.paymentScript(bh, parentSpanInst);
+      bh = await this.userErrorHandler(bh, parentSpanInst);
       //appendnew_next_userFlow
       return bh;
     } catch (e) {
@@ -278,53 +305,48 @@ export class get_appointment_flow {
     }
   }
 
-  async paymentScript(bh, parentSpanInst) {
+  async userErrorHandler(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'paymentScript',
+      'userErrorHandler',
       parentSpanInst
     );
     try {
-      bh.input.doctor = { id: [bh.input?.data?.payment_id] };
+      if (bh.local.user_response.statusCode == 200) {
+        bh.local.user_response = bh.local.user_response?.data;
+      } else {
+        throw new Error('Some error Occured try again later');
+      }
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.paymentFlow(bh, parentSpanInst);
-      //appendnew_next_paymentScript
+      bh = await this.sd_aYI6HbzDWk959stk(bh, parentSpanInst);
+      //appendnew_next_userErrorHandler
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_rpTYE9YEeLLnSGMe',
+        'sd_FbBsaqJcEphLsFUk',
         spanInst,
-        'paymentScript'
+        'userErrorHandler'
       );
     }
   }
 
-  async paymentFlow(bh, parentSpanInst) {
+  async sd_aYI6HbzDWk959stk(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'paymentFlow',
+      'sd_aYI6HbzDWk959stk',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance: SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service =
-        SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service.getInstance();
-      let outputVariables =
-        await SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance.getADoctor(
-          spanInst,
-          bh.input.doctor
-        );
-      bh.local.doctor_response = outputVariables.local.response;
-
       this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_paymentFlow
+      //appendnew_next_sd_aYI6HbzDWk959stk
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_rHRVE5mwPKEN9jgu',
+        'sd_aYI6HbzDWk959stk',
         spanInst,
-        'paymentFlow'
+        'sd_aYI6HbzDWk959stk'
       );
     }
   }

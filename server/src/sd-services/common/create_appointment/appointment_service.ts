@@ -429,7 +429,7 @@ export class appointment_service {
     );
     try {
       if (bh.local?.doctor_response?.token_limit < bh.local.token + 1) {
-        throw new Error('Tocken Limit Exceed');
+        throw new Error('Token Limit Exceed');
       }
 
       this.tracerService.sendData(spanInst, bh);

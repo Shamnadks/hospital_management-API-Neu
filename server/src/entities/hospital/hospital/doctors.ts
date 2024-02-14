@@ -14,8 +14,8 @@ export class doctors {
   email: string;
   @Column({ name: 'address', nullable: false, type: 'text', primary: false })
   address: string;
-  @Column({ name: 'age', nullable: false, type: 'bigint', primary: false })
-  age: number;
+  @Column({ name: 'dob', nullable: false, type: 'bigint', primary: false })
+  dob: number;
   @Column({
     name: 'department_id',
     nullable: false,

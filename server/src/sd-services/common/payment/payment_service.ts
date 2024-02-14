@@ -81,7 +81,91 @@ export class payment_service {
   }
   //   service flows_payment_service
 
+  async generateRazorPayOrder(
+    parentSpanInst,
+    userId: any = undefined,
+    appointmentId: any = undefined,
+    orderId: any = undefined,
+    price: any = undefined,
+    instance: any = undefined,
+    ...others
+  ) {
+    const spanInst = this.tracerService.createSpan(
+      'generateRazorPayOrder',
+      parentSpanInst
+    );
+    let bh: any = {
+      input: {
+        userId,
+        appointmentId,
+        orderId,
+        price,
+        instance,
+      },
+      local: {
+        order: undefined,
+      },
+    };
+    try {
+      bh = this.sdService.__constructDefault(bh);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.paymentScript(bh, parentSpanInst);
+      //appendnew_next_generateRazorPayOrder
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            order: bh.local.order,
+          },
+        }
+      );
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_lcf9BiVc0vKivpzD',
+        spanInst,
+        'generateRazorPayOrder'
+      );
+    }
+  }
   //appendnew_flow_payment_service_start
+
+  async paymentScript(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'paymentScript',
+      parentSpanInst
+    );
+    try {
+      let userId = bh.input.userId;
+      let appointmentId = bh.input.appointmentId;
+      let priceInSmallestUnit = bh.input.price * 100;
+      const options = {
+        amount: priceInSmallestUnit,
+        currency: 'INR',
+        receipt: bh.input.orderId,
+        notes: {
+          userId,
+          appointmentId,
+        },
+      };
+      bh.local.order = await bh.input.instance.orders.create(options);
+
+      console.log(bh.local.order);
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_paymentScript
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_OltPj8Vq7BJ2EAWq',
+        spanInst,
+        'paymentScript'
+      );
+    }
+  }
 
   //appendnew_node
 

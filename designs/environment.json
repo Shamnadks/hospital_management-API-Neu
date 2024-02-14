@@ -19,7 +19,9 @@
             "DB_USER": "server",
             "DB_PASSWORD": "server",
             "DB_SCHEMA": "server",
-            "DB_NAME": "server"
+            "DB_NAME": "server",
+            "RAZORPAY_KEY_ID": "server",
+            "RAZORPAY_SECRET": "server"
         }
     },
     "dev": {
@@ -42,7 +44,9 @@
             "DB_USER": "postgres",
             "DB_PASSWORD": "Rafhath123456",
             "DB_SCHEMA": "hospital",
-            "DB_NAME": "postgres"
+            "DB_NAME": "postgres",
+            "RAZORPAY_KEY_ID": "rzp_test_xAQNIRBNlka1mN",
+            "RAZORPAY_SECRET": "u2ockIPVC5BLMt8dJvyHoegQ"
         }
     },
     "prod": {
@@ -65,7 +69,9 @@
             "DB_USER": "postgres",
             "DB_PASSWORD": "Rafhath123456",
             "DB_SCHEMA": "hospital",
-            "DB_NAME": "postgres"
+            "DB_NAME": "postgres",
+            "RAZORPAY_KEY_ID": "rzp_test_xAQNIRBNlka1mN",
+            "RAZORPAY_SECRET": "u2ockIPVC5BLMt8dJvyHoegQ"
         }
     }
 }
