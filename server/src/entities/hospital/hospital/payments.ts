@@ -31,13 +31,8 @@ export class payments {
     primary: false,
   })
   razorpay_payment_id: string;
-  @Column({
-    name: 'razorpay_order_id',
-    nullable: false,
-    type: 'text',
-    primary: false,
-  })
-  razorpay_order_id: string;
   @Column({ name: 'cash', nullable: false, type: 'bigint', primary: false })
   cash: number;
+  @Column({ name: 'status', nullable: false, type: 'text', primary: false })
+  status: string;
 }

@@ -92,8 +92,8 @@
                 "constraints": {}
             }
         },
-        "age": {
-            "name": "age",
+        "dob": {
+            "name": "dob",
             "format": "",
             "type": "number",
             "description": "",
@@ -200,12 +200,12 @@
         "phone_no",
         "email",
         "address",
-        "age",
         "department_id",
         "education",
         "salary",
         "token_limit",
-        "status"
+        "status",
+        "dob"
     ],
     "value": "",
     "__attributeExpansion__": true,

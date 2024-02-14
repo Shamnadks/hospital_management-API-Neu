@@ -4,7 +4,7 @@
     "description": "",
     "type": "object",
     "id": "_EN_w35q2w92rw",
-    "y": 18,
+    "y": 60.400001525878906,
     "properties": {
         "id": {
             "name": "id",
@@ -109,23 +109,6 @@
                 "constraints": {}
             }
         },
-        "razorpay_order_id": {
-            "name": "razorpay_order_id",
-            "format": "",
-            "type": "string",
-            "description": "",
-            "default": "",
-            "__n__metadata__": {
-                "id": "_Att_ohy6cf2fya",
-                "subCategoryType": null,
-                "nullable": false,
-                "dbType": "text",
-                "primary": false,
-                "placeholder": "",
-                "dbColName": "",
-                "constraints": {}
-            }
-        },
         "cash": {
             "name": "cash",
             "format": "",
@@ -142,6 +125,23 @@
                 "dbColName": "",
                 "constraints": {}
             }
+        },
+        "status": {
+            "name": "status",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_8k36j8czpl",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
         }
     },
     "required": [
@@ -149,12 +149,17 @@
         "user_id",
         "doctor_id",
         "payment_method",
-        "razorpay_order_id",
         "razorpay_payment_id",
-        "cash"
+        "cash",
+        "status"
     ],
     "value": "",
     "__attributeExpansion__": true,
     "__operationExpansion__": false,
-    "x": 1722.4000244140625
+    "x": 1701.4000244140625,
+    "userList": {
+        "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd": [
+            "sd_0TG7EAyPlhSxsnNB"
+        ]
+    }
 }
