@@ -145,7 +145,7 @@ export class payment_service {
               product_data: {
                 name: `AppointmentID:${bh.input?.data?.appointment_id}`,
               },
-              unit_amount: priceInSmallestUnit,
+              unit_amount: priceInSmallestUnit * 100,
             },
             quantity: 1,
           },
