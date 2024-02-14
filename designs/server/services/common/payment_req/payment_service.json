@@ -18,13 +18,15 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "payment script",
-        "script": "let userId=bh.input.userId;\nlet appointmentId=bh.input.appointmentId;\nlet priceInSmallestUnit = bh.input.price * 100;\nconst options = {\n    amount: priceInSmallestUnit,\n    currency: \"INR\",\n    receipt: bh.input.orderId,\n    notes: {\n      userId,\n      appointmentId\n    },\n};\nbh.local.order = await bh.input.instance.orders.create(options);\n\nconsole.log(bh.local.order)",
+        "script": "let userId=bh.input?.data?.user_id;\nlet appointmentId=\"\"+bh.input?.data?.appointment_id;\nlet priceInSmallestUnit = bh.input?.data?.cash;\nconst options = {\n    amount: priceInSmallestUnit,\n    currency: \"INR\",\n    receipt: appointmentId,\n    notes: {\n      userId,\n      appointmentId\n    },\n};\nbh.local.order = await bh.input.instance.orders.create(options);\n\nconsole.log(bh.local.order)",
         "functionName": "paymentScript",
         "category": "Function",
-        "x": 385,
+        "x": 425,
         "y": 120,
         "wires": [
-            []
+            [
+                "sd_XwAsc4zK3lL4iaNa"
+            ]
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
@@ -41,39 +43,15 @@
         "outputs": 1,
         "inputVariables": [
             {
-                "key": "userId",
-                "defaultValue": {
-                    "type": "any",
-                    "value": ""
-                },
-                "output": false
-            },
-            {
-                "key": "appointmentId",
-                "defaultValue": {
-                    "type": "any",
-                    "value": ""
-                },
-                "output": false
-            },
-            {
-                "key": "orderId",
-                "defaultValue": {
-                    "type": "any",
-                    "value": ""
-                },
-                "output": false
-            },
-            {
-                "key": "price",
-                "defaultValue": {
-                    "type": "any",
-                    "value": ""
-                },
-                "output": false
-            },
-            {
                 "key": "instance",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "data",
                 "defaultValue": {
                     "type": "any",
                     "value": ""
@@ -83,7 +61,7 @@
         ],
         "localVariables": [
             {
-                "key": "order",
+                "key": "response",
                 "defaultValue": {
                     "type": "any",
                     "value": ""
@@ -104,5 +82,131 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "payment_service"
+    },
+    {
+        "id": "sd_XwAsc4zK3lL4iaNa",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "data",
+        "script": "bh.input.payment_details={\n      \"id\":0,\n      \"appointment_id\":bh.input?.data?.appointment_id,\n      \"user_id\":bh.input?.data?.user_id,\n      \"doctor_id\":bh.input?.data?.doctor_id,\n      \"payment_method\":bh.input?.data?.payment_method,\n      \"razorpay_payment_id\":bh.local.order.id,\n      \"cash\":bh.input?.data?.cash,\n      \"status\":bh.input?.data?.status\n}",
+        "functionName": "data",
+        "category": "Function",
+        "x": 600,
+        "y": 120,
+        "wires": [
+            [
+                "sd_nf6yjEotv1s2ZKEA"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_nf6yjEotv1s2ZKEA",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd",
+            "type": "tab",
+            "createdDate": "2024-02-14T06:19:41.154Z",
+            "label": "create_payment_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_evnbK1J0p907eVa0",
+            "flowName": "createPaymentFlow"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "payment_details"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "payment_response",
+                "mapVarName": "response",
+                "localVar": "bh.local.payment_response"
+            }
+        ],
+        "callService": "../../payment/create_payment/create_payment_service",
+        "startName": "createPaymentFlow",
+        "inputParams": [
+            "bh.input.payment_details"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_nf6yjEotv1s2ZKEA",
+        "category": "General",
+        "x": 685,
+        "y": 120,
+        "wires": [
+            [
+                "sd_0yOf4irIUnAvZD5Q"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_0yOf4irIUnAvZD5Q",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "payment_error_handler",
+        "script": "if(bh.local.payment_response.statusCode==200){\n    bh.local.payment_response=bh.local.payment_response?.data\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "functionName": "paymentErrorHandler",
+        "category": "Function",
+        "x": 805,
+        "y": 120,
+        "wires": [
+            [
+                "sd_tH30MdFBem0EqASM"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_tH30MdFBem0EqASM",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.order\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 945,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_service",
+        "generated": true
     }
 ]

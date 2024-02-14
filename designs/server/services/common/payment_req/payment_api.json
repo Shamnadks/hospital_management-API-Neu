@@ -21,100 +21,11 @@
         "script": "const Razorpay = require(\"razorpay\");\nbh.local.instance = new Razorpay({\n  key_id: process.env.RAZORPAY_KEY_ID,\n  key_secret: process.env.RAZORPAY_SECRET,\n});",
         "functionName": "createdInstanse",
         "category": "Function",
-        "x": 285,
-        "y": 160,
+        "x": 365,
+        "y": 180,
         "wires": [
             [
-                "sd_97Wsc6UHFwqxtP8l"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "payment_api",
-        "generated": true
-    },
-    {
-        "id": "sd_97Wsc6UHFwqxtP8l",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "generateRazorPayOrder",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
-            "type": "tab",
-            "createdDate": "2024-02-14T06:51:47.302Z",
-            "label": "payment_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_T2Za2TH8DXV6A90R",
-            "flowName": "generateRazorPayOrder"
-        },
-        "inputVariables": [
-            {
-                "key": "userId",
-                "map": true,
-                "valueType": "bh",
-                "value": ""
-            },
-            {
-                "key": "appointmentId",
-                "map": true,
-                "valueType": "bh",
-                "value": ""
-            },
-            {
-                "key": "orderId",
-                "map": true,
-                "valueType": "bh",
-                "value": ""
-            },
-            {
-                "key": "price",
-                "map": true,
-                "valueType": "bh",
-                "value": ""
-            },
-            {
-                "key": "instance",
-                "map": true,
-                "valueType": "bh",
-                "value": ""
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "order",
-                "valueType": "bh",
-                "value": "",
-                "mapVarName": "order"
-            }
-        ],
-        "callService": "./payment_service",
-        "startName": "generateRazorPayOrder",
-        "inputParams": [
-            null,
-            null,
-            null,
-            null,
-            null
-        ],
-        "accept_bh": false,
-        "functionName": "generateRazorPayOrder",
-        "category": "General",
-        "x": 465,
-        "y": 160,
-        "wires": [
-            [
-                "sd_wvtBfluWDUZ8ioM5"
+                "sd_euDUGxX1YeixLA1x"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -129,7 +40,7 @@
         "viewType": "server",
         "nodeType": "start",
         "name": "payment",
-        "path": "razorpay",
+        "path": "payment",
         "uploadpath": "",
         "summary": "",
         "description": "",
@@ -141,7 +52,6 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
-        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -170,7 +80,7 @@
         "y": 160,
         "wires": [
             [
-                "sd_tNpVvNJdIKoDv0Bq"
+                "sd_N8lhrXUSksLws7ga"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -213,7 +123,6 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -232,8 +141,8 @@
         },
         "functionName": "paymentHttpOut",
         "category": "HTTP",
-        "x": 725,
-        "y": 160,
+        "x": 685,
+        "y": 140,
         "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
@@ -241,17 +150,170 @@
         "generated": true
     },
     {
-        "id": "sd_wvtBfluWDUZ8ioM5",
-        "type": "Script",
+        "id": "sd_N8lhrXUSksLws7ga",
+        "type": "Switch",
         "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
         "viewType": "common",
         "nodeType": "flow",
-        "name": "Status Report",
-        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.order\n}",
-        "functionName": "statusReport",
+        "name": "",
+        "property": "body.payment_method",
+        "propertyType": "bh.input",
+        "propertyGv": "bh.input.body.payment_method",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "cash",
+                "vt": "str",
+                "gv": "\"cash\""
+            },
+            {
+                "t": "eq",
+                "v": "razorpay",
+                "vt": "str",
+                "gv": "\"razorpay\""
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_N8lhrXUSksLws7ga",
         "category": "Function",
-        "x": 585,
+        "x": 205,
         "y": 160,
+        "wires": [
+            [
+                "sd_nSikfLfe51N55pHa"
+            ],
+            [
+                "sd_tNpVvNJdIKoDv0Bq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_euDUGxX1YeixLA1x",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
+            "type": "tab",
+            "createdDate": "2024-02-14T06:51:47.302Z",
+            "label": "payment_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_T2Za2TH8DXV6A90R",
+            "flowName": "generateRazorPayOrder"
+        },
+        "inputVariables": [
+            {
+                "key": "instance",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "instance"
+            },
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./payment_service",
+        "startName": "generateRazorPayOrder",
+        "inputParams": [
+            "bh.local.instance",
+            "bh.input.body"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_euDUGxX1YeixLA1x",
+        "category": "General",
+        "x": 485,
+        "y": 180,
+        "wires": [
+            [
+                "sd_5M72mFg41g44r7o1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_nSikfLfe51N55pHa",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+            "type": "tab",
+            "createdDate": "2024-02-14T08:35:09.827Z",
+            "label": "payment_cash_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_ktQmTuVG8y1Gqq3W",
+            "flowName": "cashOrder"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./payment_cash_service",
+        "startName": "cashOrder",
+        "inputParams": [
+            "bh.input.body"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_nSikfLfe51N55pHa",
+        "category": "General",
+        "x": 485,
+        "y": 60,
         "wires": [
             [
                 "sd_5M72mFg41g44r7o1"

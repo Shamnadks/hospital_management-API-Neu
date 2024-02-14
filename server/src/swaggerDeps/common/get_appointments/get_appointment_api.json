@@ -1,5 +1,5 @@
 {
-    "/appointment/post": {
+    "/getappointment/post": {
         "post": {
             "summary": "",
             "description": "",

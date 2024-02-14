@@ -1,0 +1,182 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+        "type": "tab",
+        "createdDate": "2024-02-14T08:35:09.827Z",
+        "label": "payment_cash_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "payment_cash_service",
+        "relativeParentPath": "common/payment_req"
+    },
+    {
+        "id": "sd_xGnmnsWbAzabsz82",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "data",
+        "script": "bh.input.payment_details={\n      \"id\":0,\n      \"appointment_id\":bh.input?.data?.appointment_id,\n      \"user_id\":bh.input?.data?.user_id,\n      \"doctor_id\":bh.input?.data?.doctor_id,\n      \"payment_method\":bh.input?.data?.payment_method,\n      \"razorpay_payment_id\":\"not_applicable\",\n      \"cash\":bh.input?.data?.cash,\n      \"status\":bh.input?.data?.status\n}",
+        "functionName": "data",
+        "category": "Function",
+        "x": 265,
+        "y": 100,
+        "wires": [
+            [
+                "sd_UlFtwjj4JtiaoMOe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_cash_service",
+        "generated": true
+    },
+    {
+        "id": "sd_UlFtwjj4JtiaoMOe",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd",
+            "type": "tab",
+            "createdDate": "2024-02-14T06:19:41.154Z",
+            "label": "create_payment_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_evnbK1J0p907eVa0",
+            "flowName": "createPaymentFlow"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "payment_details"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "resultdata",
+                "mapVarName": "response",
+                "localVar": "bh.local.resultdata"
+            }
+        ],
+        "callService": "../../payment/create_payment/create_payment_service",
+        "startName": "createPaymentFlow",
+        "inputParams": [
+            "bh.input.payment_details"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_UlFtwjj4JtiaoMOe",
+        "category": "General",
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "sd_uInhQUjRhKJAXyiL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_cash_service",
+        "generated": true
+    },
+    {
+        "id": "sd_uInhQUjRhKJAXyiL",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "payment_error_handler",
+        "script": "if(bh.local.resultdata?.statusCode==200){\n    bh.local.resultdata=bh.local.resultdata?.data\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "functionName": "paymentErrorHandler",
+        "category": "Function",
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "sd_7YWSs1n2mn3hCcbH"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_cash_service",
+        "generated": true
+    },
+    {
+        "id": "sd_7YWSs1n2mn3hCcbH",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 610,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_cash_service",
+        "generated": true
+    },
+    {
+        "id": "sd_ktQmTuVG8y1Gqq3W",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "cash_order",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "cashOrder",
+        "category": "General",
+        "x": 145,
+        "y": 100,
+        "wires": [
+            [
+                "sd_xGnmnsWbAzabsz82"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payment_cash_service"
+    }
+]

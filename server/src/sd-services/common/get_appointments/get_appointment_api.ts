@@ -7,7 +7,7 @@ import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ from '../create_appointment/appointment_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok from './get_appointment_flow'; //_splitter_
 //append_imports_end
 export class get_appointment_api {
   private sdService = new SDBaseService();
@@ -81,7 +81,7 @@ export class get_appointment_api {
     log.debug('mounting all paths for service :: get_appointment_api');
 
     this.app['post'](
-      `${this.serviceBasePath}/appointment/post`,
+      `${this.serviceBasePath}/getappointment/post`,
       cookieParser(),
       this.sdService.getMiddlesWaresBySequenceId(
         null,
@@ -148,10 +148,10 @@ export class get_appointment_api {
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJInstance: SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ.appointment_service =
-        SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ.appointment_service.getInstance();
+      const SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1OkInstance: SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok.get_appointment_flow =
+        SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok.get_appointment_flow.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJInstance.createAppointmentFlow(
+        await SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1OkInstance.getAppointmentFlow(
           spanInst,
           bh.input.body
         );

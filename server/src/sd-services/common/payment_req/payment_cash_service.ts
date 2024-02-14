@@ -6,9 +6,9 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import { GenericRDBMSOperations } from '../../../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
+import * as SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd from '../../payment/create_payment/create_payment_service'; //_splitter_
 //append_imports_end
-export class filter_specific_service {
+export class payment_cash_service {
   private sdService = new SDBaseService();
   private tracerService = new TracerService();
   private app;
@@ -24,7 +24,7 @@ export class filter_specific_service {
     middlewareCall,
     globalTimers
   ) {
-    this.serviceName = 'filter_specific_service';
+    this.serviceName = 'payment_cash_service';
     this.app = app;
     this.serviceBasePath = this.app.settings.base;
     this.generatedMiddlewares = generatedeMiddlewares;
@@ -39,7 +39,7 @@ export class filter_specific_service {
     globalTimers?
   ) {
     if (!instance) {
-      instance = new filter_specific_service(
+      instance = new payment_cash_service(
         app,
         generatedeMiddlewares,
         routeCall,
@@ -68,30 +68,25 @@ export class filter_specific_service {
   }
 
   async mountTimers() {
-    //appendnew_flow_filter_specific_service_TimerStart
+    //appendnew_flow_payment_cash_service_TimerStart
   }
 
   private mountAllMiddlewares() {
-    log.debug(
-      'mounting all middlewares for service :: filter_specific_service'
-    );
-    //appendnew_flow_filter_specific_service_MiddlewareStart
+    log.debug('mounting all middlewares for service :: payment_cash_service');
+    //appendnew_flow_payment_cash_service_MiddlewareStart
   }
 
   private mountAllPaths() {
-    log.debug('mounting all paths for service :: filter_specific_service');
-    //appendnew_flow_filter_specific_service_HttpIn
+    log.debug('mounting all paths for service :: payment_cash_service');
+    //appendnew_flow_payment_cash_service_HttpIn
   }
-  //   service flows_filter_specific_service
+  //   service flows_payment_cash_service
 
-  async filterSpecific(parentSpanInst, filter: any = undefined, ...others) {
-    const spanInst = this.tracerService.createSpan(
-      'filterSpecific',
-      parentSpanInst
-    );
+  async cashOrder(parentSpanInst, data: any = undefined, ...others) {
+    const spanInst = this.tracerService.createSpan('cashOrder', parentSpanInst);
     let bh: any = {
       input: {
-        filter,
+        data,
       },
       local: {
         response: undefined,
@@ -100,8 +95,8 @@ export class filter_specific_service {
     try {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.psqlQuery(bh, parentSpanInst);
-      //appendnew_next_filterSpecific
+      bh = await this.data(bh, parentSpanInst);
+      //appendnew_next_cashOrder
       return (
         // formatting output variables
         {
@@ -115,112 +110,94 @@ export class filter_specific_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_lCNeGGjlsbV1cOSW',
+        'sd_ktQmTuVG8y1Gqq3W',
         spanInst,
-        'filterSpecific'
+        'cashOrder'
       );
     }
   }
-  //appendnew_flow_filter_specific_service_start
+  //appendnew_flow_payment_cash_service_start
 
-  async psqlQuery(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan('psqlQuery', parentSpanInst);
+  async data(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('data', parentSpanInst);
     try {
-      console.log(bh.input.filter);
-      let fields = '*';
-      if (bh.input.filter?.columns?.length > 0) {
-        fields = bh.input.filter?.columns?.join(',');
-      }
-
-      let sorttable = bh.input.filter?.sorttable;
-      let sorttype = bh.input.filter?.sorttype || `ASC`;
-      let limitdata = bh.input.filter?.limit;
-      let filter = bh.input.filter?.datas;
-
-      bh.local.query = `SELECT ${fields} FROM ${process.env.DB_SCHEMA}.appointments`;
-      bh.local.queryvalues = [];
-      console.log(bh.local.query);
-      if (filter) {
-        let keys = Object.keys(filter);
-        let count = 0;
-        if (keys.length > 0) {
-          bh.local.query += ' where ';
-          keys.forEach((key, index) => {
-            bh.local.query += key + ` IN (`;
-            filter[key].forEach((element, index) => {
-              bh.local.query += `$${count + 1}`;
-              bh.local.queryvalues.push(element);
-              if (filter[key].length > 1 && index < filter[key].length - 1) {
-                bh.local.query += ', ';
-              }
-              count++;
-            });
-            bh.local.query += `)`;
-            if (keys.length > 1 && index < keys.length - 1) {
-              bh.local.query += ' AND ';
-            }
-          });
-        }
-      }
-      if (sorttable) {
-        bh.local.query += ' ORDER BY ' + sorttable + ' ' + sorttype;
-      }
-      if (limitdata) {
-        bh.local.query += ' LIMIT ' + limitdata + ' ;';
-      }
+      bh.input.payment_details = {
+        id: 0,
+        appointment_id: bh.input?.data?.appointment_id,
+        user_id: bh.input?.data?.user_id,
+        doctor_id: bh.input?.data?.doctor_id,
+        payment_method: bh.input?.data?.payment_method,
+        razorpay_payment_id: 'not_applicable',
+        cash: bh.input?.data?.cash,
+        status: bh.input?.data?.status,
+      };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.getAUserSql(bh, parentSpanInst);
-      //appendnew_next_psqlQuery
+      bh = await this.sd_UlFtwjj4JtiaoMOe(bh, parentSpanInst);
+      //appendnew_next_data
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_qe1kVCwb5gWcYnUH',
+        'sd_xGnmnsWbAzabsz82',
         spanInst,
-        'psqlQuery'
+        'data'
       );
     }
   }
 
-  async getAUserSql(bh, parentSpanInst) {
+  async sd_UlFtwjj4JtiaoMOe(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'getAUserSql',
+      'sd_UlFtwjj4JtiaoMOe',
       parentSpanInst
     );
     try {
-      let configObj = this.sdService.getConfigObj(
-        'db-config',
-        'sd_JFEzq9BaWr7Csm3t'
-      );
-      let connectionName;
-      if (
-        configObj &&
-        configObj.hasOwnProperty('dbOption') &&
-        configObj.dbOption.hasOwnProperty('name')
-      ) {
-        connectionName = configObj.dbOption.name;
-      } else {
-        throw new Error('Cannot find the selected config name');
-      }
-      let params = bh.local.queryvalues;
-      params = params ? params : [];
-      bh.local.resultdata = await new GenericRDBMSOperations().executeSQL(
-        connectionName,
-        bh.local.query,
-        params
-      );
+      const SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOdInstance: SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd.create_payment_service =
+        SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd.create_payment_service.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOdInstance.createPaymentFlow(
+          spanInst,
+          bh.input.payment_details
+        );
+      bh.local.resultdata = outputVariables.local.response;
+
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.statusReport(bh, parentSpanInst);
-      //appendnew_next_getAUserSql
+      bh = await this.paymentErrorHandler(bh, parentSpanInst);
+      //appendnew_next_sd_UlFtwjj4JtiaoMOe
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_M4kWd8w4TMElXLRB',
+        'sd_UlFtwjj4JtiaoMOe',
         spanInst,
-        'getAUserSql'
+        'sd_UlFtwjj4JtiaoMOe'
+      );
+    }
+  }
+
+  async paymentErrorHandler(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'paymentErrorHandler',
+      parentSpanInst
+    );
+    try {
+      if (bh.local.resultdata?.statusCode == 200) {
+        bh.local.resultdata = bh.local.resultdata?.data;
+      } else {
+        throw new Error('Some error Occured try again later');
+      }
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_paymentErrorHandler
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_uInhQUjRhKJAXyiL',
+        spanInst,
+        'paymentErrorHandler'
       );
     }
   }
@@ -242,7 +219,7 @@ export class filter_specific_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_dGPuSolv6TkpIlRR',
+        'sd_7YWSs1n2mn3hCcbH',
         spanInst,
         'statusReport'
       );
@@ -270,5 +247,5 @@ export class filter_specific_service {
       throw e;
     }
   }
-  //appendnew_flow_filter_specific_service_Catch
+  //appendnew_flow_payment_cash_service_Catch
 }
