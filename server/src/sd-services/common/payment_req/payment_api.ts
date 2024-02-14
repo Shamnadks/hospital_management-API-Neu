@@ -7,7 +7,7 @@ import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa from './payment_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn from './payment_service'; //_splitter_
 //append_imports_end
 export class payment_api {
   private sdService = new SDBaseService();
@@ -149,18 +149,17 @@ export class payment_api {
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_iApazhDXbeGyVtBaInstance: SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa.payment_service =
-        SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa.payment_service.getInstance();
+      const SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYnInstance: SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn.payment_service =
+        SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn.payment_service.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_iApazhDXbeGyVtBaInstance.generateRazorPayOrder(
+        await SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYnInstance.generateRazorPayOrder(
           spanInst,
-          bh.input.body.userId,
-          bh.input.body.appointmentId,
-          bh.input.body.orderId,
-          bh.input.body.price,
-          bh.local.instance
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined
         );
-      bh.local.order = outputVariables.local.order;
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.statusReport(bh, parentSpanInst);

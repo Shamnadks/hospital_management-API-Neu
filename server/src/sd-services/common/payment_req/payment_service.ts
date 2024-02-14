@@ -3,9 +3,9 @@ let instance = null;
 //CORE_REFERENCE_IMPORTS
 //append_imports_start
 
-import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
-import { TracerService } from '../../services/TracerService'; //_splitter_
-import log from '../../utils/Logger'; //_splitter_
+import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
+import { TracerService } from '../../../services/TracerService'; //_splitter_
+import log from '../../../utils/Logger'; //_splitter_
 //append_imports_end
 export class payment_service {
   private sdService = new SDBaseService();
@@ -124,7 +124,7 @@ export class payment_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_lcf9BiVc0vKivpzD',
+        'sd_T2Za2TH8DXV6A90R',
         spanInst,
         'generateRazorPayOrder'
       );
@@ -160,7 +160,7 @@ export class payment_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_OltPj8Vq7BJ2EAWq',
+        'sd_gVU2nlPZ2MbhQIwy',
         spanInst,
         'paymentScript'
       );
