@@ -92,8 +92,8 @@
                 "constraints": {}
             }
         },
-        "razorpay_payment_id": {
-            "name": "razorpay_payment_id",
+        "payment_id": {
+            "name": "payment_id",
             "format": "",
             "type": "string",
             "description": "",
@@ -149,9 +149,9 @@
         "user_id",
         "doctor_id",
         "payment_method",
-        "razorpay_payment_id",
         "cash",
-        "status"
+        "status",
+        "payment_id"
     ],
     "value": "",
     "__attributeExpansion__": true,

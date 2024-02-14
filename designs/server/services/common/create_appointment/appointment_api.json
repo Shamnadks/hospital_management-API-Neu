@@ -79,7 +79,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "appointment_api",
-        "functionName": "sd_0UfJ8MQ7hEc6pMEi"
+        "functionName": "sd_0UfJ8MQ7hEc6pMEi",
+        "generated": false
     },
     {
         "id": "sd_Szkt0BtttEI7aGrB",
@@ -203,7 +204,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "appointment_api"
+        "serviceName": "appointment_api",
+        "generated": false
     },
     {
         "id": "sd_NntvQ1e63azDJXPb",
@@ -316,8 +318,8 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "appointment_api",
-        "generated": true
+        "serviceName": "appointment_api"
     }
 ]

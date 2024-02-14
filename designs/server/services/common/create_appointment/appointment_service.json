@@ -17,14 +17,16 @@
         "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
         "viewType": "common",
         "nodeType": "flow",
-        "name": "Status Report",
-        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
-        "functionName": "statusReport",
+        "name": "payment_data",
+        "script": "bh.local.paymentdata={    \n      \"appointment_id\":bh.local.resultdata?.id,\n      \"user_id\":bh.local.resultdata?.user_id,\n      \"doctor_id\":bh.local.resultdata?.doctor_id,\n      \"payment_method\":bh.input.data?.payment_method,\n      \"cash\":bh.local.resultdata?.cash,\n      \"status\":bh.local.resultdata?.status,\n      \"sucess_url\":bh.input.data?.sucess_url,\n      \"cancel_url\": bh.input.data?.cancel_url\n      }\nconsole.log(bh.local.paymentdata);",
+        "functionName": "paymentData",
         "category": "Function",
         "x": 2405,
         "y": 220,
         "wires": [
-            []
+            [
+                "sd_6oaugOlUcCsbWqNI"
+            ]
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
@@ -71,8 +73,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "appointment_service",
-        "generated": false
+        "serviceName": "appointment_service"
     },
     {
         "id": "sd_1lhDY9ucbweZ5nGv",
@@ -238,9 +239,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "appointment_service"
+        "serviceName": "appointment_service",
+        "generated": true
     },
     {
         "id": "sd_tAQhvM7nzB5EbueV",
@@ -446,7 +447,7 @@
         "y": 220,
         "wires": [
             [
-                "sd_lPeuyHWnwoNO2Mr8"
+                "sd_NZnQKeQzIIQlJaPI"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -461,7 +462,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "user_error_handler",
-        "script": "if(bh.local.user_response.statusCode==200){\n    bh.local.user_response=bh.local.user_response?.data\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "script": "if(bh.local.user_response?.statusCode==200){\n    bh.local.user_response=bh.local.user_response?.data\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
         "functionName": "userErrorHandler",
         "category": "Function",
         "x": 1085,
@@ -483,7 +484,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "token_error_handler",
-        "script": "if(bh.local.token.statusCode==200){\n    bh.local.token=bh.local.token?.data?.[0]?.token_number||0\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "script": "if(bh.local.token?.statusCode==200){\n    bh.local.token=bh.local.token?.data?.[0]?.token_number||0\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
         "functionName": "tokenErrorHandler",
         "category": "Function",
         "x": 1465,
@@ -505,7 +506,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "doctor_error_handler",
-        "script": "if(bh.local.doctor_response.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\n",
+        "script": "if(bh.local.doctor_response?.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\n",
         "functionName": "doctorErrorHandler",
         "category": "Function",
         "x": 1845,
@@ -674,7 +675,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "users_error_handler",
-        "script": "if(bh.local.user_response.statusCode==200){\n    bh.local.user_response=bh.local.user_response?.data?.[0]\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "script": "if(bh.local.user_response?.statusCode==200){\n    bh.local.user_response=bh.local.user_response?.data?.[0]\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
         "functionName": "usersErrorHandler",
         "category": "Function",
         "x": 905,
@@ -682,6 +683,132 @@
         "wires": [
             [
                 "sd_Wq9YCh3Yn5ajALIp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_6oaugOlUcCsbWqNI",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+            "type": "tab",
+            "createdDate": "2024-02-13T18:41:03.147Z",
+            "label": "payment_api",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_RFvxaGlDwTqFGT4z",
+            "flowName": "paymentStart"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "paymentdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "paymentresponse",
+                "mapVarName": "response",
+                "localVar": "bh.local.paymentresponse"
+            }
+        ],
+        "callService": "../payment_req/payment_api",
+        "startName": "paymentStart",
+        "inputParams": [
+            "bh.local.paymentdata"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_6oaugOlUcCsbWqNI",
+        "category": "General",
+        "x": 2525,
+        "y": 220,
+        "wires": [
+            [
+                "sd_iOB5bY8BAZWXDLpv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_iOB5bY8BAZWXDLpv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "payment_error_handler",
+        "script": "console.log(bh.local.paymentresponse)\nif(bh.local.paymentresponse?.statusCode==200){\n    bh.local.paymentresponse=bh.local.paymentresponse?.data\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\n",
+        "functionName": "paymentErrorHandler",
+        "category": "Function",
+        "x": 2665,
+        "y": 220,
+        "wires": [
+            [
+                "sd_4TXnC8G2GW745azM"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_4TXnC8G2GW745azM",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:{\n        data:bh.local.resultdata,\n        url:bh.local.paymentresponse\n    }\n}\nconsole.log(bh.local.response)",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 2825,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_NZnQKeQzIIQlJaPI",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "appointment_error_handler",
+        "script": "if(bh.local.resultdata?.statusCode==200){\n    bh.local.resultdata=bh.local.resultdata?.data\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "functionName": "appointmentErrorHandler",
+        "category": "Function",
+        "x": 2345,
+        "y": 120,
+        "wires": [
+            [
+                "sd_lPeuyHWnwoNO2Mr8"
             ]
         ],
         "__n_excludedFromValidation__": {},

@@ -3,7 +3,6 @@ let instance = null;
 //CORE_REFERENCE_IMPORTS
 //append_imports_start
 
-import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
@@ -80,42 +79,47 @@ export class payment_api {
 
   private mountAllPaths() {
     log.debug('mounting all paths for service :: payment_api');
-
-    this.app['post'](
-      `${this.serviceBasePath}/payment`,
-      cookieParser(),
-      this.sdService.getMiddlesWaresBySequenceId(
-        null,
-        'pre',
-        this.generatedMiddlewares
-      ),
-
-      async (req, res, next) => {
-        let bh: any = {};
-        try {
-          bh = this.sdService.__constructDefault(
-            { local: {}, input: {} },
-            req,
-            res,
-            next
-          );
-          let parentSpanInst = null;
-          bh = await this.sd_N8lhrXUSksLws7ga(bh, parentSpanInst);
-          //appendnew_next_sd_km40Zc8lTmNthZ2S
-        } catch (e) {
-          return await this.errorHandler(bh, e, 'sd_km40Zc8lTmNthZ2S');
-        }
-      },
-      this.sdService.getMiddlesWaresBySequenceId(
-        null,
-        'post',
-        this.generatedMiddlewares
-      )
-    );
     //appendnew_flow_payment_api_HttpIn
   }
   //   service flows_payment_api
 
+  async paymentStart(parentSpanInst, data: any = undefined, ...others) {
+    const spanInst = this.tracerService.createSpan(
+      'paymentStart',
+      parentSpanInst
+    );
+    let bh: any = {
+      input: {
+        data,
+      },
+      local: {
+        response: undefined,
+      },
+    };
+    try {
+      bh = this.sdService.__constructDefault(bh);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_N8lhrXUSksLws7ga(bh, parentSpanInst);
+      //appendnew_next_paymentStart
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            response: bh.local.response,
+          },
+        }
+      );
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_RFvxaGlDwTqFGT4z',
+        spanInst,
+        'paymentStart'
+      );
+    }
+  }
   //appendnew_flow_payment_api_start
 
   async sd_N8lhrXUSksLws7ga(bh, parentSpanInst) {
@@ -126,7 +130,7 @@ export class payment_api {
     try {
       if (
         this.sdService.operators['eq'](
-          bh.input.body.payment_method,
+          bh.input.data.payment_method,
           'cash',
           undefined,
           undefined
@@ -135,8 +139,8 @@ export class payment_api {
         bh = await this.sd_nSikfLfe51N55pHa(bh, parentSpanInst);
       } else if (
         this.sdService.operators['eq'](
-          bh.input.body.payment_method,
-          'razorpay',
+          bh.input.data.payment_method,
+          'stripe',
           undefined,
           undefined
         )
@@ -168,12 +172,12 @@ export class payment_api {
       let outputVariables =
         await SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UYInstance.cashOrder(
           spanInst,
-          bh.input.body
+          bh.input.data
         );
-      bh.local.response = outputVariables.local.response;
+      bh.local.resultdata = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      await this.paymentHttpOut(bh, parentSpanInst);
+      bh = await this.statusReport(bh, parentSpanInst);
       //appendnew_next_sd_nSikfLfe51N55pHa
       return bh;
     } catch (e) {
@@ -187,13 +191,28 @@ export class payment_api {
     }
   }
 
-  async paymentHttpOut(bh, parentSpanInst) {
+  async statusReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusReport',
+      parentSpanInst
+    );
     try {
-      bh.web.res.status(bh.local.response.statusCode).send(bh.local.response);
+      bh.local.response = {
+        statusCode: bh.local.resultdata.statusCode,
+        data: bh.local.resultdata.data,
+      };
 
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_statusReport
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_5M72mFg41g44r7o1');
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_MdL8CkPu98huVHVv',
+        spanInst,
+        'statusReport'
+      );
     }
   }
 
@@ -203,11 +222,7 @@ export class payment_api {
       parentSpanInst
     );
     try {
-      const Razorpay = require('razorpay');
-      bh.local.instance = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID,
-        key_secret: process.env.RAZORPAY_SECRET,
-      });
+      bh.local.stripe = require('stripe')(process.env.STRIPE_SECRET_TEST_KEY);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_euDUGxX1YeixLA1x(bh, parentSpanInst);
       //appendnew_next_createdInstanse
@@ -234,13 +249,13 @@ export class payment_api {
       let outputVariables =
         await SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYnInstance.generateRazorPayOrder(
           spanInst,
-          bh.local.instance,
-          bh.input.body
+          bh.local.stripe,
+          bh.input.data
         );
-      bh.local.response = outputVariables.local.response;
+      bh.local.resultdata = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      await this.paymentHttpOut(bh, parentSpanInst);
+      bh = await this.statusReport(bh, parentSpanInst);
       //appendnew_next_sd_euDUGxX1YeixLA1x
       return bh;
     } catch (e) {

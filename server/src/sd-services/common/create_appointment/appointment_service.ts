@@ -11,6 +11,7 @@ import * as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j from '../../appointments/filter_s
 import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from '../../doctors/filter_doctor/filter_doctor_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_1utwBDtR9iw7QRXa from '../../users/create_user/create_user_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD from '../../users/filter_user/filter_user_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD from '../payment_req/payment_api'; //_splitter_
 //append_imports_end
 export class appointment_service {
   private sdService = new SDBaseService();
@@ -246,7 +247,7 @@ export class appointment_service {
       parentSpanInst
     );
     try {
-      if (bh.local.user_response.statusCode == 200) {
+      if (bh.local.user_response?.statusCode == 200) {
         bh.local.user_response = bh.local.user_response?.data?.[0];
       } else {
         throw new Error('Some error Occured try again later');
@@ -372,7 +373,7 @@ export class appointment_service {
       parentSpanInst
     );
     try {
-      if (bh.local.token.statusCode == 200) {
+      if (bh.local.token?.statusCode == 200) {
         bh.local.token = bh.local.token?.data?.[0]?.token_number || 0;
       } else {
         throw new Error('Some error Occured try again later');
@@ -450,7 +451,7 @@ export class appointment_service {
       parentSpanInst
     );
     try {
-      if (bh.local.doctor_response.statusCode == 200) {
+      if (bh.local.doctor_response?.statusCode == 200) {
         bh.local.doctor_response = bh.local.doctor_response?.data?.[0];
       } else {
         throw new Error('Some error Occured try again later');
@@ -544,7 +545,7 @@ export class appointment_service {
       bh.local.resultdata = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.statusReport(bh, parentSpanInst);
+      bh = await this.appointmentErrorHandler(bh, parentSpanInst);
       //appendnew_next_appoinmentFlow
       return bh;
     } catch (e) {
@@ -558,6 +559,122 @@ export class appointment_service {
     }
   }
 
+  async appointmentErrorHandler(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'appointmentErrorHandler',
+      parentSpanInst
+    );
+    try {
+      if (bh.local.resultdata?.statusCode == 200) {
+        bh.local.resultdata = bh.local.resultdata?.data;
+      } else {
+        throw new Error('Some error Occured try again later');
+      }
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.paymentData(bh, parentSpanInst);
+      //appendnew_next_appointmentErrorHandler
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_NZnQKeQzIIQlJaPI',
+        spanInst,
+        'appointmentErrorHandler'
+      );
+    }
+  }
+
+  async paymentData(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'paymentData',
+      parentSpanInst
+    );
+    try {
+      bh.local.paymentdata = {
+        appointment_id: bh.local.resultdata?.id,
+        user_id: bh.local.resultdata?.user_id,
+        doctor_id: bh.local.resultdata?.doctor_id,
+        payment_method: bh.input.data?.payment_method,
+        cash: bh.local.resultdata?.cash,
+        status: bh.local.resultdata?.status,
+        sucess_url: bh.input.data?.sucess_url,
+        cancel_url: bh.input.data?.cancel_url,
+      };
+      console.log(bh.local.paymentdata);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_6oaugOlUcCsbWqNI(bh, parentSpanInst);
+      //appendnew_next_paymentData
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_lPeuyHWnwoNO2Mr8',
+        spanInst,
+        'paymentData'
+      );
+    }
+  }
+
+  async sd_6oaugOlUcCsbWqNI(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_6oaugOlUcCsbWqNI',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeODInstance: SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD.payment_api =
+        SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD.payment_api.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeODInstance.paymentStart(
+          spanInst,
+          bh.local.paymentdata
+        );
+      bh.local.paymentresponse = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.paymentErrorHandler(bh, parentSpanInst);
+      //appendnew_next_sd_6oaugOlUcCsbWqNI
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_6oaugOlUcCsbWqNI',
+        spanInst,
+        'sd_6oaugOlUcCsbWqNI'
+      );
+    }
+  }
+
+  async paymentErrorHandler(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'paymentErrorHandler',
+      parentSpanInst
+    );
+    try {
+      console.log(bh.local.paymentresponse);
+      if (bh.local.paymentresponse?.statusCode == 200) {
+        bh.local.paymentresponse = bh.local.paymentresponse?.data;
+      } else {
+        throw new Error('Some error Occured try again later');
+      }
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_paymentErrorHandler
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_iOB5bY8BAZWXDLpv',
+        spanInst,
+        'paymentErrorHandler'
+      );
+    }
+  }
+
   async statusReport(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
       'statusReport',
@@ -566,8 +683,12 @@ export class appointment_service {
     try {
       bh.local.response = {
         statusCode: 200,
-        data: bh.local.resultdata,
+        data: {
+          data: bh.local.resultdata,
+          url: bh.local.paymentresponse,
+        },
       };
+      console.log(bh.local.response);
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport
       return bh;
@@ -575,7 +696,7 @@ export class appointment_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_lPeuyHWnwoNO2Mr8',
+        'sd_4TXnC8G2GW745azM',
         spanInst,
         'statusReport'
       );
@@ -651,7 +772,7 @@ export class appointment_service {
       parentSpanInst
     );
     try {
-      if (bh.local.user_response.statusCode == 200) {
+      if (bh.local.user_response?.statusCode == 200) {
         bh.local.user_response = bh.local.user_response?.data;
       } else {
         throw new Error('Some error Occured try again later');

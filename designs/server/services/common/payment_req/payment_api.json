@@ -18,7 +18,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "created Instanse ",
-        "script": "const Razorpay = require(\"razorpay\");\nbh.local.instance = new Razorpay({\n  key_id: process.env.RAZORPAY_KEY_ID,\n  key_secret: process.env.RAZORPAY_SECRET,\n});",
+        "script": "bh.local.stripe = require(\"stripe\")(process.env.STRIPE_SECRET_TEST_KEY);",
         "functionName": "createdInstanse",
         "category": "Function",
         "x": 365,
@@ -34,131 +34,15 @@
         "generated": true
     },
     {
-        "id": "sd_km40Zc8lTmNthZ2S",
-        "type": "HttpIn",
-        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
-        "viewType": "server",
-        "nodeType": "start",
-        "name": "payment",
-        "path": "payment",
-        "uploadpath": "",
-        "summary": "",
-        "description": "",
-        "method": "post",
-        "sequenceId": "",
-        "consumes": "",
-        "produces": "",
-        "filetype": "path",
-        "acceptFileUpload": false,
-        "useDataModel": false,
-        "dataModelIsArray": false,
-        "erd": "",
-        "erdName": "",
-        "entity": "",
-        "entityId": "",
-        "ref": "",
-        "editableListData": {
-            "responses": [],
-            "params": [
-                {
-                    "key": "data",
-                    "desc": "erfwdsa",
-                    "type": "body",
-                    "required": false,
-                    "rowId": "sd_muEuoO1ZWwLycoko",
-                    "valid": true
-                }
-            ],
-            "produces": [],
-            "consumes": []
-        },
-        "inputs": 0,
-        "outputs": 1,
-        "validateRequestUsingSwaggerDocs": false,
-        "category": "HTTP",
-        "x": 80,
-        "y": 160,
-        "wires": [
-            [
-                "sd_N8lhrXUSksLws7ga"
-            ]
-        ],
-        "__ssdTypeInputs__": {
-            "uploadpath": {
-                "type": "str",
-                "value": "",
-                "nullable": "true",
-                "nullableValue": "",
-                "constant": false
-            }
-        },
-        "__n_excludedFromValidation__": {},
-        "generateNext": true,
-        "serviceName": "payment_api",
-        "functionName": "sd_km40Zc8lTmNthZ2S"
-    },
-    {
-        "id": "sd_5M72mFg41g44r7o1",
-        "type": "HttpOut",
-        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
-        "viewType": "server",
-        "nodeType": "flow",
-        "name": "payment_http_out",
-        "headers": {},
-        "responseBody": {
-            "type": "bh.local",
-            "value": "response",
-            "ssd_typedInputField": true
-        },
-        "httpcode": {
-            "type": "bh.local",
-            "value": "response.statusCode",
-            "ssd_typedInputField": true
-        },
-        "responseType": "obj",
-        "swaggerResponse": {},
-        "responseMapping": {
-            "status": "bh.local.response.statusCode",
-            "obj": "bh.local.response",
-            "send": "bh.local.response"
-        },
-        "dataModelIsArray": false,
-        "inputs": 1,
-        "outputs": 0,
-        "erd": "",
-        "entity": "",
-        "entityId": "",
-        "ref": "",
-        "editableListData": {
-            "headers": [],
-            "produces": [],
-            "responses": []
-        },
-        "cookiesList": {},
-        "switchStates": {
-            "headers": "Map",
-            "cookies": "Map"
-        },
-        "functionName": "paymentHttpOut",
-        "category": "HTTP",
-        "x": 685,
-        "y": 140,
-        "wires": [],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "payment_api",
-        "generated": true
-    },
-    {
         "id": "sd_N8lhrXUSksLws7ga",
         "type": "Switch",
         "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "property": "body.payment_method",
+        "property": "data.payment_method",
         "propertyType": "bh.input",
-        "propertyGv": "bh.input.body.payment_method",
+        "propertyGv": "bh.input.data.payment_method",
         "rules": [
             {
                 "t": "eq",
@@ -168,9 +52,9 @@
             },
             {
                 "t": "eq",
-                "v": "razorpay",
+                "v": "stripe",
                 "vt": "str",
-                "gv": "\"razorpay\""
+                "gv": "\"stripe\""
             }
         ],
         "checkall": "false",
@@ -178,8 +62,8 @@
         "outputs": 2,
         "functionName": "sd_N8lhrXUSksLws7ga",
         "category": "Function",
-        "x": 205,
-        "y": 160,
+        "x": 245,
+        "y": 80,
         "wires": [
             [
                 "sd_nSikfLfe51N55pHa"
@@ -221,13 +105,13 @@
                 "key": "instance",
                 "map": true,
                 "valueType": "bh.local",
-                "value": "instance"
+                "value": "stripe"
             },
             {
                 "key": "data",
                 "map": true,
                 "valueType": "bh.input",
-                "value": "body"
+                "value": "data"
             }
         ],
         "bhVariables": [],
@@ -236,16 +120,16 @@
                 "mapVarType": "local",
                 "key": "response",
                 "valueType": "bh.local",
-                "value": "response",
+                "value": "resultdata",
                 "mapVarName": "response",
-                "localVar": "bh.local.response"
+                "localVar": "bh.local.resultdata"
             }
         ],
         "callService": "./payment_service",
         "startName": "generateRazorPayOrder",
         "inputParams": [
-            "bh.local.instance",
-            "bh.input.body"
+            "bh.local.stripe",
+            "bh.input.data"
         ],
         "accept_bh": false,
         "functionName": "sd_euDUGxX1YeixLA1x",
@@ -254,7 +138,7 @@
         "y": 180,
         "wires": [
             [
-                "sd_5M72mFg41g44r7o1"
+                "sd_MdL8CkPu98huVHVv"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -290,7 +174,7 @@
                 "key": "data",
                 "map": true,
                 "valueType": "bh.input",
-                "value": "body"
+                "value": "data"
             }
         ],
         "bhVariables": [],
@@ -299,15 +183,15 @@
                 "mapVarType": "local",
                 "key": "response",
                 "valueType": "bh.local",
-                "value": "response",
+                "value": "resultdata",
                 "mapVarName": "response",
-                "localVar": "bh.local.response"
+                "localVar": "bh.local.resultdata"
             }
         ],
         "callService": "./payment_cash_service",
         "startName": "cashOrder",
         "inputParams": [
-            "bh.input.body"
+            "bh.input.data"
         ],
         "accept_bh": false,
         "functionName": "sd_nSikfLfe51N55pHa",
@@ -316,8 +200,70 @@
         "y": 60,
         "wires": [
             [
-                "sd_5M72mFg41g44r7o1"
+                "sd_MdL8CkPu98huVHVv"
             ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_RFvxaGlDwTqFGT4z",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "payment_start",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "paymentStart",
+        "category": "General",
+        "x": 105,
+        "y": 80,
+        "wires": [
+            [
+                "sd_N8lhrXUSksLws7ga"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payment_api"
+    },
+    {
+        "id": "sd_MdL8CkPu98huVHVv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:bh.local.resultdata.statusCode,\n    data:bh.local.resultdata.data\n}\n",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 665,
+        "y": 140,
+        "wires": [
+            []
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
