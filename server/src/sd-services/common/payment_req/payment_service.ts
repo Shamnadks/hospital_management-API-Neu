@@ -136,18 +136,28 @@ export class payment_service {
       let userId = bh.input?.data?.user_id;
       let appointmentId = '' + bh.input?.data?.appointment_id;
       let priceInSmallestUnit = bh.input?.data?.cash;
-      const options = {
-        amount: priceInSmallestUnit,
-        currency: 'INR',
-        receipt: appointmentId,
-        notes: {
-          userId,
-          appointmentId,
-        },
-      };
-      bh.local.order = await bh.input.instance.orders.create(options);
+      console.log(bh.input?.data?.sucess_url, bh.input?.data?.cancel_url);
+      const session = await bh.input.instance.checkout.sessions.create({
+        line_items: [
+          {
+            price_data: {
+              currency: 'INR',
+              product_data: {
+                name: `AppointmentID:${bh.input?.data?.appointment_id}`,
+              },
+              unit_amount: priceInSmallestUnit,
+            },
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: bh.input?.data?.sucess_url,
+        cancel_url: bh.input?.data?.cancel_url,
+      });
 
-      console.log(bh.local.order);
+      bh.local.sessionid = session.id;
+      bh.local.url = session.url;
+      // console.log(session)
       this.tracerService.sendData(spanInst, bh);
       bh = await this.data(bh, parentSpanInst);
       //appendnew_next_paymentScript
@@ -172,7 +182,7 @@ export class payment_service {
         user_id: bh.input?.data?.user_id,
         doctor_id: bh.input?.data?.doctor_id,
         payment_method: bh.input?.data?.payment_method,
-        razorpay_payment_id: bh.local.order.id,
+        payment_id: bh.local.sessionid,
         cash: bh.input?.data?.cash,
         status: bh.input?.data?.status,
       };
@@ -255,7 +265,7 @@ export class payment_service {
     try {
       bh.local.response = {
         statusCode: 200,
-        data: bh.local.order,
+        data: bh.local.url,
       };
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport

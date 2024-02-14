@@ -127,7 +127,7 @@ export class payment_cash_service {
         user_id: bh.input?.data?.user_id,
         doctor_id: bh.input?.data?.doctor_id,
         payment_method: bh.input?.data?.payment_method,
-        razorpay_payment_id: 'not_applicable',
+        payment_id: 'not_applicable',
         cash: bh.input?.data?.cash,
         status: bh.input?.data?.status,
       };
@@ -212,6 +212,7 @@ export class payment_cash_service {
         statusCode: 200,
         data: bh.local.resultdata,
       };
+
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport
       return bh;
