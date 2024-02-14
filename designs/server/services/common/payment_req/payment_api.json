@@ -9,7 +9,7 @@
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "payment_api",
-        "relativeParentPath": "common/payment"
+        "relativeParentPath": "common/payment_req"
     },
     {
         "id": "sd_tNpVvNJdIKoDv0Bq",
@@ -44,48 +44,48 @@
         "isValidNode": true,
         "noerr": 0,
         "service": {
-            "id": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+            "id": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
             "type": "tab",
-            "createdDate": "2024-02-13T18:41:12.714Z",
+            "createdDate": "2024-02-14T06:51:47.302Z",
             "label": "payment_service",
             "disabled": false,
             "info": "",
             "functionSeq": 0
         },
         "flow": {
-            "flowId": "sd_lcf9BiVc0vKivpzD",
+            "flowId": "sd_T2Za2TH8DXV6A90R",
             "flowName": "generateRazorPayOrder"
         },
         "inputVariables": [
             {
                 "key": "userId",
                 "map": true,
-                "valueType": "bh.input",
-                "value": "body.userId"
+                "valueType": "bh",
+                "value": ""
             },
             {
                 "key": "appointmentId",
                 "map": true,
-                "valueType": "bh.input",
-                "value": "body.appointmentId"
+                "valueType": "bh",
+                "value": ""
             },
             {
                 "key": "orderId",
                 "map": true,
-                "valueType": "bh.input",
-                "value": "body.orderId"
+                "valueType": "bh",
+                "value": ""
             },
             {
                 "key": "price",
                 "map": true,
-                "valueType": "bh.input",
-                "value": "body.price"
+                "valueType": "bh",
+                "value": ""
             },
             {
                 "key": "instance",
                 "map": true,
-                "valueType": "bh.local",
-                "value": "instance"
+                "valueType": "bh",
+                "value": ""
             }
         ],
         "bhVariables": [],
@@ -93,20 +93,19 @@
             {
                 "mapVarType": "local",
                 "key": "order",
-                "valueType": "bh.local",
-                "value": "order",
-                "mapVarName": "order",
-                "localVar": "bh.local.order"
+                "valueType": "bh",
+                "value": "",
+                "mapVarName": "order"
             }
         ],
         "callService": "./payment_service",
         "startName": "generateRazorPayOrder",
         "inputParams": [
-            "bh.input.body.userId",
-            "bh.input.body.appointmentId",
-            "bh.input.body.orderId",
-            "bh.input.body.price",
-            "bh.local.instance"
+            null,
+            null,
+            null,
+            null,
+            null
         ],
         "accept_bh": false,
         "functionName": "generateRazorPayOrder",
@@ -119,9 +118,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "payment_api"
+        "serviceName": "payment_api",
+        "generated": true
     },
     {
         "id": "sd_km40Zc8lTmNthZ2S",
@@ -142,6 +141,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -185,8 +185,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "payment_api",
-        "functionName": "sd_km40Zc8lTmNthZ2S",
-        "generated": false
+        "functionName": "sd_km40Zc8lTmNthZ2S"
     },
     {
         "id": "sd_5M72mFg41g44r7o1",
@@ -214,6 +213,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",

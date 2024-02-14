@@ -1,12 +1,12 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-payment_service-SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn
+import { payment_service as SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn } from './sd-services/common/payment_req/payment_service';
+//CORE_REFERENCE_IMPORT-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
+import { payment_api as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD } from './sd-services/common/payment_req/payment_api';
 //CORE_REFERENCE_IMPORT-create_payment_service-SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd
 import { create_payment_service as SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd } from './sd-services/payment/create_payment/create_payment_service';
 //CORE_REFERENCE_IMPORT-create_payment_api-SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv
 import { create_payment_api as SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv } from './sd-services/payment/create_payment/create_payment_api';
-//CORE_REFERENCE_IMPORT-payment_service-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa
-import { payment_service as SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa } from './sd-services/common/payment/payment_service';
-//CORE_REFERENCE_IMPORT-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
-import { payment_api as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD } from './sd-services/common/payment/payment_api';
 //CORE_REFERENCE_IMPORT-get_appointment_flow-SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok
 import { get_appointment_flow as SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok } from './sd-services/common/get_appointments/get_appointment_flow';
 //CORE_REFERENCE_IMPORT-get_appointment_api-SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8
@@ -60,14 +60,14 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_service-SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn
+SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
+SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-create_payment_service-SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd
 SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-create_payment_api-SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv
 SSD_SERVICE_ID_sd_loXbxBoqzdxgVAcv,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_service-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa
-SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-get_appointment_flow-SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok
 SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-get_appointment_api-SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8

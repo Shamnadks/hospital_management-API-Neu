@@ -1,28 +1,28 @@
 [
     {
-        "id": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+        "id": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
         "type": "tab",
-        "createdDate": "2024-02-13T18:41:12.714Z",
+        "createdDate": "2024-02-14T06:51:47.302Z",
         "label": "payment_service",
         "disabled": false,
         "info": "",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "payment_service",
-        "relativeParentPath": "common\\payment"
+        "relativeParentPath": "common/payment_req"
     },
     {
-        "id": "sd_OltPj8Vq7BJ2EAWq",
+        "id": "sd_gVU2nlPZ2MbhQIwy",
         "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+        "z": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
         "viewType": "common",
         "nodeType": "flow",
         "name": "payment script",
         "script": "let userId=bh.input.userId;\nlet appointmentId=bh.input.appointmentId;\nlet priceInSmallestUnit = bh.input.price * 100;\nconst options = {\n    amount: priceInSmallestUnit,\n    currency: \"INR\",\n    receipt: bh.input.orderId,\n    notes: {\n      userId,\n      appointmentId\n    },\n};\nbh.local.order = await bh.input.instance.orders.create(options);\n\nconsole.log(bh.local.order)",
         "functionName": "paymentScript",
         "category": "Function",
-        "x": 365,
-        "y": 100,
+        "x": 385,
+        "y": 120,
         "wires": [
             []
         ],
@@ -32,9 +32,9 @@
         "generated": true
     },
     {
-        "id": "sd_lcf9BiVc0vKivpzD",
+        "id": "sd_T2Za2TH8DXV6A90R",
         "type": "Start",
-        "z": "SSD_SERVICE_ID_sd_iApazhDXbeGyVtBa",
+        "z": "SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn",
         "viewType": "client-server",
         "nodeType": "start",
         "name": "generateRazorPayOrder",
@@ -94,16 +94,15 @@
         "accept_bh": false,
         "functionName": "generateRazorPayOrder",
         "category": "General",
-        "x": 200,
-        "y": 100,
+        "x": 220,
+        "y": 120,
         "wires": [
             [
-                "sd_OltPj8Vq7BJ2EAWq"
+                "sd_gVU2nlPZ2MbhQIwy"
             ]
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "payment_service",
-        "generated": false
+        "serviceName": "payment_service"
     }
 ]
