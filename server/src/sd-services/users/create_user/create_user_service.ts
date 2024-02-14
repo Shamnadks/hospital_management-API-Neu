@@ -6,6 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
+import { DmUtils } from '../../../utils/ndefault-datamodel/find/dmUtils'; //_splitter_
 //append_imports_end
 export class create_user_service {
   private sdService = new SDBaseService();
@@ -81,7 +82,95 @@ export class create_user_service {
   }
   //   service flows_create_user_service
 
+  async createUserFlow(parentSpanInst, data: any = undefined, ...others) {
+    const spanInst = this.tracerService.createSpan(
+      'createUserFlow',
+      parentSpanInst
+    );
+    let bh: any = {
+      input: {
+        data,
+      },
+      local: {
+        response: undefined,
+      },
+    };
+    try {
+      bh = this.sdService.__constructDefault(bh);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.insertUser(bh, parentSpanInst);
+      //appendnew_next_createUserFlow
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            response: bh.local.response,
+          },
+        }
+      );
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_Byb1meamDLsfKtLt',
+        spanInst,
+        'createUserFlow'
+      );
+    }
+  }
   //appendnew_flow_create_user_service_start
+
+  async insertUser(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'insertUser',
+      parentSpanInst
+    );
+    try {
+      const dmUtilsInst = new DmUtils('sd_JFEzq9BaWr7Csm3t');
+      bh.local.resultdata = await dmUtilsInst.insert(
+        '_EN_up8lofoxeh',
+        bh.input.data
+      );
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_insertUser
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_vmGcuV758MAz2RDw',
+        spanInst,
+        'insertUser'
+      );
+    }
+  }
+
+  async statusReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 200,
+        data: bh.local.resultdata,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_statusReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_8X2g2xiZ2IpHdiQQ',
+        spanInst,
+        'statusReport'
+      );
+    }
+  }
 
   //appendnew_node
 

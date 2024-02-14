@@ -6,6 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
+import { DmUtils } from '../../../utils/ndefault-datamodel/find/dmUtils'; //_splitter_
 //append_imports_end
 export class create_appointment_service {
   private sdService = new SDBaseService();
@@ -83,7 +84,99 @@ export class create_appointment_service {
   }
   //   service flows_create_appointment_service
 
+  async createAppointmentFlow(
+    parentSpanInst,
+    data: any = undefined,
+    ...others
+  ) {
+    const spanInst = this.tracerService.createSpan(
+      'createAppointmentFlow',
+      parentSpanInst
+    );
+    let bh: any = {
+      input: {
+        data,
+      },
+      local: {
+        response: undefined,
+      },
+    };
+    try {
+      bh = this.sdService.__constructDefault(bh);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.insertAppointment(bh, parentSpanInst);
+      //appendnew_next_createAppointmentFlow
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            response: bh.local.response,
+          },
+        }
+      );
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_1R0EhmuVGDk0Ltj1',
+        spanInst,
+        'createAppointmentFlow'
+      );
+    }
+  }
   //appendnew_flow_create_appointment_service_start
+
+  async insertAppointment(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'insertAppointment',
+      parentSpanInst
+    );
+    try {
+      const dmUtilsInst = new DmUtils('sd_JFEzq9BaWr7Csm3t');
+      bh.local.resultdata = await dmUtilsInst.insert(
+        '_EN_smqy2nds0d',
+        bh.input.data
+      );
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_insertAppointment
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_7dbhIjvX6na8z8Cf',
+        spanInst,
+        'insertAppointment'
+      );
+    }
+  }
+
+  async statusReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 200,
+        data: bh.local.resultdata,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_statusReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_k2EsUWWzWCq2sSMY',
+        spanInst,
+        'statusReport'
+      );
+    }
+  }
 
   //appendnew_node
 

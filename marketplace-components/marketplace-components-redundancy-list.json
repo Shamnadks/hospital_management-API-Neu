@@ -902,5 +902,45 @@
                 }
             ]
         }
+    },
+    "5fe4a1da4f4cbf2fca03d39b": {
+        "name": "5fe4a1da4f4cbf2fca03d39b",
+        "version": "1.0.7",
+        "packageType": [
+            "studio-nodes"
+        ],
+        "deps": {
+            "neutrinos-crypto": {
+                "name": "neutrinos-crypto",
+                "version": "1.0.7",
+                "packageType": "studio-nodes",
+                "nodes": {
+                    "server": [
+                        {
+                            "name": "5981dd1a-2b59-81e1-89f0-a440e4625762",
+                            "displayName": "Crypto"
+                        }
+                    ]
+                }
+            }
+        },
+        "parentDeps": {}
+    },
+    "neutrinos-crypto": {
+        "name": "neutrinos-crypto",
+        "version": "1.0.7",
+        "packageType": "studio-nodes",
+        "deps": {},
+        "parentDeps": {
+            "5fe4a1da4f4cbf2fca03d39b": "1.0.7"
+        },
+        "nodes": {
+            "server": [
+                {
+                    "name": "5981dd1a-2b59-81e1-89f0-a440e4625762",
+                    "displayName": "Crypto"
+                }
+            ]
+        }
     }
 }

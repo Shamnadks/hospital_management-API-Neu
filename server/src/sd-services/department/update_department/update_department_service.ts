@@ -136,7 +136,7 @@ export class update_department_service {
       );
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_0Aqjn4ft5KJO3h4Z(bh, parentSpanInst);
+      bh = await this.statusReport(bh, parentSpanInst);
       //appendnew_next_sqlUpdateDepartment
       return bh;
     } catch (e) {
@@ -150,9 +150,9 @@ export class update_department_service {
     }
   }
 
-  async sd_0Aqjn4ft5KJO3h4Z(bh, parentSpanInst) {
+  async statusReport(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_0Aqjn4ft5KJO3h4Z',
+      'statusReport',
       parentSpanInst
     );
     try {
@@ -162,7 +162,7 @@ export class update_department_service {
       };
 
       this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_sd_0Aqjn4ft5KJO3h4Z
+      //appendnew_next_statusReport
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -170,7 +170,7 @@ export class update_department_service {
         e,
         'sd_0Aqjn4ft5KJO3h4Z',
         spanInst,
-        'sd_0Aqjn4ft5KJO3h4Z'
+        'statusReport'
       );
     }
   }

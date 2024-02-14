@@ -1,0 +1,523 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "type": "tab",
+        "createdDate": "2024-02-13T12:57:35.383Z",
+        "label": "appointment_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "appointment_service",
+        "relativeParentPath": "common/create_appointment"
+    },
+    {
+        "id": "sd_lPeuyHWnwoNO2Mr8",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 1925,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_qkPyDTRY2em7dUSR",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "create_appointment_flow",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "createAppointmentFlow",
+        "category": "General",
+        "x": 125,
+        "y": 100,
+        "wires": [
+            [
+                "sd_OqW1iGu1zHMxnYkq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "appointment_service",
+        "generated": false
+    },
+    {
+        "id": "sd_1lhDY9ucbweZ5nGv",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "create_user_flow",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_1utwBDtR9iw7QRXa",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:14:44.334Z",
+            "label": "create_user_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_Byb1meamDLsfKtLt",
+            "flowName": "createUserFlow"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "users"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "user_response",
+                "mapVarName": "response",
+                "localVar": "bh.local.user_response"
+            }
+        ],
+        "callService": "../../users/create_user/create_user_service",
+        "startName": "createUserFlow",
+        "inputParams": [
+            "bh.local.users"
+        ],
+        "accept_bh": false,
+        "functionName": "createUserFlow",
+        "category": "General",
+        "x": 365,
+        "y": 100,
+        "wires": [
+            [
+                "sd_83rrv4qrlNpagft5"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "appointment_service"
+    },
+    {
+        "id": "sd_OqW1iGu1zHMxnYkq",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "user_script",
+        "script": "bh.local.users={\n      \"id\": 0,\n      \"name\": bh.input?.data?.name,\n      \"phone_no\": bh.input?.data?.phone_no,\n      \"dob\": bh.input?.data?.dob,\n      \"place\": bh.input?.data?.place,\n      \"address\": bh.input?.data?.address,\n      \"pin_code\": bh.input?.data?.pin_code,\n      \"email\": bh.input?.data?.email,\n      \"blood_group\": bh.input?.data?.blood_group\n    }\n  ",
+        "functionName": "userScript",
+        "category": "Function",
+        "x": 265,
+        "y": 100,
+        "wires": [
+            [
+                "sd_1lhDY9ucbweZ5nGv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_NvbJXBAxQ7PWlZFo",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "token_finder_script ",
+        "script": "\nbh.input.filterdata={\nfields:['token_number'],\nsorttable:'token_number',\nsorttype:'DESC',\nlimitdata:1,\ndatas:{\n    doctor_id:[bh.input?.data?.doctor_id],\n    appointment_date:[bh.input.formattedDate],\n}\n}",
+        "functionName": "tokenFinderScript",
+        "category": "Function",
+        "x": 805,
+        "y": 100,
+        "wires": [
+            [
+                "sd_eIn2Du6q9UffQloj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_eIn2Du6q9UffQloj",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "token_finder",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j",
+            "type": "tab",
+            "createdDate": "2024-02-13T14:53:43.091Z",
+            "label": "filter_specific_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_lCNeGGjlsbV1cOSW",
+            "flowName": "filterSpecific"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "filterdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "token",
+                "mapVarName": "response",
+                "localVar": "bh.local.token"
+            }
+        ],
+        "callService": "../../appointments/filter_specfic/filter_specific_service",
+        "startName": "filterSpecific",
+        "inputParams": [
+            "bh.input.filterdata"
+        ],
+        "accept_bh": false,
+        "functionName": "tokenFinder",
+        "category": "General",
+        "x": 905,
+        "y": 100,
+        "wires": [
+            [
+                "sd_rSJjxCm3xlsgnV3O"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "appointment_service"
+    },
+    {
+        "id": "sd_tAQhvM7nzB5EbueV",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "doctor_script",
+        "script": "bh.input.doctor={\"id\":[bh.input?.data?.doctor_id]};",
+        "functionName": "doctorScript",
+        "category": "Function",
+        "x": 1125,
+        "y": 100,
+        "wires": [
+            [
+                "sd_zGDGZFelERRd0H7I"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_zGDGZFelERRd0H7I",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "doctor_flow",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:09:46.935Z",
+            "label": "filter_doctor_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_8BHWhDa3GVzpn7tx",
+            "flowName": "getADoctor"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "doctor"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "doctor_response",
+                "mapVarName": "response",
+                "localVar": "bh.local.doctor_response"
+            }
+        ],
+        "callService": "../../doctors/filter_doctor/filter_doctor_service",
+        "startName": "getADoctor",
+        "inputParams": [
+            "bh.input.doctor"
+        ],
+        "accept_bh": false,
+        "functionName": "doctorFlow",
+        "category": "General",
+        "x": 1225,
+        "y": 100,
+        "wires": [
+            [
+                "sd_WY01PFLnaJqS39rG"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "appointment_service"
+    },
+    {
+        "id": "sd_6Q5R0am0hoJaY6U1",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Error_token_limit",
+        "script": "if(bh.local?.doctor_response?.token_limit<bh.local.token+1){\n    throw new Error(\"Tocken Limit Exceed\");\n}\n",
+        "functionName": "errorTokenLimit",
+        "category": "Function",
+        "x": 1465,
+        "y": 100,
+        "wires": [
+            [
+                "sd_AVbrERh80Wtu5zGR"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_AVbrERh80Wtu5zGR",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "appointment",
+        "script": "bh.local.appointment={\n    id:0,\n    user_id :bh.local?.user_response?.id,\n    doctor_id :bh.input?.data?.doctor_id,\n    appointment_date: bh.input.formattedDate,\n    token_number :bh.local.token+1,\n    cash :bh.input?.data?.cash,\n    age:bh.input.age,\n    status : 'Pending'\n}\n// console.log(bh.local.appointment)",
+        "functionName": "appointment",
+        "category": "Function",
+        "x": 1565,
+        "y": 100,
+        "wires": [
+            [
+                "sd_zyqekgl9w1v4079g"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_Wq9YCh3Yn5ajALIp",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "date_and_age",
+        "script": "const currentDate = new Date();\nconst year = currentDate.getFullYear();\nconst month = currentDate.getMonth() + 1; // Month is zero-based, so add 1\nconst day = currentDate.getDate();\nbh.input.formattedDate = `${year}-${month < 10 ? \"0\" + month : month}-${\n  day < 10 ? \"0\" + day : day\n}`;\nconst dob = new Date(bh.local?.user_response?.dob);\nbh.input.age = year - dob.getFullYear();\n\n// Check if the birthday hasn't occurred yet this year\nif (month < dob.getMonth() || (month === dob.getMonth() && day < dob.getDate())) {\n    bh.input.age--;\n}\n",
+        "functionName": "dateAndAge",
+        "category": "Function",
+        "x": 705,
+        "y": 100,
+        "wires": [
+            [
+                "sd_NvbJXBAxQ7PWlZFo"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_zyqekgl9w1v4079g",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "appoinment_flow",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:24:13.883Z",
+            "label": "create_appointment_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_1R0EhmuVGDk0Ltj1",
+            "flowName": "createAppointmentFlow"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "appointment"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "resultdata",
+                "mapVarName": "response",
+                "localVar": "bh.local.resultdata"
+            }
+        ],
+        "callService": "../../appointments/create_appointment/create_appointment_service",
+        "startName": "createAppointmentFlow",
+        "inputParams": [
+            "bh.local.appointment"
+        ],
+        "accept_bh": false,
+        "functionName": "appoinmentFlow",
+        "category": "General",
+        "x": 1705,
+        "y": 100,
+        "wires": [
+            [
+                "sd_lPeuyHWnwoNO2Mr8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "appointment_service"
+    },
+    {
+        "id": "sd_83rrv4qrlNpagft5",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "user_error_handler",
+        "script": "if(bh.local.user_response.statusCode==200){\n    bh.local.user_response=bh.local.user_response?.data\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "functionName": "userErrorHandler",
+        "category": "Function",
+        "x": 545,
+        "y": 100,
+        "wires": [
+            [
+                "sd_Wq9YCh3Yn5ajALIp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_rSJjxCm3xlsgnV3O",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "token_error_handler",
+        "script": "if(bh.local.token.statusCode==200){\n    bh.local.token=bh.local.token?.data?.[0]?.token_number||0\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
+        "functionName": "tokenErrorHandler",
+        "category": "Function",
+        "x": 1025,
+        "y": 100,
+        "wires": [
+            [
+                "sd_tAQhvM7nzB5EbueV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_WY01PFLnaJqS39rG",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "doctor_error_handler",
+        "script": "if(bh.local.doctor_response.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\n",
+        "functionName": "doctorErrorHandler",
+        "category": "Function",
+        "x": 1325,
+        "y": 100,
+        "wires": [
+            [
+                "sd_6Q5R0am0hoJaY6U1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    }
+]

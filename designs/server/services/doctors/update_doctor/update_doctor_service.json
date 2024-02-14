@@ -1,14 +1,126 @@
 [
     {
-        "type": "tab",
         "id": "SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:10:30.719Z",
+        "label": "update_doctor_service",
         "disabled": false,
         "info": "",
-        "label": "update_doctor_service",
-        "createdDate": "2024-02-12T17:10:30.719Z",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "update_doctor_service",
         "relativeParentPath": "doctors/update_doctor"
+    },
+    {
+        "id": "sd_QZRet94Zx8q1HiCD",
+        "type": "update",
+        "z": "SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "sql_update_doctor",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_9t9ccwr01x",
+        "_UI_entityName": "doctors",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "operationType": "updateByID",
+        "filterBy": "",
+        "updateObject": "bh.input.data",
+        "resultMapping": "bh.local.resultdata",
+        "functionName": "sqlUpdateDoctor",
+        "category": "Data Model",
+        "x": 385,
+        "y": 80,
+        "wires": [
+            [
+                "sd_jRUvrZy5MaJUUWG5"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "filterBy": {
+                "type": "bh.model",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            },
+            "updateObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "resultdata",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "filterBy": true
+        },
+        "generateNext": false,
+        "serviceName": "update_doctor_service",
+        "generated": true
+    },
+    {
+        "id": "sd_jRUvrZy5MaJUUWG5",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}\n\n",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 645,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_doctor_service",
+        "generated": true
+    },
+    {
+        "id": "sd_h0Odv8abqr7tqhP5",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "update_doctor",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "updateDoctor",
+        "category": "General",
+        "x": 165,
+        "y": 80,
+        "wires": [
+            [
+                "sd_QZRet94Zx8q1HiCD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_doctor_service"
     }
 ]

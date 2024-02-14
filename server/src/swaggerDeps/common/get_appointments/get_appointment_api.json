@@ -1,0 +1,24 @@
+{
+    "/appointment/post": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [
+                "application/json"
+            ],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "data",
+                    "description": "data of entire body",
+                    "required": true
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "get_appointment_api"
+            ]
+        }
+    }
+}

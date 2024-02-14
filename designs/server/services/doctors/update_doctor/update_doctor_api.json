@@ -1,14 +1,312 @@
 [
     {
-        "type": "tab",
         "id": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:10:17.863Z",
+        "label": "update_doctor_api",
         "disabled": false,
         "info": "",
-        "label": "update_doctor_api",
-        "createdDate": "2024-02-12T17:10:17.863Z",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "update_doctor_api",
         "relativeParentPath": "doctors/update_doctor"
+    },
+    {
+        "id": "sd_RVASkLKD6Q60zhUn",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "update_doctor",
+        "path": "doctor/put",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "put",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": true,
+        "dataModelIsArray": false,
+        "erd": "_DM_kxoe18g2p",
+        "erdName": "hospital",
+        "entity": "doctors",
+        "entityId": "_EN_9t9ccwr01x",
+        "ref": "#/definitions/hospital ~ doctors",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": [
+                {
+                    "key": "application/json",
+                    "rowId": "sd_cvsrDqEPKXwLTNnG",
+                    "valid": true
+                }
+            ]
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 150,
+        "y": 91.80000305175781,
+        "wires": [
+            [
+                "sd_iufzZUTbMZxQM73Y"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_doctor_api",
+        "functionName": "sd_RVASkLKD6Q60zhUn"
+    },
+    {
+        "id": "sd_hsFdNMv8E6n1ALP1",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_depatrment_flow",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_mhuKmoTwxVKclwNX",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:10:30.719Z",
+            "label": "update_doctor_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_h0Odv8abqr7tqhP5",
+            "flowName": "updateDoctor"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body?.doctors"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./update_doctor_service",
+        "startName": "updateDoctor",
+        "inputParams": [
+            "bh.input.body?.doctors"
+        ],
+        "accept_bh": false,
+        "functionName": "updateDepatrmentFlow",
+        "category": "General",
+        "x": 490,
+        "y": 91.80000305175781,
+        "wires": [
+            [
+                "sd_Q4qo0AI9odcpktL0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_doctor_api",
+        "generated": true
+    },
+    {
+        "id": "sd_iufzZUTbMZxQM73Y",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_department_script",
+        "script": "// if(!bh.input.body?.name?.title || bh.input.body?.name?.trim()?.length==0){  \n// throw new Error(\"Enter some task\");\n// }",
+        "functionName": "updateDepartmentScript",
+        "category": "Function",
+        "x": 330,
+        "y": 91.80000305175781,
+        "wires": [
+            [
+                "sd_hsFdNMv8E6n1ALP1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_doctor_api",
+        "generated": true
+    },
+    {
+        "id": "sd_Q4qo0AI9odcpktL0",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "department_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "departmentHttpOut",
+        "category": "HTTP",
+        "x": 710,
+        "y": 91.80000305175781,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_doctor_api",
+        "generated": true
+    },
+    {
+        "id": "sd_TnAZ0qGb9rgGsbu5",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 390,
+        "y": 271.8000030517578,
+        "wires": [
+            [
+                "sd_2p6JDyO2ouNYcj7h"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_doctor_api",
+        "generated": true
+    },
+    {
+        "id": "sd_mjKMfm4n424LIEGJ",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_TnAZ0qGb9rgGsbu5",
+            "sd_2p6JDyO2ouNYcj7h"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 230,
+        "y": 271.8000030517578,
+        "wires": [
+            [
+                "sd_TnAZ0qGb9rgGsbu5"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_doctor_api"
+    },
+    {
+        "id": "sd_2p6JDyO2ouNYcj7h",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_hyeC8CsVYrjg7rox",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "error_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "errorHttpOut",
+        "category": "HTTP",
+        "x": 530,
+        "y": 271.8000030517578,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_doctor_api",
+        "generated": true
     }
 ]
