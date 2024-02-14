@@ -6,6 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
+import * as SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd from '../../payment/create_payment/create_payment_service'; //_splitter_
 //append_imports_end
 export class payment_service {
   private sdService = new SDBaseService();
@@ -83,11 +84,8 @@ export class payment_service {
 
   async generateRazorPayOrder(
     parentSpanInst,
-    userId: any = undefined,
-    appointmentId: any = undefined,
-    orderId: any = undefined,
-    price: any = undefined,
     instance: any = undefined,
+    data: any = undefined,
     ...others
   ) {
     const spanInst = this.tracerService.createSpan(
@@ -96,14 +94,11 @@ export class payment_service {
     );
     let bh: any = {
       input: {
-        userId,
-        appointmentId,
-        orderId,
-        price,
         instance,
+        data,
       },
       local: {
-        order: undefined,
+        response: undefined,
       },
     };
     try {
@@ -116,7 +111,7 @@ export class payment_service {
         {
           input: {},
           local: {
-            order: bh.local.order,
+            response: bh.local.response,
           },
         }
       );
@@ -138,13 +133,13 @@ export class payment_service {
       parentSpanInst
     );
     try {
-      let userId = bh.input.userId;
-      let appointmentId = bh.input.appointmentId;
-      let priceInSmallestUnit = bh.input.price * 100;
+      let userId = bh.input?.data?.user_id;
+      let appointmentId = '' + bh.input?.data?.appointment_id;
+      let priceInSmallestUnit = bh.input?.data?.cash;
       const options = {
         amount: priceInSmallestUnit,
         currency: 'INR',
-        receipt: bh.input.orderId,
+        receipt: appointmentId,
         notes: {
           userId,
           appointmentId,
@@ -154,6 +149,7 @@ export class payment_service {
 
       console.log(bh.local.order);
       this.tracerService.sendData(spanInst, bh);
+      bh = await this.data(bh, parentSpanInst);
       //appendnew_next_paymentScript
       return bh;
     } catch (e) {
@@ -163,6 +159,114 @@ export class payment_service {
         'sd_gVU2nlPZ2MbhQIwy',
         spanInst,
         'paymentScript'
+      );
+    }
+  }
+
+  async data(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('data', parentSpanInst);
+    try {
+      bh.input.payment_details = {
+        id: 0,
+        appointment_id: bh.input?.data?.appointment_id,
+        user_id: bh.input?.data?.user_id,
+        doctor_id: bh.input?.data?.doctor_id,
+        payment_method: bh.input?.data?.payment_method,
+        razorpay_payment_id: bh.local.order.id,
+        cash: bh.input?.data?.cash,
+        status: bh.input?.data?.status,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_nf6yjEotv1s2ZKEA(bh, parentSpanInst);
+      //appendnew_next_data
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_XwAsc4zK3lL4iaNa',
+        spanInst,
+        'data'
+      );
+    }
+  }
+
+  async sd_nf6yjEotv1s2ZKEA(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_nf6yjEotv1s2ZKEA',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOdInstance: SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd.create_payment_service =
+        SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOd.create_payment_service.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_WDoX05PyLP0zXvOdInstance.createPaymentFlow(
+          spanInst,
+          bh.input.payment_details
+        );
+      bh.local.payment_response = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.paymentErrorHandler(bh, parentSpanInst);
+      //appendnew_next_sd_nf6yjEotv1s2ZKEA
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_nf6yjEotv1s2ZKEA',
+        spanInst,
+        'sd_nf6yjEotv1s2ZKEA'
+      );
+    }
+  }
+
+  async paymentErrorHandler(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'paymentErrorHandler',
+      parentSpanInst
+    );
+    try {
+      if (bh.local.payment_response.statusCode == 200) {
+        bh.local.payment_response = bh.local.payment_response?.data;
+      } else {
+        throw new Error('Some error Occured try again later');
+      }
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_paymentErrorHandler
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_0yOf4irIUnAvZD5Q',
+        spanInst,
+        'paymentErrorHandler'
+      );
+    }
+  }
+
+  async statusReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 200,
+        data: bh.local.order,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_statusReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_tH30MdFBem0EqASM',
+        spanInst,
+        'statusReport'
       );
     }
   }

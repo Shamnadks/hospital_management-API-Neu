@@ -18,7 +18,7 @@
         "viewType": "server",
         "nodeType": "start",
         "name": "get_appointment",
-        "path": "appointment/post",
+        "path": "getappointment/post",
         "uploadpath": "",
         "summary": "",
         "description": "",
@@ -144,7 +144,7 @@
         "script": "// if(bh.input.body?.name?.trim()?.length){  \n// }\n// throw new Error(\"Enter some task\");\nconsole.log(bh.input.body)",
         "functionName": "sd_dclWlg04ZFKPNXXG",
         "category": "Function",
-        "x": 305,
+        "x": 425,
         "y": 100,
         "wires": [
             [
@@ -269,17 +269,17 @@
         "isValidNode": true,
         "noerr": 0,
         "service": {
-            "id": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+            "id": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
             "type": "tab",
-            "createdDate": "2024-02-13T12:57:35.383Z",
-            "label": "appointment_service",
+            "createdDate": "2024-02-13T19:33:54.151Z",
+            "label": "get_appointment_flow",
             "disabled": false,
             "info": "",
             "functionSeq": 0
         },
         "flow": {
-            "flowId": "sd_qkPyDTRY2em7dUSR",
-            "flowName": "createAppointmentFlow"
+            "flowId": "sd_yxCIS4I0s8cOYMlp",
+            "flowName": "getAppointmentFlow"
         },
         "inputVariables": [
             {
@@ -300,15 +300,15 @@
                 "localVar": "bh.local.response"
             }
         ],
-        "callService": "../create_appointment/appointment_service",
-        "startName": "createAppointmentFlow",
+        "callService": "./get_appointment_flow",
+        "startName": "getAppointmentFlow",
         "inputParams": [
             "bh.input.body"
         ],
         "accept_bh": false,
         "functionName": "sd_H4XatPBmkz1SZrBi",
         "category": "General",
-        "x": 440,
+        "x": 565,
         "y": 100,
         "wires": [
             [
@@ -319,5 +319,24 @@
         "generateNext": false,
         "serviceName": "get_appointment_api",
         "generated": true
+    },
+    {
+        "id": "sd_4BeY8JG5kzef2v5j",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "token_finder_script  ",
+        "script": "bh.input.filterdata={\nfield:\nsorttable:'',\nsorttype:'DESC',\nlimitdata:1,\ndatas:{\n    appointment_date:[bh.input.formattedDate],\n    appointment_date:[bh.input.f],\n}\n}",
+        "functionName": "tokenFinderScript",
+        "category": "Function",
+        "x": 705,
+        "y": 360,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "get_appointment_api"
     }
 ]

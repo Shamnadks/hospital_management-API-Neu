@@ -1,5 +1,5 @@
 {
-    "/razorpay": {
+    "/payment": {
         "post": {
             "summary": "",
             "description": "",

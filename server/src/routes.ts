@@ -1,4 +1,6 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-payment_cash_service-SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY
+import { payment_cash_service as SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY } from './sd-services/common/payment_req/payment_cash_service';
 //CORE_REFERENCE_IMPORT-payment_service-SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn
 import { payment_service as SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn } from './sd-services/common/payment_req/payment_service';
 //CORE_REFERENCE_IMPORT-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
@@ -60,6 +62,8 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_cash_service-SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY
+SSD_SERVICE_ID_sd_l5yYyef8zSJYH0UY,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_service-SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn
 SSD_SERVICE_ID_sd_jfya9jPAl3GjcYYn,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_api-SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD
