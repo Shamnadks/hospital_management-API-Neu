@@ -8,7 +8,7 @@ import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
 import { GenericRDBMSOperations } from '../../../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
 //append_imports_end
-export class filter_specific_service {
+export class payment_verified_api {
   private sdService = new SDBaseService();
   private tracerService = new TracerService();
   private app;
@@ -24,7 +24,7 @@ export class filter_specific_service {
     middlewareCall,
     globalTimers
   ) {
-    this.serviceName = 'filter_specific_service';
+    this.serviceName = 'payment_verified_api';
     this.app = app;
     this.serviceBasePath = this.app.settings.base;
     this.generatedMiddlewares = generatedeMiddlewares;
@@ -39,7 +39,7 @@ export class filter_specific_service {
     globalTimers?
   ) {
     if (!instance) {
-      instance = new filter_specific_service(
+      instance = new payment_verified_api(
         app,
         generatedeMiddlewares,
         routeCall,
@@ -68,30 +68,25 @@ export class filter_specific_service {
   }
 
   async mountTimers() {
-    //appendnew_flow_filter_specific_service_TimerStart
+    //appendnew_flow_payment_verified_api_TimerStart
   }
 
   private mountAllMiddlewares() {
-    log.debug(
-      'mounting all middlewares for service :: filter_specific_service'
-    );
-    //appendnew_flow_filter_specific_service_MiddlewareStart
+    log.debug('mounting all middlewares for service :: payment_verified_api');
+    //appendnew_flow_payment_verified_api_MiddlewareStart
   }
 
   private mountAllPaths() {
-    log.debug('mounting all paths for service :: filter_specific_service');
-    //appendnew_flow_filter_specific_service_HttpIn
+    log.debug('mounting all paths for service :: payment_verified_api');
+    //appendnew_flow_payment_verified_api_HttpIn
   }
-  //   service flows_filter_specific_service
+  //   service flows_payment_verified_api
 
-  async filterSpecific(parentSpanInst, filter: any = undefined, ...others) {
-    const spanInst = this.tracerService.createSpan(
-      'filterSpecific',
-      parentSpanInst
-    );
+  async updateId(parentSpanInst, id: any = undefined, ...others) {
+    const spanInst = this.tracerService.createSpan('updateId', parentSpanInst);
     let bh: any = {
       input: {
-        filter,
+        id,
       },
       local: {
         response: undefined,
@@ -100,8 +95,8 @@ export class filter_specific_service {
     try {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.psqlQuery(bh, parentSpanInst);
-      //appendnew_next_filterSpecific
+      bh = await this.updateQuery(bh, parentSpanInst);
+      //appendnew_next_updateId
       return (
         // formatting output variables
         {
@@ -115,77 +110,41 @@ export class filter_specific_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_lCNeGGjlsbV1cOSW',
+        'sd_oT55kVeDRazWZne4',
         spanInst,
-        'filterSpecific'
+        'updateId'
       );
     }
   }
-  //appendnew_flow_filter_specific_service_start
+  //appendnew_flow_payment_verified_api_start
 
-  async psqlQuery(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan('psqlQuery', parentSpanInst);
+  async updateQuery(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'updateQuery',
+      parentSpanInst
+    );
     try {
-      console.log(bh.input.filter);
-      let fields = '*';
-      if (bh.input.filter?.columns?.length > 0) {
-        fields = bh.input.filter?.columns?.join(',');
-      }
+      bh.local.query = `UPDATE ${process.env.DB_SCHEMA}.payments SET status = 'completed' WHERE payment_id = $1;`;
+      bh.local.queryvalues = [bh.input.id];
 
-      let sorttable = bh.input.filter?.sorttable;
-      let sorttype = bh.input.filter?.sorttype || `ASC`;
-      let limitdata = bh.input.filter?.limit;
-      let filter = bh.input.filter?.datas;
-
-      bh.local.query = `SELECT ${fields} FROM ${process.env.DB_SCHEMA}.appointments`;
-      bh.local.queryvalues = [];
-      console.log(bh.local.query);
-      if (filter) {
-        let keys = Object.keys(filter);
-        let count = 0;
-        if (keys.length > 0) {
-          bh.local.query += ' where ';
-          keys.forEach((key, index) => {
-            bh.local.query += key + ` IN (`;
-            filter[key].forEach((element, index) => {
-              bh.local.query += `$${count + 1}`;
-              bh.local.queryvalues.push(element);
-              if (filter[key].length > 1 && index < filter[key].length - 1) {
-                bh.local.query += ', ';
-              }
-              count++;
-            });
-            bh.local.query += `)`;
-            if (keys.length > 1 && index < keys.length - 1) {
-              bh.local.query += ' AND ';
-            }
-          });
-        }
-      }
-      if (sorttable) {
-        bh.local.query += ' ORDER BY ' + sorttable + ' ' + sorttype;
-      }
-      if (limitdata) {
-        bh.local.query += ' LIMIT ' + limitdata + ' ;';
-      }
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.getAUserSql(bh, parentSpanInst);
-      //appendnew_next_psqlQuery
+      bh = await this.updateAPaymentSql(bh, parentSpanInst);
+      //appendnew_next_updateQuery
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_qe1kVCwb5gWcYnUH',
+        'sd_crwvwgJrPsezkhQI',
         spanInst,
-        'psqlQuery'
+        'updateQuery'
       );
     }
   }
 
-  async getAUserSql(bh, parentSpanInst) {
+  async updateAPaymentSql(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'getAUserSql',
+      'updateAPaymentSql',
       parentSpanInst
     );
     try {
@@ -211,16 +170,81 @@ export class filter_specific_service {
         params
       );
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.statusReport(bh, parentSpanInst);
-      //appendnew_next_getAUserSql
+      bh = await this.payemntappointment(bh, parentSpanInst);
+      //appendnew_next_updateAPaymentSql
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_M4kWd8w4TMElXLRB',
+        'sd_h4NNGlMVCOxt08ZF',
         spanInst,
-        'getAUserSql'
+        'updateAPaymentSql'
+      );
+    }
+  }
+
+  async payemntappointment(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'payemntappointment',
+      parentSpanInst
+    );
+    try {
+      bh.local.query2 = `SELECT * FROM ${process.env.DB_SCHEMA}.payments WHERE payment_id = $1;`;
+      console.log(bh.local.query2);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.findAPaymentSql(bh, parentSpanInst);
+      //appendnew_next_payemntappointment
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_DX3FYHYy3qqEBITe',
+        spanInst,
+        'payemntappointment'
+      );
+    }
+  }
+
+  async findAPaymentSql(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'findAPaymentSql',
+      parentSpanInst
+    );
+    try {
+      let configObj = this.sdService.getConfigObj(
+        'db-config',
+        'sd_JFEzq9BaWr7Csm3t'
+      );
+      let connectionName;
+      if (
+        configObj &&
+        configObj.hasOwnProperty('dbOption') &&
+        configObj.dbOption.hasOwnProperty('name')
+      ) {
+        connectionName = configObj.dbOption.name;
+      } else {
+        throw new Error('Cannot find the selected config name');
+      }
+      let params = bh.local.queryvalues;
+      params = params ? params : [];
+      bh.local.resultdata = await new GenericRDBMSOperations().executeSQL(
+        connectionName,
+        bh.local.query2,
+        params
+      );
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.statusReport(bh, parentSpanInst);
+      //appendnew_next_findAPaymentSql
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_ExdGs6B0KOmIlnTp',
+        spanInst,
+        'findAPaymentSql'
       );
     }
   }
@@ -235,6 +259,7 @@ export class filter_specific_service {
         statusCode: 200,
         data: bh.local.resultdata,
       };
+      console.log(bh.local.response);
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport
       return bh;
@@ -242,33 +267,9 @@ export class filter_specific_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_dGPuSolv6TkpIlRR',
+        'sd_mFQeA3zjBCLIINb1',
         spanInst,
         'statusReport'
-      );
-    }
-  }
-
-  async statusErrorReport(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'statusErrorReport',
-      parentSpanInst
-    );
-    try {
-      bh.local.response = {
-        statusCode: 400,
-        error: bh.error.message,
-      };
-      this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_statusErrorReport
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_LJmAJDI52koimIRr',
-        spanInst,
-        'statusErrorReport'
       );
     }
   }
@@ -288,28 +289,11 @@ export class filter_specific_service {
     bh.errorSource = src;
     bh.errorFunName = functionName;
     this.tracerService.sendData(parentSpanInst, bh, true);
-    if (
-      false ||
-      (await this.errorHandle(bh, parentSpanInst))
-      /*appendnew_next_Catch*/
-    ) {
-      return bh;
+    if (bh.web.next) {
+      bh.web.next(e);
     } else {
-      if (bh.web.next) {
-        bh.web.next(e);
-      } else {
-        throw e;
-      }
+      throw e;
     }
   }
-  async errorHandle(bh, parentSpanInst) {
-    const catchConnectedNodes = ['sd_LJmAJDI52koimIRr'];
-    if (catchConnectedNodes.includes(bh.errorSource)) {
-      return false;
-    }
-    bh = await this.statusErrorReport(bh, parentSpanInst);
-    //appendnew_next_errorHandle
-    return true;
-  }
-  //appendnew_flow_filter_specific_service_Catch
+  //appendnew_flow_payment_verified_api_Catch
 }

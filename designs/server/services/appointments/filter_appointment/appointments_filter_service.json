@@ -39,6 +39,7 @@
         "nodeType": "flow",
         "name": "get_a_user_sql",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "resultdata"
@@ -50,6 +51,7 @@
         },
         "inputs": 1,
         "outputs": 1,
+        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "queryvalues"
@@ -131,7 +133,52 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
+        "serviceName": "appointments_filter_service"
+    },
+    {
+        "id": "sd_5mDGdRmLBG2SerMv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status_error_report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusErrorReport",
+        "category": "Function",
+        "x": 305,
+        "y": 280,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
         "serviceName": "appointments_filter_service",
-        "generated": false
+        "generated": true
+    },
+    {
+        "id": "sd_jbQ1mpBNGn3RKLl2",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_lRLqUDOgTWLPHbfo",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_5mDGdRmLBG2SerMv"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 145,
+        "y": 280,
+        "wires": [
+            [
+                "sd_5mDGdRmLBG2SerMv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "appointments_filter_service"
     }
 ]

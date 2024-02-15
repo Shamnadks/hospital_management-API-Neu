@@ -319,24 +319,5 @@
         "generateNext": false,
         "serviceName": "get_appointment_api",
         "generated": true
-    },
-    {
-        "id": "sd_4BeY8JG5kzef2v5j",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "token_finder_script  ",
-        "script": "bh.input.filterdata={\nfield:\nsorttable:'',\nsorttype:'DESC',\nlimitdata:1,\ndatas:{\n    appointment_date:[bh.input.formattedDate],\n    appointment_date:[bh.input.f],\n}\n}",
-        "functionName": "tokenFinderScript",
-        "category": "Function",
-        "x": 705,
-        "y": 360,
-        "wires": [
-            []
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": true,
-        "serviceName": "get_appointment_api"
     }
 ]

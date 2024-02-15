@@ -252,6 +252,7 @@ export class appointment_service {
       } else {
         throw new Error('Some error Occured try again later');
       }
+      bh.input.status = 'paid';
       this.tracerService.sendData(spanInst, bh);
       bh = await this.dateAndAge(bh, parentSpanInst);
       //appendnew_next_usersErrorHandler
@@ -511,7 +512,7 @@ export class appointment_service {
         token_number: bh.local.token + 1,
         cash: bh.input?.data?.cash,
         age: bh.input.age,
-        status: 'Pending',
+        status: bh.input.status,
       };
       // console.log(bh.local.appointment)
       this.tracerService.sendData(spanInst, bh);
@@ -597,7 +598,7 @@ export class appointment_service {
         doctor_id: bh.local.resultdata?.doctor_id,
         payment_method: bh.input.data?.payment_method,
         cash: bh.local.resultdata?.cash,
-        status: bh.local.resultdata?.status,
+        status: bh.input.status,
         sucess_url: bh.input.data?.sucess_url,
         cancel_url: bh.input.data?.cancel_url,
       };
@@ -777,6 +778,7 @@ export class appointment_service {
       } else {
         throw new Error('Some error Occured try again later');
       }
+      bh.input.status = 'pending';
       this.tracerService.sendData(spanInst, bh);
       bh = await this.dateAndAge(bh, parentSpanInst);
       //appendnew_next_userErrorHandler

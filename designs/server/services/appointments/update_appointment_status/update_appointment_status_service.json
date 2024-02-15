@@ -1,14 +1,192 @@
 [
     {
-        "type": "tab",
         "id": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:25:45.856Z",
+        "label": "update_appointment_status_service",
         "disabled": false,
         "info": "",
-        "label": "update_appointment_status_service",
-        "createdDate": "2024-02-12T17:25:45.856Z",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "update_appointment_status_service",
         "relativeParentPath": "appointments/update_appointment_status"
+    },
+    {
+        "id": "sd_xBNr9GfiNhVYiIj8",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "appointment_status_update",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "id",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "status",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "appointmentStatusUpdate",
+        "category": "General",
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "sd_u3hZeAdsVvbDASwL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_appointment_status_service"
+    },
+    {
+        "id": "sd_u3hZeAdsVvbDASwL",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_appointment",
+        "script": "\nbh.local.query = `UPDATE ${process.env.DB_SCHEMA}.appointments SET status = $1 WHERE id = $2;`\nbh.local.queryvalues=[bh.input.status,bh.input.id]\n \n\nconsole.log(bh.local.query,bh.local.queryvalues)",
+        "functionName": "updateAppointment",
+        "category": "Function",
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "sd_VkrwML7BOJ8XpFCc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_service",
+        "generated": true
+    },
+    {
+        "id": "sd_VOMsu44vojdQSllp",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 705,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_service",
+        "generated": true
+    },
+    {
+        "id": "sd_VkrwML7BOJ8XpFCc",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "update_a_payment_sql",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "resultdata"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "query"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "queryvalues"
+        },
+        "dbType": "postgres",
+        "functionName": "updateAPaymentSql",
+        "category": "Storage",
+        "x": 545,
+        "y": 140,
+        "wires": [
+            [
+                "sd_VOMsu44vojdQSllp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_service",
+        "generated": true
+    },
+    {
+        "id": "sd_acJiWni0BefwXzga",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status_error_report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusErrorReport",
+        "category": "Function",
+        "x": 345,
+        "y": 320,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_service",
+        "generated": true
+    },
+    {
+        "id": "sd_JpkFFasmPQNz9khd",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_acJiWni0BefwXzga"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 185,
+        "y": 320,
+        "wires": [
+            [
+                "sd_acJiWni0BefwXzga"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_appointment_status_service"
     }
 ]

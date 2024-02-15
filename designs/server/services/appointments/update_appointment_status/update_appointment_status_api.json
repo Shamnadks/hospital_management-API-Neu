@@ -1,14 +1,301 @@
 [
     {
-        "type": "tab",
         "id": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "type": "tab",
+        "createdDate": "2024-02-12T17:25:25.289Z",
+        "label": "update_appointment_status_api",
         "disabled": false,
         "info": "",
-        "label": "update_appointment_status_api",
-        "createdDate": "2024-02-12T17:25:25.289Z",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "update_appointment_status_api",
         "relativeParentPath": "appointments/update_appointment_status"
+    },
+    {
+        "id": "sd_jhr8yzexT8TcsS4p",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "update_appointment",
+        "path": "updateappointment/post",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "body",
+                    "desc": "status update",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_cUFeXVBS2knqLWOU",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "sd_Ry85RP7QGhQDHnnS"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_appointment_status_api",
+        "functionName": "sd_jhr8yzexT8TcsS4p"
+    },
+    {
+        "id": "sd_Ry85RP7QGhQDHnnS",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_appointment",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:25:45.856Z",
+            "label": "update_appointment_status_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_xBNr9GfiNhVYiIj8",
+            "flowName": "appointmentStatusUpdate"
+        },
+        "inputVariables": [
+            {
+                "key": "id",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.id"
+            },
+            {
+                "key": "status",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.status"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./update_appointment_status_service",
+        "startName": "appointmentStatusUpdate",
+        "inputParams": [
+            "bh.input.body.id",
+            "bh.input.body.status"
+        ],
+        "accept_bh": false,
+        "functionName": "updateAppointment",
+        "category": "General",
+        "x": 445,
+        "y": 180,
+        "wires": [
+            [
+                "sd_AGntFaIFngyDhceB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_api",
+        "generated": true
+    },
+    {
+        "id": "sd_AGntFaIFngyDhceB",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_AGntFaIFngyDhceB",
+        "category": "HTTP",
+        "x": 645,
+        "y": 160,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_api",
+        "generated": true
+    },
+    {
+        "id": "sd_9P7Yst5PYetdCMsI",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status_error_report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusErrorReport",
+        "category": "Function",
+        "x": 445,
+        "y": 340,
+        "wires": [
+            [
+                "sd_oY8ITsWUozFEb6aF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_api",
+        "generated": true
+    },
+    {
+        "id": "sd_ZGoNOQ1U9toUJZvu",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_9P7Yst5PYetdCMsI",
+            "sd_oY8ITsWUozFEb6aF"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 285,
+        "y": 340,
+        "wires": [
+            [
+                "sd_9P7Yst5PYetdCMsI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_appointment_status_api"
+    },
+    {
+        "id": "sd_oY8ITsWUozFEb6aF",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_ADMaiDiZnUmK75yJ",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "error_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "errorHttpOut",
+        "category": "HTTP",
+        "x": 585,
+        "y": 340,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_appointment_status_api",
+        "generated": true
     }
 ]
