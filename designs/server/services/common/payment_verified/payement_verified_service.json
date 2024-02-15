@@ -301,5 +301,107 @@
         "generateNext": false,
         "serviceName": "payement_verified_service",
         "generated": true
+    },
+    {
+        "id": "sd_2JKcvVa2HkC4EIoQ",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status_error_report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusErrorReport",
+        "category": "Function",
+        "x": 425,
+        "y": 380,
+        "wires": [
+            [
+                "sd_0Syfq2X3B56doeKf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
+    },
+    {
+        "id": "sd_57vKTsthRprnIPte",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_2JKcvVa2HkC4EIoQ",
+            "sd_0Syfq2X3B56doeKf"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 265,
+        "y": 380,
+        "wires": [
+            [
+                "sd_2JKcvVa2HkC4EIoQ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payement_verified_service"
+    },
+    {
+        "id": "sd_0Syfq2X3B56doeKf",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "error_http_out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "errorHttpOut",
+        "category": "HTTP",
+        "x": 565,
+        "y": 380,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
     }
 ]

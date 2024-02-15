@@ -274,6 +274,30 @@ export class payment_verified_api {
     }
   }
 
+  async statusErrorReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusErrorReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 400,
+        error: bh.error.message,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_statusErrorReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_x5ZpxW5EwaXhSS9d',
+        spanInst,
+        'statusErrorReport'
+      );
+    }
+  }
+
   //appendnew_node
 
   // error_handler_slot
@@ -289,11 +313,28 @@ export class payment_verified_api {
     bh.errorSource = src;
     bh.errorFunName = functionName;
     this.tracerService.sendData(parentSpanInst, bh, true);
-    if (bh.web.next) {
-      bh.web.next(e);
+    if (
+      false ||
+      (await this.errorHandle(bh, parentSpanInst))
+      /*appendnew_next_Catch*/
+    ) {
+      return bh;
     } else {
-      throw e;
+      if (bh.web.next) {
+        bh.web.next(e);
+      } else {
+        throw e;
+      }
     }
+  }
+  async errorHandle(bh, parentSpanInst) {
+    const catchConnectedNodes = ['sd_x5ZpxW5EwaXhSS9d'];
+    if (catchConnectedNodes.includes(bh.errorSource)) {
+      return false;
+    }
+    bh = await this.statusErrorReport(bh, parentSpanInst);
+    //appendnew_next_errorHandle
+    return true;
   }
   //appendnew_flow_payment_verified_api_Catch
 }

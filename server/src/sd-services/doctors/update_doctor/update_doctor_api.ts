@@ -184,9 +184,9 @@ export class update_doctor_api {
     }
   }
 
-  async statusReport(bh, parentSpanInst) {
+  async statusErrorReport(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'statusReport',
+      'statusErrorReport',
       parentSpanInst
     );
     try {
@@ -196,15 +196,15 @@ export class update_doctor_api {
       };
       this.tracerService.sendData(spanInst, bh);
       await this.errorHttpOut(bh, parentSpanInst);
-      //appendnew_next_statusReport
+      //appendnew_next_statusErrorReport
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_TnAZ0qGb9rgGsbu5',
+        'sd_O03P1BlotFBqJ0uw',
         spanInst,
-        'statusReport'
+        'statusErrorReport'
       );
     }
   }
@@ -215,7 +215,7 @@ export class update_doctor_api {
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_2p6JDyO2ouNYcj7h');
+      return await this.errorHandler(bh, e, 'sd_YQLgSrBDWwbMWhtE');
     }
   }
 
@@ -249,11 +249,11 @@ export class update_doctor_api {
     }
   }
   async errorHandle(bh, parentSpanInst) {
-    const catchConnectedNodes = ['sd_TnAZ0qGb9rgGsbu5', 'sd_2p6JDyO2ouNYcj7h'];
+    const catchConnectedNodes = ['sd_O03P1BlotFBqJ0uw', 'sd_YQLgSrBDWwbMWhtE'];
     if (catchConnectedNodes.includes(bh.errorSource)) {
       return false;
     }
-    bh = await this.statusReport(bh, parentSpanInst);
+    bh = await this.statusErrorReport(bh, parentSpanInst);
     //appendnew_next_errorHandle
     return true;
   }
