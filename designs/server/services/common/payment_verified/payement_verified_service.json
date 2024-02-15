@@ -1,0 +1,305 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "type": "tab",
+        "createdDate": "2024-02-14T21:34:27.530Z",
+        "label": "payement_verified_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "payement_verified_service",
+        "relativeParentPath": "common/payment_verified"
+    },
+    {
+        "id": "sd_1i7rY1KO01YLAl7U",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "paymentverify",
+        "path": "paymentverify/post",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "body",
+                    "desc": "id",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_tut4AcsICYM1ZYoV",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "sd_6y2chzYi0CZ4vkCv"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payement_verified_service",
+        "functionName": "sd_1i7rY1KO01YLAl7U"
+    },
+    {
+        "id": "sd_6y2chzYi0CZ4vkCv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "",
+        "functionName": "sd_6y2chzYi0CZ4vkCv",
+        "category": "Function",
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "sd_z5eezRS0mfq93bl7"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
+    },
+    {
+        "id": "sd_z5eezRS0mfq93bl7",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "call_payment_update",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+            "type": "tab",
+            "createdDate": "2024-02-14T21:34:16.029Z",
+            "label": "payment_verified_api",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_oT55kVeDRazWZne4",
+            "flowName": "updateId"
+        },
+        "inputVariables": [
+            {
+                "key": "id",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.payment_id"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./payment_verified_api",
+        "startName": "updateId",
+        "inputParams": [
+            "bh.input.body.payment_id"
+        ],
+        "accept_bh": false,
+        "functionName": "callPaymentUpdate",
+        "category": "General",
+        "x": 445,
+        "y": 200,
+        "wires": [
+            [
+                "sd_uDY9DgKsIoLPb658"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
+    },
+    {
+        "id": "sd_uDY9DgKsIoLPb658",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.input.appointment_id=bh.local?.response?.data?.[0]?.appointment_id\nbh.input.status=\"paid\"",
+        "functionName": "sd_uDY9DgKsIoLPb658",
+        "category": "Function",
+        "x": 605,
+        "y": 200,
+        "wires": [
+            [
+                "sd_krzjnA1AjEHeUgv4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
+    },
+    {
+        "id": "sd_krzjnA1AjEHeUgv4",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "appointment_changes",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_F8uRJxFxyYnAocyM",
+            "type": "tab",
+            "createdDate": "2024-02-12T17:25:45.856Z",
+            "label": "update_appointment_status_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_xBNr9GfiNhVYiIj8",
+            "flowName": "appointmentStatusUpdate"
+        },
+        "inputVariables": [
+            {
+                "key": "id",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "appointment_id"
+            },
+            {
+                "key": "status",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "status"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "../../appointments/update_appointment_status/update_appointment_status_service",
+        "startName": "appointmentStatusUpdate",
+        "inputParams": [
+            "bh.input.appointment_id",
+            "bh.input.status"
+        ],
+        "accept_bh": false,
+        "functionName": "appointmentChanges",
+        "category": "General",
+        "x": 745,
+        "y": 200,
+        "wires": [
+            [
+                "sd_QKPtr6wtO6QBmtGN"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
+    },
+    {
+        "id": "sd_QKPtr6wtO6QBmtGN",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_QKPtr6wtO6QBmtGN",
+        "category": "HTTP",
+        "x": 885,
+        "y": 200,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payement_verified_service",
+        "generated": true
+    }
+]

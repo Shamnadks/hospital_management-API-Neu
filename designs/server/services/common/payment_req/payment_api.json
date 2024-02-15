@@ -269,5 +269,51 @@
         "generateNext": false,
         "serviceName": "payment_api",
         "generated": true
+    },
+    {
+        "id": "sd_K49qqfyGwtAunGqT",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status_error_report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusErrorReport",
+        "category": "Function",
+        "x": 345,
+        "y": 340,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_api",
+        "generated": true
+    },
+    {
+        "id": "sd_jEmjtVvc8iu6dMwX",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_K49qqfyGwtAunGqT"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 185,
+        "y": 340,
+        "wires": [
+            [
+                "sd_K49qqfyGwtAunGqT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payment_api"
     }
 ]

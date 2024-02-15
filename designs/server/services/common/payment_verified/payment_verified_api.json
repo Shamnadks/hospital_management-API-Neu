@@ -1,0 +1,196 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "type": "tab",
+        "createdDate": "2024-02-14T21:34:16.029Z",
+        "label": "payment_verified_api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "payment_verified_api",
+        "relativeParentPath": "common/payment_verified"
+    },
+    {
+        "id": "sd_oT55kVeDRazWZne4",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "update id",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "id",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "updateId",
+        "category": "General",
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "sd_crwvwgJrPsezkhQI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "payment_verified_api"
+    },
+    {
+        "id": "sd_crwvwgJrPsezkhQI",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update query",
+        "script": "\nbh.local.query = `UPDATE ${process.env.DB_SCHEMA}.payments SET status = 'completed' WHERE payment_id = $1;`\nbh.local.queryvalues=[bh.input.id]\n \n\n",
+        "functionName": "updateQuery",
+        "category": "Function",
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "sd_h4NNGlMVCOxt08ZF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_verified_api",
+        "generated": true
+    },
+    {
+        "id": "sd_mFQeA3zjBCLIINb1",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.resultdata\n}\nconsole.log(bh.local.response)",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 925,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_verified_api",
+        "generated": true
+    },
+    {
+        "id": "sd_h4NNGlMVCOxt08ZF",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "update_a_payment_sql",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "resultdata"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "query"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "queryvalues"
+        },
+        "dbType": "postgres",
+        "functionName": "updateAPaymentSql",
+        "category": "Storage",
+        "x": 565,
+        "y": 120,
+        "wires": [
+            [
+                "sd_DX3FYHYy3qqEBITe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_verified_api",
+        "generated": true
+    },
+    {
+        "id": "sd_DX3FYHYy3qqEBITe",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "payemntappointment",
+        "script": "\nbh.local.query2 = `SELECT * FROM ${process.env.DB_SCHEMA}.payments WHERE payment_id = $1;`\nconsole.log(bh.local.query2)",
+        "functionName": "payemntappointment",
+        "category": "Function",
+        "x": 705,
+        "y": 120,
+        "wires": [
+            [
+                "sd_ExdGs6B0KOmIlnTp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_verified_api",
+        "generated": true
+    },
+    {
+        "id": "sd_ExdGs6B0KOmIlnTp",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "find_a_payment_sql",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "resultdata"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "query2"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "queryvalues"
+        },
+        "dbType": "postgres",
+        "functionName": "findAPaymentSql",
+        "category": "Storage",
+        "x": 825,
+        "y": 120,
+        "wires": [
+            [
+                "sd_mFQeA3zjBCLIINb1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "payment_verified_api",
+        "generated": true
+    }
+]

@@ -1,5 +1,5 @@
 {
-    "/updateappointment/post": {
+    "/paymentverify/post": {
         "post": {
             "summary": "",
             "description": "",
@@ -9,13 +9,13 @@
                 {
                     "in": "body",
                     "name": "body",
-                    "description": "status update",
+                    "description": "id",
                     "required": false
                 }
             ],
             "responses": {},
             "tags": [
-                "update_appointment_status_api"
+                "payement_verified_service"
             ]
         }
     }
