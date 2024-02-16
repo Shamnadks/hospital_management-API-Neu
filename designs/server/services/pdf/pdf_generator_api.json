@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_1GtB6xpAjw1UITrf",
+        "disabled": false,
+        "info": "",
+        "label": "pdf_generator_api",
+        "createdDate": "2024-02-15T05:42:16.608Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "pdf_generator_api",
+        "relativeParentPath": "pdf"
+    }
+]

@@ -135,8 +135,9 @@ export class filter_specific_service {
       let sorttable = bh.input.filter?.sorttable;
       let sorttype = bh.input.filter?.sorttype || `ASC`;
       let limitdata = bh.input.filter?.limit;
+      let skip = bh.input.filter?.skip;
       let filter = bh.input.filter?.datas;
-
+      let groupby = bh.input.filter?.groupby;
       bh.local.query = `SELECT ${fields} FROM ${process.env.DB_SCHEMA}.appointments`;
       bh.local.queryvalues = [];
       console.log(bh.local.query);
@@ -162,8 +163,15 @@ export class filter_specific_service {
           });
         }
       }
+      if (groupby.length > 0) {
+        groupby = groupby.join(',');
+        bh.local.query += ' GROUP BY ' + groupby;
+      }
       if (sorttable) {
         bh.local.query += ' ORDER BY ' + sorttable + ' ' + sorttype;
+      }
+      if (skip) {
+        bh.local.query += ' OFFSET ' + skip;
       }
       if (limitdata) {
         bh.local.query += ' LIMIT ' + limitdata + ' ;';
