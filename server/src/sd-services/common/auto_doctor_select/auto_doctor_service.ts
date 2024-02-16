@@ -239,7 +239,7 @@ export class auto_doctor_service {
     try {
       bh.local.response = {
         statusCode: 200,
-        data: {},
+        data: [],
         selcted: {},
       };
       this.tracerService.sendData(spanInst, bh);

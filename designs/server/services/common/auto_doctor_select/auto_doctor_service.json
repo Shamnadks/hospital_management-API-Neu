@@ -186,7 +186,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "doctor_error_response",
-        "script": "bh.local.response = {\n  statusCode: 200,\n  data: {},\n  selcted:{}\n};",
+        "script": "bh.local.response = {\n  statusCode: 200,\n  data: [],\n  selcted:{}\n};",
         "functionName": "doctorErrorResponse",
         "category": "Function",
         "x": 605,
