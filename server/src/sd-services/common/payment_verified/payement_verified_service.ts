@@ -235,6 +235,41 @@ export class payement_verified_service {
     }
   }
 
+  async statusErrorReport(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'statusErrorReport',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 400,
+        error: bh.error.message,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      await this.errorHttpOut(bh, parentSpanInst);
+      //appendnew_next_statusErrorReport
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_2JKcvVa2HkC4EIoQ',
+        spanInst,
+        'statusErrorReport'
+      );
+    }
+  }
+
+  async errorHttpOut(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(bh.local.response.statusCode).send(bh.local.response);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_0Syfq2X3B56doeKf');
+    }
+  }
+
   //appendnew_node
 
   // error_handler_slot
@@ -250,11 +285,28 @@ export class payement_verified_service {
     bh.errorSource = src;
     bh.errorFunName = functionName;
     this.tracerService.sendData(parentSpanInst, bh, true);
-    if (bh.web.next) {
-      bh.web.next(e);
+    if (
+      false ||
+      (await this.errorHandle(bh, parentSpanInst))
+      /*appendnew_next_Catch*/
+    ) {
+      return bh;
     } else {
-      throw e;
+      if (bh.web.next) {
+        bh.web.next(e);
+      } else {
+        throw e;
+      }
     }
+  }
+  async errorHandle(bh, parentSpanInst) {
+    const catchConnectedNodes = ['sd_2JKcvVa2HkC4EIoQ', 'sd_0Syfq2X3B56doeKf'];
+    if (catchConnectedNodes.includes(bh.errorSource)) {
+      return false;
+    }
+    bh = await this.statusErrorReport(bh, parentSpanInst);
+    //appendnew_next_errorHandle
+    return true;
   }
   //appendnew_flow_payement_verified_service_Catch
 }

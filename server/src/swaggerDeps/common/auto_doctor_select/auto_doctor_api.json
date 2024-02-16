@@ -1,0 +1,22 @@
+{
+    "/selectdoctor/post": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "id",
+                    "description": "id of department",
+                    "required": true
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "auto_doctor_api"
+            ]
+        }
+    }
+}

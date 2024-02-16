@@ -30,6 +30,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "_DM_kxoe18g2p",
         "erdName": "hospital",
         "entity": "department",
@@ -101,6 +102,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -212,20 +214,20 @@
         "generated": true
     },
     {
-        "id": "sd_eK7616VEGERujrhU",
+        "id": "sd_GntIaicmSUo51YAG",
         "type": "Script",
         "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
         "viewType": "common",
         "nodeType": "flow",
-        "name": "Status Report",
+        "name": "Status_error_report",
         "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
-        "functionName": "statusReport",
+        "functionName": "statusErrorReport",
         "category": "Function",
-        "x": 405,
-        "y": 320,
+        "x": 385,
+        "y": 300,
         "wires": [
             [
-                "sd_mqoX1NHg4K4PTIOQ"
+                "sd_wTioPyoL73qQmV4F"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -234,7 +236,7 @@
         "generated": true
     },
     {
-        "id": "sd_oEUrzGxN9Ol7wE2m",
+        "id": "sd_Uq9fWuCGkomw4diE",
         "type": "Catch",
         "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
         "viewType": "common",
@@ -244,16 +246,16 @@
         "selectCatchType": "allnodes",
         "masternodeList": "",
         "ignoreList": [
-            "sd_eK7616VEGERujrhU",
-            "sd_mqoX1NHg4K4PTIOQ"
+            "sd_GntIaicmSUo51YAG",
+            "sd_wTioPyoL73qQmV4F"
         ],
         "functionName": "errorHandle",
         "category": "General",
-        "x": 245,
-        "y": 320,
+        "x": 225,
+        "y": 300,
         "wires": [
             [
-                "sd_eK7616VEGERujrhU"
+                "sd_GntIaicmSUo51YAG"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -261,7 +263,7 @@
         "serviceName": "filter_doctor_api"
     },
     {
-        "id": "sd_mqoX1NHg4K4PTIOQ",
+        "id": "sd_wTioPyoL73qQmV4F",
         "type": "HttpOut",
         "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
         "viewType": "server",
@@ -286,6 +288,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -304,8 +307,8 @@
         },
         "functionName": "errorHttpOut",
         "category": "HTTP",
-        "x": 545,
-        "y": 320,
+        "x": 525,
+        "y": 300,
         "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,

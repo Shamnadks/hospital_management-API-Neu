@@ -942,5 +942,65 @@
                 }
             ]
         }
+    },
+    "64a3ced62abecc31071ac701": {
+        "name": "64a3ced62abecc31071ac701",
+        "version": "1.0.0",
+        "packageType": [
+            "studio-nodes"
+        ],
+        "deps": {
+            "neutrinos-custom-html-to-pdf": {
+                "name": "neutrinos-custom-html-to-pdf",
+                "version": "1.0.0",
+                "packageType": "studio-nodes",
+                "nodes": {
+                    "server": [
+                        {
+                            "name": "556379ce-a850-1400-209e-3d9dd7e5d95f",
+                            "displayName": "Generate PDF",
+                            "dependencies": [
+                                {
+                                    "name": "puppeteer",
+                                    "version": "2.1.1"
+                                },
+                                {
+                                    "name": "handlebars",
+                                    "version": "4.7.7"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "parentDeps": {}
+    },
+    "neutrinos-custom-html-to-pdf": {
+        "name": "neutrinos-custom-html-to-pdf",
+        "version": "1.0.0",
+        "packageType": "studio-nodes",
+        "deps": {},
+        "parentDeps": {
+            "64a3ced62abecc31071ac701": "1.0.0"
+        },
+        "nodes": {
+            "server": [
+                {
+                    "name": "556379ce-a850-1400-209e-3d9dd7e5d95f",
+                    "displayName": "Generate PDF",
+                    "dependencies": [
+                        {
+                            "name": "puppeteer",
+                            "version": "2.1.1"
+                        },
+                        {
+                            "name": "handlebars",
+                            "version": "4.7.7"
+                        }
+                    ]
+                }
+            ]
+        }
     }
 }

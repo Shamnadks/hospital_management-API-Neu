@@ -184,9 +184,9 @@ export class filter_doctor_api {
     }
   }
 
-  async statusReport(bh, parentSpanInst) {
+  async statusErrorReport(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'statusReport',
+      'statusErrorReport',
       parentSpanInst
     );
     try {
@@ -196,15 +196,15 @@ export class filter_doctor_api {
       };
       this.tracerService.sendData(spanInst, bh);
       await this.errorHttpOut(bh, parentSpanInst);
-      //appendnew_next_statusReport
+      //appendnew_next_statusErrorReport
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_eK7616VEGERujrhU',
+        'sd_GntIaicmSUo51YAG',
         spanInst,
-        'statusReport'
+        'statusErrorReport'
       );
     }
   }
@@ -215,7 +215,7 @@ export class filter_doctor_api {
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_mqoX1NHg4K4PTIOQ');
+      return await this.errorHandler(bh, e, 'sd_wTioPyoL73qQmV4F');
     }
   }
 
@@ -249,11 +249,11 @@ export class filter_doctor_api {
     }
   }
   async errorHandle(bh, parentSpanInst) {
-    const catchConnectedNodes = ['sd_eK7616VEGERujrhU', 'sd_mqoX1NHg4K4PTIOQ'];
+    const catchConnectedNodes = ['sd_GntIaicmSUo51YAG', 'sd_wTioPyoL73qQmV4F'];
     if (catchConnectedNodes.includes(bh.errorSource)) {
       return false;
     }
-    bh = await this.statusReport(bh, parentSpanInst);
+    bh = await this.statusErrorReport(bh, parentSpanInst);
     //appendnew_next_errorHandle
     return true;
   }

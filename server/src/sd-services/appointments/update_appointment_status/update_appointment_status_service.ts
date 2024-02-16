@@ -206,6 +206,9 @@ export class update_appointment_status_service {
     try {
       bh.local.response = {
         statusCode: 200,
+        data: {
+          appointment_id: bh.input.id,
+        },
       };
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport

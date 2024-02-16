@@ -1,4 +1,12 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-auto_doctor_service-SSD_SERVICE_ID_sd_bthY8bjd638CxsCf
+import { auto_doctor_service as SSD_SERVICE_ID_sd_bthY8bjd638CxsCf } from './sd-services/common/auto_doctor_select/auto_doctor_service';
+//CORE_REFERENCE_IMPORT-auto_doctor_api-SSD_SERVICE_ID_sd_ta2UPnAaBavHfvQ8
+import { auto_doctor_api as SSD_SERVICE_ID_sd_ta2UPnAaBavHfvQ8 } from './sd-services/common/auto_doctor_select/auto_doctor_api';
+//CORE_REFERENCE_IMPORT-pdf_generator_flow-SSD_SERVICE_ID_sd_LwAtZ02wqqaUQKYG
+import { pdf_generator_flow as SSD_SERVICE_ID_sd_LwAtZ02wqqaUQKYG } from './sd-services/pdf/pdf_generator_flow';
+//CORE_REFERENCE_IMPORT-pdf_generator_api-SSD_SERVICE_ID_sd_1GtB6xpAjw1UITrf
+import { pdf_generator_api as SSD_SERVICE_ID_sd_1GtB6xpAjw1UITrf } from './sd-services/pdf/pdf_generator_api';
 //CORE_REFERENCE_IMPORT-payement_verified_service-SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh
 import { payement_verified_service as SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh } from './sd-services/common/payment_verified/payement_verified_service';
 //CORE_REFERENCE_IMPORT-payment_verified_api-SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88
@@ -66,6 +74,14 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-auto_doctor_service-SSD_SERVICE_ID_sd_bthY8bjd638CxsCf
+SSD_SERVICE_ID_sd_bthY8bjd638CxsCf,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-auto_doctor_api-SSD_SERVICE_ID_sd_ta2UPnAaBavHfvQ8
+SSD_SERVICE_ID_sd_ta2UPnAaBavHfvQ8,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-pdf_generator_flow-SSD_SERVICE_ID_sd_LwAtZ02wqqaUQKYG
+SSD_SERVICE_ID_sd_LwAtZ02wqqaUQKYG,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-pdf_generator_api-SSD_SERVICE_ID_sd_1GtB6xpAjw1UITrf
+SSD_SERVICE_ID_sd_1GtB6xpAjw1UITrf,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payement_verified_service-SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh
 SSD_SERVICE_ID_sd_tjA7Kxv8OylO0nnh,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-payment_verified_api-SSD_SERVICE_ID_sd_jPPvsFExUCTPJE88

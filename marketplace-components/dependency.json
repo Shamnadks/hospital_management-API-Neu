@@ -617,6 +617,116 @@
                     }
                 }
             ]
+        },
+        {
+            "_id": "64a3ced62abecc31071ac701",
+            "name": "neutrinos-custom-html-to-pdf",
+            "averageRating": 0,
+            "description": "Can be used to create dynamic html using templates and be saved as a pdf. Uses handlebars JS in the background for the purpose.",
+            "devid": "70725a35-ce50-18c8-baac-8bdfb9abdd1e",
+            "displayName": "Custom PDF ",
+            "lastUpdated": "2023-07-04T07:48:38.656Z",
+            "numberOfDownloads": 0,
+            "packageType": [
+                "studio-nodes"
+            ],
+            "platformSupportVersion": "9.1.2",
+            "pluginImage": "neutrinos-custom-html-to-pdf-1688450413217.svg",
+            "publisher": "Neutrinos",
+            "uploadedDate": "2023-07-04T07:48:38.656Z",
+            "username": "rohith.nair@neutrinos.co",
+            "version": "1.0.0",
+            "versions": {
+                "1.0.0": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-custom-html-to-pdf",
+                            "displayName": "Custom PDF ",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.0",
+                            "packageDependencies": {
+                                "puppeteer": "2.1.1",
+                                "handlebars": "4.7.7"
+                            },
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "556379ce-a850-1400-209e-3d9dd7e5d95f",
+                                        "displayName": "Generate PDF",
+                                        "dependencies": [
+                                            {
+                                                "name": "puppeteer",
+                                                "version": "2.1.1"
+                                            },
+                                            {
+                                                "name": "handlebars",
+                                                "version": "4.7.7"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "9.1.2"
+                    },
+                    "metadata": {
+                        "devid": "70725a35-ce50-18c8-baac-8bdfb9abdd1e",
+                        "name": "neutrinos-custom-html-to-pdf",
+                        "displayName": "Custom PDF ",
+                        "version": "1.0.0",
+                        "username": "rohith.nair@neutrinos.co",
+                        "publisher": "Neutrinos",
+                        "platformSupportVersion": {
+                            "min": "9.1.2"
+                        },
+                        "description": "Can be used to create dynamic html using templates and be saved as a pdf. Uses handlebars JS in the background for the purpose.",
+                        "pluginImage": "neutrinos-custom-html-to-pdf-1688450413217.svg"
+                    },
+                    "version": "1.0.0"
+                }
+            },
+            "archiveFile": "api/zips/undefined",
+            "guide": "64a3ced7c21c000019cde892",
+            "icon": "api/resource/icons/64a3ced6c21c000019cde88c",
+            "screenshots": [
+                "api/resource/screenshots/64a3ced7c21c000019cde88e",
+                "api/resource/screenshots/64a3ced7c21c000019cde890"
+            ],
+            "no_of_downloads_by_packages": {
+                "neutrinos-custom-html-to-pdf": 5
+            },
+            "dependencies": [
+                {
+                    "name": "neutrinos-custom-html-to-pdf",
+                    "displayName": "Custom PDF ",
+                    "packageType": "studio-nodes",
+                    "version": "1.0.0",
+                    "packageDependencies": {
+                        "puppeteer": "2.1.1",
+                        "handlebars": "4.7.7"
+                    },
+                    "nodes": {
+                        "server": [
+                            {
+                                "name": "556379ce-a850-1400-209e-3d9dd7e5d95f",
+                                "displayName": "Generate PDF",
+                                "dependencies": [
+                                    {
+                                        "name": "puppeteer",
+                                        "version": "2.1.1"
+                                    },
+                                    {
+                                        "name": "handlebars",
+                                        "version": "4.7.7"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     ]
 }

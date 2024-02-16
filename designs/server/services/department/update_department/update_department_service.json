@@ -122,5 +122,51 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "update_department_service"
+    },
+    {
+        "id": "sd_cze66RfTIDQK56ZM",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status_error_report",
+        "script": "bh.local.response={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "statusErrorReport",
+        "category": "Function",
+        "x": 385,
+        "y": 280,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "update_department_service",
+        "generated": true
+    },
+    {
+        "id": "sd_vsy75QZc67kY9VEW",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_9d3akMmIsei4wjRS",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "error_handle",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_cze66RfTIDQK56ZM"
+        ],
+        "functionName": "errorHandle",
+        "category": "General",
+        "x": 225,
+        "y": 280,
+        "wires": [
+            [
+                "sd_cze66RfTIDQK56ZM"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "update_department_service"
     }
 ]

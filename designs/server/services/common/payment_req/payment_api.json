@@ -142,9 +142,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "payment_api",
-        "generated": true
+        "serviceName": "payment_api"
     },
     {
         "id": "sd_nSikfLfe51N55pHa",
@@ -248,7 +248,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "payment_api"
+        "serviceName": "payment_api",
+        "generated": false
     },
     {
         "id": "sd_MdL8CkPu98huVHVv",
@@ -314,6 +315,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "payment_api"
+        "serviceName": "payment_api",
+        "generated": false
     }
 ]

@@ -90,7 +90,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "Status Report",
-        "script": "bh.local.response={\n    statusCode:200,\n}",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:{\n       appointment_id:bh.input.id\n    }\n}",
         "functionName": "statusReport",
         "category": "Function",
         "x": 705,
