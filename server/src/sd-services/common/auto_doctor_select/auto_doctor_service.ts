@@ -8,7 +8,6 @@ import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
 import * as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j from '../../appointments/filter_specfic/filter_specific_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from '../../doctors/filter_doctor/filter_doctor_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok from '../get_appointments/get_appointment_flow'; //_splitter_
 //append_imports_end
 export class auto_doctor_service {
   private sdService = new SDBaseService();
@@ -84,85 +83,6 @@ export class auto_doctor_service {
   }
   //   service flows_auto_doctor_service
 
-  async autoDoctorFlow(parentSpanInst, data: any = undefined, ...others) {
-    const spanInst = this.tracerService.createSpan(
-      'autoDoctorFlow',
-      parentSpanInst
-    );
-    let bh: any = {
-      input: {
-        data,
-      },
-      local: {
-        response: undefined,
-      },
-    };
-    try {
-      bh = this.sdService.__constructDefault(bh);
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_DeX9oH4ATtf4bHLu(bh, parentSpanInst);
-      //appendnew_next_autoDoctorFlow
-      return (
-        // formatting output variables
-        {
-          input: {},
-          local: {
-            response: bh.local.response,
-          },
-        }
-      );
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_uqFwMxCwDJ5tDqx3',
-        spanInst,
-        'autoDoctorFlow'
-      );
-    }
-  }
-
-  async loop(
-    parentSpanInst,
-    count = 0,
-    appointment_response: any = undefined,
-    ...others
-  ) {
-    const spanInst = this.tracerService.createSpan('loop', parentSpanInst);
-    let bh: any = {
-      input: {
-        count,
-        appointment_response,
-      },
-      local: {
-        response: undefined,
-      },
-    };
-    try {
-      bh = this.sdService.__constructDefault(bh);
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_kKsCxNDwbjGO2EN8(bh, parentSpanInst);
-      //appendnew_next_loop
-      return (
-        // formatting output variables
-        {
-          input: {},
-          local: {
-            response: bh.local.response,
-          },
-        }
-      );
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_SV5ZrnEwPUuV5qfr',
-        spanInst,
-        'loop'
-      );
-    }
-  }
-
   async autoDoctorSelect(parentSpanInst, data: any = undefined, ...others) {
     const spanInst = this.tracerService.createSpan(
       'autoDoctorSelect',
@@ -201,115 +121,6 @@ export class auto_doctor_service {
     }
   }
   //appendnew_flow_auto_doctor_service_start
-
-  async sd_DeX9oH4ATtf4bHLu(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_DeX9oH4ATtf4bHLu',
-      parentSpanInst
-    );
-    try {
-      const SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1OkInstance: SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok.get_appointment_flow =
-        SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok.get_appointment_flow.getInstance();
-      let outputVariables =
-        await SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1OkInstance.loop(
-          spanInst,
-          undefined,
-          bh.local.appointment_response
-        );
-      bh.local.response = outputVariables.local.response;
-
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_gfIE8YRpTJl5WRjy(bh, parentSpanInst);
-      //appendnew_next_sd_DeX9oH4ATtf4bHLu
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_DeX9oH4ATtf4bHLu',
-        spanInst,
-        'sd_DeX9oH4ATtf4bHLu'
-      );
-    }
-  }
-
-  async sd_gfIE8YRpTJl5WRjy(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_gfIE8YRpTJl5WRjy',
-      parentSpanInst
-    );
-    try {
-      console.log(bh.local.response);
-      console.log('bh.local.response');
-      this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_sd_gfIE8YRpTJl5WRjy
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_gfIE8YRpTJl5WRjy',
-        spanInst,
-        'sd_gfIE8YRpTJl5WRjy'
-      );
-    }
-  }
-
-  async sd_kKsCxNDwbjGO2EN8(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_kKsCxNDwbjGO2EN8',
-      parentSpanInst
-    );
-    try {
-      if (
-        this.sdService.operators['gt'](
-          bh.input.appointment_response.length,
-          bh.input.count,
-          undefined,
-          undefined
-        )
-      ) {
-      } else {
-        bh = await this.sd_QGGIaYdO6efbz6O2(bh, parentSpanInst);
-      }
-      this.tracerService.sendData(spanInst, bh);
-
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_kKsCxNDwbjGO2EN8',
-        spanInst,
-        'sd_kKsCxNDwbjGO2EN8'
-      );
-    }
-  }
-
-  async sd_QGGIaYdO6efbz6O2(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_QGGIaYdO6efbz6O2',
-      parentSpanInst
-    );
-    try {
-      bh.local.response = {
-        statusCode: 200,
-        data: bh.input.appointment_response,
-      };
-      console.log(bh.input.appointment_response);
-      this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_sd_QGGIaYdO6efbz6O2
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_QGGIaYdO6efbz6O2',
-        spanInst,
-        'sd_QGGIaYdO6efbz6O2'
-      );
-    }
-  }
 
   async statusErrorReport(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
@@ -374,7 +185,7 @@ export class auto_doctor_service {
       bh.local.doctor_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.doctorErrorHandler(bh, parentSpanInst);
+      bh = await this.sd_DhVyCYWHgkPpCUYX(bh, parentSpanInst);
       //appendnew_next_doctorFlow
       return bh;
     } catch (e) {
@@ -384,6 +195,63 @@ export class auto_doctor_service {
         'sd_d5UnEr9GfEY9f67J',
         spanInst,
         'doctorFlow'
+      );
+    }
+  }
+
+  async sd_DhVyCYWHgkPpCUYX(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_DhVyCYWHgkPpCUYX',
+      parentSpanInst
+    );
+    try {
+      if (
+        this.sdService.operators['gt'](
+          bh.local.doctor_response.data.length,
+          0,
+          undefined,
+          undefined
+        )
+      ) {
+        bh = await this.doctorErrorHandler(bh, parentSpanInst);
+      } else {
+        bh = await this.doctorErrorResponse(bh, parentSpanInst);
+      }
+      this.tracerService.sendData(spanInst, bh);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_DhVyCYWHgkPpCUYX',
+        spanInst,
+        'sd_DhVyCYWHgkPpCUYX'
+      );
+    }
+  }
+
+  async doctorErrorResponse(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'doctorErrorResponse',
+      parentSpanInst
+    );
+    try {
+      bh.local.response = {
+        statusCode: 200,
+        data: {},
+        selcted: {},
+      };
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_doctorErrorResponse
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_bmZgo3ZmXEJsschR',
+        spanInst,
+        'doctorErrorResponse'
       );
     }
   }
@@ -401,23 +269,23 @@ export class auto_doctor_service {
       }
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_3IpfcYH11kNvA2La(bh, parentSpanInst);
+      bh = await this.timeFinderFilter(bh, parentSpanInst);
       //appendnew_next_doctorErrorHandler
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_bmZgo3ZmXEJsschR',
+        'sd_ku4npc4boInEB59R',
         spanInst,
         'doctorErrorHandler'
       );
     }
   }
 
-  async sd_3IpfcYH11kNvA2La(bh, parentSpanInst) {
+  async timeFinderFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_3IpfcYH11kNvA2La',
+      'timeFinderFilter',
       parentSpanInst
     );
     try {
@@ -442,7 +310,7 @@ export class auto_doctor_service {
       console.log(bh.input.appoinmentfilter);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.getAutoData(bh, parentSpanInst);
-      //appendnew_next_sd_3IpfcYH11kNvA2La
+      //appendnew_next_timeFinderFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -450,7 +318,7 @@ export class auto_doctor_service {
         e,
         'sd_3IpfcYH11kNvA2La',
         spanInst,
-        'sd_3IpfcYH11kNvA2La'
+        'timeFinderFilter'
       );
     }
   }
@@ -498,7 +366,7 @@ export class auto_doctor_service {
       }
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_a1z6MZMvU9kRrMNR(bh, parentSpanInst);
+      bh = await this.dataManageAndOutput(bh, parentSpanInst);
       //appendnew_next_appointmentErrorHandler
       return bh;
     } catch (e) {
@@ -512,9 +380,9 @@ export class auto_doctor_service {
     }
   }
 
-  async sd_a1z6MZMvU9kRrMNR(bh, parentSpanInst) {
+  async dataManageAndOutput(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_a1z6MZMvU9kRrMNR',
+      'dataManageAndOutput',
       parentSpanInst
     );
     try {
@@ -551,7 +419,7 @@ export class auto_doctor_service {
       console.log(bh.local.response);
 
       this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_sd_a1z6MZMvU9kRrMNR
+      //appendnew_next_dataManageAndOutput
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -559,7 +427,7 @@ export class auto_doctor_service {
         e,
         'sd_a1z6MZMvU9kRrMNR',
         spanInst,
-        'sd_a1z6MZMvU9kRrMNR'
+        'dataManageAndOutput'
       );
     }
   }
