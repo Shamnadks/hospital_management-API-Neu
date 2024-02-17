@@ -302,7 +302,7 @@ export class auto_doctor_service {
       bh.input.appoinmentfilter = {
         columns: ['doctor_id', 'MAX(token_number) as max_token'],
         datas: {
-          appointment_date: ['2024-02-15'],
+          appointment_date: [bh.input.formattedDate],
           doctor_id: idArray,
         },
         groupby: ['doctor_id'],
@@ -394,21 +394,21 @@ export class auto_doctor_service {
         let appointmentItem = bh.local.appointment_response.find(
           (app) => app.doctor_id === doctorItem.id
         );
-        if (appointmentItem) {
-          let balanceToken = doctorItem.token_limit - appointmentItem.max_token;
-          results.push({
+        console.log(doctorItem?.token_limit);
+        let balanceToken = doctorItem?.token_limit;
+        balanceToken -= appointmentItem?.max_token || 0;
+        results.push({
+          id: doctorItem.id,
+          balanceToken: balanceToken,
+          ...doctorItem,
+        });
+        if (balanceToken > topBalanceToken) {
+          topBalanceToken = balanceToken;
+          topDoctor = {
             id: doctorItem.id,
             balanceToken: balanceToken,
             ...doctorItem,
-          });
-          if (balanceToken > topBalanceToken) {
-            topBalanceToken = balanceToken;
-            topDoctor = {
-              id: doctorItem.id,
-              balanceToken: balanceToken,
-              ...doctorItem,
-            };
-          }
+          };
         }
       }
       bh.local.response = {

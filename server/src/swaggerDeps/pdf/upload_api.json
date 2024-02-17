@@ -1,1 +1,24 @@
-{}
+{
+    "/uploadFile": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [
+                "multipart/form-data"
+            ],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "data",
+                    "description": "evrfdsax",
+                    "required": true
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "upload_api"
+            ]
+        }
+    }
+}
