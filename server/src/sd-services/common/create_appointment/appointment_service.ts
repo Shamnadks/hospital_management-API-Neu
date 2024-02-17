@@ -9,6 +9,7 @@ import log from '../../../utils/Logger'; //_splitter_
 import * as SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a from '../../appointments/create_appointment/create_appointment_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j from '../../appointments/filter_specfic/filter_specific_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from '../../doctors/filter_doctor/filter_doctor_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z from '../../pdf/upload_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_1utwBDtR9iw7QRXa from '../../users/create_user/create_user_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD from '../../users/filter_user/filter_user_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD from '../payment_req/payment_api'; //_splitter_
@@ -141,7 +142,6 @@ export class appointment_service {
         phone_no: [bh.input?.data?.phone_no],
         dob: [bh.input?.data?.dob],
       };
-      console.log(bh.input.filterdata);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.userFinder(bh, parentSpanInst);
       //appendnew_next_userFinderScript
@@ -173,7 +173,7 @@ export class appointment_service {
       bh.local.user_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_WBqhvQ6n1fXtslIT(bh, parentSpanInst);
+      bh = await this.userDublicateHandler(bh, parentSpanInst);
       //appendnew_next_userFinder
       return bh;
     } catch (e) {
@@ -183,28 +183,6 @@ export class appointment_service {
         'sd_2BVvyyNXnyldcxop',
         spanInst,
         'userFinder'
-      );
-    }
-  }
-
-  async sd_WBqhvQ6n1fXtslIT(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_WBqhvQ6n1fXtslIT',
-      parentSpanInst
-    );
-    try {
-      console.log(bh.local.user_response);
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.userDublicateHandler(bh, parentSpanInst);
-      //appendnew_next_sd_WBqhvQ6n1fXtslIT
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_WBqhvQ6n1fXtslIT',
-        spanInst,
-        'sd_WBqhvQ6n1fXtslIT'
       );
     }
   }
@@ -482,9 +460,8 @@ export class appointment_service {
       if (bh.local?.doctor_response?.token_limit < bh.local.token + 1) {
         throw new Error('Token Limit Exceed');
       }
-
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.appointment(bh, parentSpanInst);
+      bh = await this.sd_3qF86QE90JO9OGPH(bh, parentSpanInst);
       //appendnew_next_errorTokenLimit
       return bh;
     } catch (e) {
@@ -494,6 +471,36 @@ export class appointment_service {
         'sd_6Q5R0am0hoJaY6U1',
         spanInst,
         'errorTokenLimit'
+      );
+    }
+  }
+
+  async sd_3qF86QE90JO9OGPH(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_3qF86QE90JO9OGPH',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1ZInstance: SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z.upload_service =
+        SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z.upload_service.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1ZInstance.fileUploadUsingCloudinary(
+          spanInst,
+          bh.input.data.newFile
+        );
+      bh.local.uploaddata = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.appointment(bh, parentSpanInst);
+      //appendnew_next_sd_3qF86QE90JO9OGPH
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_3qF86QE90JO9OGPH',
+        spanInst,
+        'sd_3qF86QE90JO9OGPH'
       );
     }
   }
@@ -512,9 +519,9 @@ export class appointment_service {
         token_number: bh.local.token + 1,
         cash: bh.input?.data?.cash,
         age: bh.input.age,
+        url: bh.local?.uploaddata?.data?.url,
         status: bh.input.status,
       };
-      // console.log(bh.local.appointment)
       this.tracerService.sendData(spanInst, bh);
       bh = await this.appoinmentFlow(bh, parentSpanInst);
       //appendnew_next_appointment
@@ -602,7 +609,6 @@ export class appointment_service {
         sucess_url: bh.input.data?.sucess_url,
         cancel_url: bh.input.data?.cancel_url,
       };
-      console.log(bh.local.paymentdata);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_6oaugOlUcCsbWqNI(bh, parentSpanInst);
       //appendnew_next_paymentData
@@ -654,7 +660,6 @@ export class appointment_service {
       parentSpanInst
     );
     try {
-      console.log(bh.local.paymentresponse);
       if (bh.local.paymentresponse?.statusCode == 200) {
         bh.local.paymentresponse = bh.local.paymentresponse?.data;
       } else {

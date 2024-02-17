@@ -99,7 +99,7 @@ export class filter_doctor_api {
             next
           );
           let parentSpanInst = null;
-          bh = await this.sd_bAoAnjKoApT4gESB(bh, parentSpanInst);
+          bh = await this.filterDepartmentFlow(bh, parentSpanInst);
           //appendnew_next_sd_tdnWYSU7UxtMf9qn
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_tdnWYSU7UxtMf9qn');
@@ -116,33 +116,6 @@ export class filter_doctor_api {
   //   service flows_filter_doctor_api
 
   //appendnew_flow_filter_doctor_api_start
-
-  async sd_bAoAnjKoApT4gESB(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_bAoAnjKoApT4gESB',
-      parentSpanInst
-    );
-    try {
-      // console.log(bh,bh.input,"hiiiii")
-      // console.log("drtghbjk")
-      // console.log(bh)
-      // console.log(bh.input.body)
-      // console.log(bh.local.body)
-      // console.log(bh.local)
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.filterDepartmentFlow(bh, parentSpanInst);
-      //appendnew_next_sd_bAoAnjKoApT4gESB
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_bAoAnjKoApT4gESB',
-        spanInst,
-        'sd_bAoAnjKoApT4gESB'
-      );
-    }
-  }
 
   async filterDepartmentFlow(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(

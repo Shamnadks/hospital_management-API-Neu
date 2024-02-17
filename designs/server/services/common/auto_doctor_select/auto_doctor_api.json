@@ -54,8 +54,8 @@
         "outputs": 1,
         "validateRequestUsingSwaggerDocs": false,
         "category": "HTTP",
-        "x": 140,
-        "y": 300,
+        "x": 205,
+        "y": 80,
         "wires": [
             [
                 "sd_1vHDBTP4uqWTB67f"
@@ -73,8 +73,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "auto_doctor_api",
-        "functionName": "sd_w9bg918Za3ee5ogm",
-        "generated": false
+        "functionName": "sd_w9bg918Za3ee5ogm"
     },
     {
         "id": "sd_1vHDBTP4uqWTB67f",
@@ -126,17 +125,17 @@
         "accept_bh": false,
         "functionName": "selectDoctor",
         "category": "General",
-        "x": 305,
-        "y": 300,
+        "x": 370,
+        "y": 80,
         "wires": [
             [
                 "sd_Gr0L2UwcEywl9KWJ"
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "auto_doctor_api"
+        "serviceName": "auto_doctor_api",
+        "generated": true
     },
     {
         "id": "sd_Gr0L2UwcEywl9KWJ",
@@ -164,6 +163,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -182,8 +182,8 @@
         },
         "functionName": "sd_Gr0L2UwcEywl9KWJ",
         "category": "HTTP",
-        "x": 445,
-        "y": 300,
+        "x": 510,
+        "y": 80,
         "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,

@@ -30,6 +30,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "_DM_kxoe18g2p",
         "erdName": "hospital",
         "entity": "department",
@@ -58,7 +59,7 @@
         "y": 120,
         "wires": [
             [
-                "sd_bAoAnjKoApT4gESB"
+                "sd_hrzNagdoVJSblmOm"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -183,28 +184,6 @@
         "wires": [
             [
                 "sd_2lEfIThZi1GmM9pq"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "filter_doctor_api",
-        "generated": true
-    },
-    {
-        "id": "sd_bAoAnjKoApT4gESB",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "// console.log(bh,bh.input,\"hiiiii\")\n// console.log(\"drtghbjk\")\n// console.log(bh)\n// console.log(bh.input.body)\n// console.log(bh.local.body)\n// console.log(bh.local)",
-        "functionName": "sd_bAoAnjKoApT4gESB",
-        "category": "Function",
-        "x": 325,
-        "y": 120,
-        "wires": [
-            [
-                "sd_hrzNagdoVJSblmOm"
             ]
         ],
         "__n_excludedFromValidation__": {},

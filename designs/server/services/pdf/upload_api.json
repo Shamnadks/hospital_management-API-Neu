@@ -97,7 +97,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "upload_api",
-        "functionName": "sd_TWuSo0c1NEzdhOG5"
+        "functionName": "sd_TWuSo0c1NEzdhOG5",
+        "generated": false
     },
     {
         "id": "sd_MpbyQa8lj0bkqLgS",
@@ -209,9 +210,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "upload_api",
-        "generated": true
+        "serviceName": "upload_api"
     },
     {
         "id": "sd_lSLMbmXY7jBZsltp",

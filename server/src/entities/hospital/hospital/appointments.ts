@@ -30,4 +30,6 @@ export class appointments {
   cash: string;
   @Column({ name: 'status', nullable: false, type: 'text', primary: false })
   status: string;
+  @Column({ name: 'url', nullable: false, type: 'text', primary: false })
+  url: string;
 }
