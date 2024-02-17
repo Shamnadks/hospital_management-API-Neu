@@ -7,7 +7,7 @@ import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from './filter_doctor_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB from '../../filter/filterservice'; //_splitter_
 //append_imports_end
 export class filter_doctor_api {
   private sdService = new SDBaseService();
@@ -99,7 +99,7 @@ export class filter_doctor_api {
             next
           );
           let parentSpanInst = null;
-          bh = await this.filterDepartmentFlow(bh, parentSpanInst);
+          bh = await this.departmentFinderScript(bh, parentSpanInst);
           //appendnew_next_sd_tdnWYSU7UxtMf9qn
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_tdnWYSU7UxtMf9qn');
@@ -117,32 +117,57 @@ export class filter_doctor_api {
 
   //appendnew_flow_filter_doctor_api_start
 
-  async filterDepartmentFlow(bh, parentSpanInst) {
+  async departmentFinderScript(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'filterDepartmentFlow',
+      'departmentFinderScript',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance: SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service =
-        SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service.getInstance();
-      let outputVariables =
-        await SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance.getADoctor(
-          spanInst,
-          bh.input.body
-        );
-      bh.local.response = outputVariables.local.response;
-
+      bh.input.filterdata = {
+        tablename: 'doctors',
+        datas: { ...bh.input.body },
+      };
       this.tracerService.sendData(spanInst, bh);
-      await this.departmentHttpOut(bh, parentSpanInst);
-      //appendnew_next_filterDepartmentFlow
+      bh = await this.departmentFilter(bh, parentSpanInst);
+      //appendnew_next_departmentFinderScript
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_hrzNagdoVJSblmOm',
+        'sd_Kluq5isJjjSQXQDz',
         spanInst,
-        'filterDepartmentFlow'
+        'departmentFinderScript'
+      );
+    }
+  }
+
+  async departmentFilter(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'departmentFilter',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
+          spanInst,
+          bh.input.filterdata
+        );
+      bh.local.response = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      await this.departmentHttpOut(bh, parentSpanInst);
+      //appendnew_next_departmentFilter
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_w91mvKR9DmiwMo3c',
+        spanInst,
+        'departmentFilter'
       );
     }
   }

@@ -55,10 +55,10 @@
         "validateRequestUsingSwaggerDocs": false,
         "category": "HTTP",
         "x": 205,
-        "y": 100,
+        "y": 80,
         "wires": [
             [
-                "sd_8YFgzAL66WsGBuK8"
+                "sd_Jxfm1oAFGrCw7RMz"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -119,93 +119,9 @@
         },
         "functionName": "departmentHttpOut",
         "category": "HTTP",
-        "x": 565,
-        "y": 120,
+        "x": 605,
+        "y": 80,
         "wires": [],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "filter_department_api",
-        "generated": true
-    },
-    {
-        "id": "sd_7F6CWTQH2jTk6MXk",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "filter department flow",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5",
-            "type": "tab",
-            "createdDate": "2024-02-13T09:15:14.316Z",
-            "label": "filter_department_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_VXhTdZzj3e1Eobnq",
-            "flowName": "getADepartment"
-        },
-        "inputVariables": [
-            {
-                "key": "filter",
-                "map": true,
-                "valueType": "bh.input",
-                "value": "body"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "response",
-                "valueType": "bh.local",
-                "value": "response",
-                "mapVarName": "response",
-                "localVar": "bh.local.response"
-            }
-        ],
-        "callService": "./filter_department_service",
-        "startName": "getADepartment",
-        "inputParams": [
-            "bh.input.body"
-        ],
-        "accept_bh": false,
-        "functionName": "filterDepartmentFlow",
-        "category": "General",
-        "x": 425,
-        "y": 100,
-        "wires": [
-            [
-                "sd_h9APgiV2F0fMwZz2"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "filter_department_api",
-        "generated": true
-    },
-    {
-        "id": "sd_8YFgzAL66WsGBuK8",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "// console.log(bh,bh.input,\"hiiiii\")\n// console.log(\"drtghbjk\")\n// console.log(bh)\n// console.log(bh.input.body)\n// console.log(bh.local.body)\n// console.log(bh.local)",
-        "functionName": "sd_8YFgzAL66WsGBuK8",
-        "category": "Function",
-        "x": 325,
-        "y": 100,
-        "wires": [
-            [
-                "sd_7F6CWTQH2jTk6MXk"
-            ]
-        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "filter_department_api",
@@ -286,6 +202,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -307,6 +224,90 @@
         "x": 545,
         "y": 300,
         "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_Jxfm1oAFGrCw7RMz",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "department_finder_script ",
+        "script": "bh.input.filterdata={\n      \"tablename\":\"department\",\n     datas:{...bh.input.body}\n}",
+        "functionName": "departmentFinderScript",
+        "category": "Function",
+        "x": 325,
+        "y": 80,
+        "wires": [
+            [
+                "sd_N55t5d5Ymn733dRF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_department_api",
+        "generated": true
+    },
+    {
+        "id": "sd_N55t5d5Ymn733dRF",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_7PvugXUXmRHa3g0m",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "department_filter",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB",
+            "type": "tab",
+            "createdDate": "2024-02-17T18:43:47.614Z",
+            "label": "filterservice",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_wYU9zqSZwf22vVhQ",
+            "flowName": "filterSpecific"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "filterdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "../../filter/filterservice",
+        "startName": "filterSpecific",
+        "inputParams": [
+            "bh.input.filterdata"
+        ],
+        "accept_bh": false,
+        "functionName": "departmentFilter",
+        "category": "General",
+        "x": 465,
+        "y": 80,
+        "wires": [
+            [
+                "sd_h9APgiV2F0fMwZz2"
+            ]
+        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "filter_department_api",

@@ -3,12 +3,12 @@ let instance = null;
 //CORE_REFERENCE_IMPORTS
 //append_imports_start
 
-import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
-import { TracerService } from '../../../services/TracerService'; //_splitter_
-import log from '../../../utils/Logger'; //_splitter_
-import { GenericRDBMSOperations } from '../../../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
+import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
+import { TracerService } from '../../services/TracerService'; //_splitter_
+import log from '../../utils/Logger'; //_splitter_
+import { GenericRDBMSOperations } from '../../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
 //append_imports_end
-export class filter_department_service {
+export class filterservice {
   private sdService = new SDBaseService();
   private tracerService = new TracerService();
   private app;
@@ -24,7 +24,7 @@ export class filter_department_service {
     middlewareCall,
     globalTimers
   ) {
-    this.serviceName = 'filter_department_service';
+    this.serviceName = 'filterservice';
     this.app = app;
     this.serviceBasePath = this.app.settings.base;
     this.generatedMiddlewares = generatedeMiddlewares;
@@ -39,7 +39,7 @@ export class filter_department_service {
     globalTimers?
   ) {
     if (!instance) {
-      instance = new filter_department_service(
+      instance = new filterservice(
         app,
         generatedeMiddlewares,
         routeCall,
@@ -68,25 +68,23 @@ export class filter_department_service {
   }
 
   async mountTimers() {
-    //appendnew_flow_filter_department_service_TimerStart
+    //appendnew_flow_filterservice_TimerStart
   }
 
   private mountAllMiddlewares() {
-    log.debug(
-      'mounting all middlewares for service :: filter_department_service'
-    );
-    //appendnew_flow_filter_department_service_MiddlewareStart
+    log.debug('mounting all middlewares for service :: filterservice');
+    //appendnew_flow_filterservice_MiddlewareStart
   }
 
   private mountAllPaths() {
-    log.debug('mounting all paths for service :: filter_department_service');
-    //appendnew_flow_filter_department_service_HttpIn
+    log.debug('mounting all paths for service :: filterservice');
+    //appendnew_flow_filterservice_HttpIn
   }
-  //   service flows_filter_department_service
+  //   service flows_filterservice
 
-  async getADepartment(parentSpanInst, filter: any = undefined, ...others) {
+  async filterSpecific(parentSpanInst, filter: any = undefined, ...others) {
     const spanInst = this.tracerService.createSpan(
-      'getADepartment',
+      'filterSpecific',
       parentSpanInst
     );
     let bh: any = {
@@ -101,7 +99,7 @@ export class filter_department_service {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.psqlQuery(bh, parentSpanInst);
-      //appendnew_next_getADepartment
+      //appendnew_next_filterSpecific
       return (
         // formatting output variables
         {
@@ -115,62 +113,95 @@ export class filter_department_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_VXhTdZzj3e1Eobnq',
+        'sd_wYU9zqSZwf22vVhQ',
         spanInst,
-        'getADepartment'
+        'filterSpecific'
       );
     }
   }
-  //appendnew_flow_filter_department_service_start
+  //appendnew_flow_filterservice_start
 
   async psqlQuery(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan('psqlQuery', parentSpanInst);
     try {
-      bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.department`;
-      bh.local.queryvalues = [];
-      let keys = Object.keys(bh.input?.filter);
-      let count = 0;
-      if (keys?.length > 0) {
-        bh.local.query += ' where ';
-        keys.forEach((key, index) => {
-          bh.local.query += key + ` IN (`;
-          bh.input?.filter[key]?.forEach((element, index) => {
-            bh.local.query += `$${count + 1}`;
-            bh.local.queryvalues.push(element);
-            if (
-              bh.input?.filter[key]?.length > 1 &&
-              index < bh.input?.filter[key]?.length - 1
-            ) {
-              bh.local.query += ', ';
-            }
-            count++;
-          });
-          bh.local.query += `)`;
-          if (keys?.length > 1 && index < keys?.length - 1) {
-            bh.local.query += ' AND ';
-          }
-        });
+      let fields = '*';
+      let tablename = bh.input.filter?.tablename;
+      if (!tablename) {
+        throw new Error('something is missing');
       }
+      let sorttable = bh.input.filter?.sorttable;
+      let sorttype = bh.input.filter?.sorttype || `ASC`;
+      let limitdata = bh.input.filter?.limit;
+      let skip = bh.input.filter?.skip;
+      let filter = bh.input.filter?.datas;
+      let groupby = bh.input.filter?.groupby;
+      let joins = bh.input.filter?.joins;
+      if (bh.input.filter?.columns?.length > 0) {
+        fields = bh.input.filter?.columns?.join(',');
+      }
+      bh.local.query = `SELECT ${fields} FROM ${process.env.DB_SCHEMA}.${tablename}`;
+      if (joins?.length > 0) {
+        joins = joins.join(' ');
+        bh.local.query += ' ' + joins;
+      }
+      bh.local.queryvalues = [];
+      if (filter) {
+        let keys = Object.keys(filter);
+        let count = 0;
+        if (keys?.length > 0) {
+          bh.local.query += ' where ';
+          keys.forEach((key, index) => {
+            bh.local.query += key + ` IN (`;
+            filter?.[key]?.forEach((element, index) => {
+              bh.local.query += `$${count + 1}`;
+              bh.local.queryvalues.push(element);
+              if (
+                filter?.[key]?.length > 1 &&
+                index < filter?.[key]?.length - 1
+              ) {
+                bh.local.query += ', ';
+              }
+              count++;
+            });
+            bh.local.query += `)`;
+            if (keys.length > 1 && index < keys.length - 1) {
+              bh.local.query += ' AND ';
+            }
+          });
+        }
+      }
+
+      if (groupby?.length > 0) {
+        groupby = groupby.join(',');
+        bh.local.query += ' GROUP BY ' + groupby;
+      }
+      if (sorttable) {
+        bh.local.query += ' ORDER BY ' + sorttable + ' ' + sorttype;
+      }
+      if (skip) {
+        bh.local.query += ' OFFSET ' + skip;
+      }
+      if (limitdata) {
+        bh.local.query += ' LIMIT ' + limitdata + ' ;';
+      }
+      console.log(bh.local.query);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.getADepartmentSql(bh, parentSpanInst);
+      bh = await this.filterSql(bh, parentSpanInst);
       //appendnew_next_psqlQuery
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_OVB3PpxhHPWHIZZb',
+        'sd_va2THODFgUUyFSgg',
         spanInst,
         'psqlQuery'
       );
     }
   }
 
-  async getADepartmentSql(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'getADepartmentSql',
-      parentSpanInst
-    );
+  async filterSql(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('filterSql', parentSpanInst);
     try {
       let configObj = this.sdService.getConfigObj(
         'db-config',
@@ -195,15 +226,15 @@ export class filter_department_service {
       );
       this.tracerService.sendData(spanInst, bh);
       bh = await this.statusReport(bh, parentSpanInst);
-      //appendnew_next_getADepartmentSql
+      //appendnew_next_filterSql
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_E7nCKbCME3zEUYYq',
+        'sd_t35xgLVZGHUA56JD',
         spanInst,
-        'getADepartmentSql'
+        'filterSql'
       );
     }
   }
@@ -225,33 +256,9 @@ export class filter_department_service {
       return await this.errorHandler(
         bh,
         e,
-        'sd_1efLqyTwD34GA9lw',
+        'sd_XSjbiFD242UZz4Ns',
         spanInst,
         'statusReport'
-      );
-    }
-  }
-
-  async statusErrorReport(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'statusErrorReport',
-      parentSpanInst
-    );
-    try {
-      bh.local.response = {
-        statusCode: 400,
-        error: bh.error.message,
-      };
-      this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_statusErrorReport
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_YtT2vOXFlYztBOze',
-        spanInst,
-        'statusErrorReport'
       );
     }
   }
@@ -271,28 +278,11 @@ export class filter_department_service {
     bh.errorSource = src;
     bh.errorFunName = functionName;
     this.tracerService.sendData(parentSpanInst, bh, true);
-    if (
-      false ||
-      (await this.errorHandle(bh, parentSpanInst))
-      /*appendnew_next_Catch*/
-    ) {
-      return bh;
+    if (bh.web.next) {
+      bh.web.next(e);
     } else {
-      if (bh.web.next) {
-        bh.web.next(e);
-      } else {
-        throw e;
-      }
+      throw e;
     }
   }
-  async errorHandle(bh, parentSpanInst) {
-    const catchConnectedNodes = ['sd_YtT2vOXFlYztBOze'];
-    if (catchConnectedNodes.includes(bh.errorSource)) {
-      return false;
-    }
-    bh = await this.statusErrorReport(bh, parentSpanInst);
-    //appendnew_next_errorHandle
-    return true;
-  }
-  //appendnew_flow_filter_department_service_Catch
+  //appendnew_flow_filterservice_Catch
 }

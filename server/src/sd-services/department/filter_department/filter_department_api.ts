@@ -7,7 +7,7 @@ import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5 from './filter_department_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB from '../../filter/filterservice'; //_splitter_
 //append_imports_end
 export class filter_department_api {
   private sdService = new SDBaseService();
@@ -99,7 +99,7 @@ export class filter_department_api {
             next
           );
           let parentSpanInst = null;
-          bh = await this.sd_8YFgzAL66WsGBuK8(bh, parentSpanInst);
+          bh = await this.departmentFinderScript(bh, parentSpanInst);
           //appendnew_next_sd_OzHkZ6ljAaL9OqCE
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_OzHkZ6ljAaL9OqCE');
@@ -117,59 +117,57 @@ export class filter_department_api {
 
   //appendnew_flow_filter_department_api_start
 
-  async sd_8YFgzAL66WsGBuK8(bh, parentSpanInst) {
+  async departmentFinderScript(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_8YFgzAL66WsGBuK8',
+      'departmentFinderScript',
       parentSpanInst
     );
     try {
-      // console.log(bh,bh.input,"hiiiii")
-      // console.log("drtghbjk")
-      // console.log(bh)
-      // console.log(bh.input.body)
-      // console.log(bh.local.body)
-      // console.log(bh.local)
+      bh.input.filterdata = {
+        tablename: 'department',
+        datas: { ...bh.input.body },
+      };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.filterDepartmentFlow(bh, parentSpanInst);
-      //appendnew_next_sd_8YFgzAL66WsGBuK8
+      bh = await this.departmentFilter(bh, parentSpanInst);
+      //appendnew_next_departmentFinderScript
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_8YFgzAL66WsGBuK8',
+        'sd_Jxfm1oAFGrCw7RMz',
         spanInst,
-        'sd_8YFgzAL66WsGBuK8'
+        'departmentFinderScript'
       );
     }
   }
 
-  async filterDepartmentFlow(bh, parentSpanInst) {
+  async departmentFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'filterDepartmentFlow',
+      'departmentFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5Instance: SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5.filter_department_service =
-        SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5.filter_department_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_kxabzJtnUwVxiUP5Instance.getADepartment(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
-          bh.input.body
+          bh.input.filterdata
         );
       bh.local.response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
       await this.departmentHttpOut(bh, parentSpanInst);
-      //appendnew_next_filterDepartmentFlow
+      //appendnew_next_departmentFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_7F6CWTQH2jTk6MXk',
+        'sd_N55t5d5Ymn733dRF',
         spanInst,
-        'filterDepartmentFlow'
+        'departmentFilter'
       );
     }
   }

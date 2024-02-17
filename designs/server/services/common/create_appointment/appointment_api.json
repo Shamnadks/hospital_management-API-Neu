@@ -30,7 +30,6 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": true,
-        "uploadFileOptions": "",
         "erd": "_DM_zlf6ik8qk",
         "erdName": "",
         "entity": "",

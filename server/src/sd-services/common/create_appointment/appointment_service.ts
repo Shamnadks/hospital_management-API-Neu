@@ -7,11 +7,9 @@ import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
 import * as SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a from '../../appointments/create_appointment/create_appointment_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j from '../../appointments/filter_specfic/filter_specific_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from '../../doctors/filter_doctor/filter_doctor_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB from '../../filter/filterservice'; //_splitter_
 import * as SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z from '../../pdf/upload_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_1utwBDtR9iw7QRXa from '../../users/create_user/create_user_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD from '../../users/filter_user/filter_user_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_5uKBgMCMEY9EmeOD from '../payment_req/payment_api'; //_splitter_
 //append_imports_end
 export class appointment_service {
@@ -138,12 +136,15 @@ export class appointment_service {
     );
     try {
       bh.input.filterdata = {
-        name: [bh.input?.data?.name],
-        phone_no: [bh.input?.data?.phone_no],
-        dob: [bh.input?.data?.dob],
+        tablename: 'users',
+        datas: {
+          name: [bh.input?.data?.name],
+          phone_no: [bh.input?.data?.phone_no],
+          dob: [bh.input?.data?.dob],
+        },
       };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.userFinder(bh, parentSpanInst);
+      bh = await this.userFilter(bh, parentSpanInst);
       //appendnew_next_userFinderScript
       return bh;
     } catch (e) {
@@ -157,16 +158,16 @@ export class appointment_service {
     }
   }
 
-  async userFinder(bh, parentSpanInst) {
+  async userFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'userFinder',
+      'userFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_er58WUWxKEh6IEiDInstance: SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD.filter_user_service =
-        SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD.filter_user_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_er58WUWxKEh6IEiDInstance.getAUser(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
           bh.input.filterdata
         );
@@ -174,15 +175,15 @@ export class appointment_service {
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.userDublicateHandler(bh, parentSpanInst);
-      //appendnew_next_userFinder
+      //appendnew_next_userFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_2BVvyyNXnyldcxop',
+        'sd_8Exr912Zqy29uxvJ',
         spanInst,
-        'userFinder'
+        'userFilter'
       );
     }
   }
@@ -194,7 +195,7 @@ export class appointment_service {
     );
     try {
       if (
-        this.sdService.operators['eq'](
+        this.sdService.operators['gte'](
           bh.local.user_response.data.length,
           1,
           undefined,
@@ -292,17 +293,16 @@ export class appointment_service {
     );
     try {
       bh.input.filterdata = {
-        fields: ['token_number'],
-        sorttable: 'token_number',
-        sorttype: 'DESC',
-        limitdata: 1,
+        tablename: 'appointments',
+        columns: ['MAX(token_number) as token_number'],
         datas: {
           doctor_id: [bh.input?.data?.doctor_id],
           appointment_date: [bh.input.formattedDate],
         },
+        groupby: ['doctor_id'],
       };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.tokenFinder(bh, parentSpanInst);
+      bh = await this.appointmentTokenFilter(bh, parentSpanInst);
       //appendnew_next_tokenFinderScript
       return bh;
     } catch (e) {
@@ -316,16 +316,16 @@ export class appointment_service {
     }
   }
 
-  async tokenFinder(bh, parentSpanInst) {
+  async appointmentTokenFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'tokenFinder',
+      'appointmentTokenFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9jInstance: SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j.filter_specific_service =
-        SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j.filter_specific_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9jInstance.filterSpecific(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
           bh.input.filterdata
         );
@@ -333,15 +333,15 @@ export class appointment_service {
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.tokenErrorHandler(bh, parentSpanInst);
-      //appendnew_next_tokenFinder
+      //appendnew_next_appointmentTokenFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_eIn2Du6q9UffQloj',
+        'sd_OWspeXKLxlzgBAYN',
         spanInst,
-        'tokenFinder'
+        'appointmentTokenFilter'
       );
     }
   }
@@ -357,8 +357,9 @@ export class appointment_service {
       } else {
         throw new Error('Some error Occured try again later');
       }
+      console.log(bh.local.token);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.doctorScript(bh, parentSpanInst);
+      bh = await this.doctoScript(bh, parentSpanInst);
       //appendnew_next_tokenErrorHandler
       return bh;
     } catch (e) {
@@ -372,54 +373,62 @@ export class appointment_service {
     }
   }
 
-  async doctorScript(bh, parentSpanInst) {
+  async doctoScript(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'doctorScript',
+      'doctoScript',
       parentSpanInst
     );
     try {
-      bh.input.doctor = { id: [bh.input?.data?.doctor_id] };
+      bh.input.filterdata = {
+        tablename: 'doctors',
+        columns: [
+          `${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name`,
+        ],
+        datas: {
+          id: [bh.input.data?.doctor_id],
+        },
+      };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.doctorFlow(bh, parentSpanInst);
-      //appendnew_next_doctorScript
+      bh = await this.doctorFilter(bh, parentSpanInst);
+      //appendnew_next_doctoScript
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_tAQhvM7nzB5EbueV',
+        'sd_50OcWwyndouCjK7H',
         spanInst,
-        'doctorScript'
+        'doctoScript'
       );
     }
   }
 
-  async doctorFlow(bh, parentSpanInst) {
+  async doctorFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'doctorFlow',
+      'doctorFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance: SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service =
-        SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance.getADoctor(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
-          bh.input.doctor
+          bh.input.filterdata
         );
       bh.local.doctor_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.doctorErrorHandler(bh, parentSpanInst);
-      //appendnew_next_doctorFlow
+      //appendnew_next_doctorFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_zGDGZFelERRd0H7I',
+        'sd_lijNWtD0R1mGyp8d',
         spanInst,
-        'doctorFlow'
+        'doctorFilter'
       );
     }
   }
@@ -461,7 +470,7 @@ export class appointment_service {
         throw new Error('Token Limit Exceed');
       }
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_3qF86QE90JO9OGPH(bh, parentSpanInst);
+      bh = await this.fileUpload(bh, parentSpanInst);
       //appendnew_next_errorTokenLimit
       return bh;
     } catch (e) {
@@ -475,9 +484,9 @@ export class appointment_service {
     }
   }
 
-  async sd_3qF86QE90JO9OGPH(bh, parentSpanInst) {
+  async fileUpload(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_3qF86QE90JO9OGPH',
+      'fileUpload',
       parentSpanInst
     );
     try {
@@ -492,7 +501,7 @@ export class appointment_service {
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.appointment(bh, parentSpanInst);
-      //appendnew_next_sd_3qF86QE90JO9OGPH
+      //appendnew_next_fileUpload
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -500,7 +509,7 @@ export class appointment_service {
         e,
         'sd_3qF86QE90JO9OGPH',
         spanInst,
-        'sd_3qF86QE90JO9OGPH'
+        'fileUpload'
       );
     }
   }
@@ -610,7 +619,7 @@ export class appointment_service {
         cancel_url: bh.input.data?.cancel_url,
       };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_6oaugOlUcCsbWqNI(bh, parentSpanInst);
+      bh = await this.paymentService(bh, parentSpanInst);
       //appendnew_next_paymentData
       return bh;
     } catch (e) {
@@ -624,9 +633,9 @@ export class appointment_service {
     }
   }
 
-  async sd_6oaugOlUcCsbWqNI(bh, parentSpanInst) {
+  async paymentService(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_6oaugOlUcCsbWqNI',
+      'paymentService',
       parentSpanInst
     );
     try {
@@ -641,7 +650,7 @@ export class appointment_service {
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.paymentErrorHandler(bh, parentSpanInst);
-      //appendnew_next_sd_6oaugOlUcCsbWqNI
+      //appendnew_next_paymentService
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -649,7 +658,7 @@ export class appointment_service {
         e,
         'sd_6oaugOlUcCsbWqNI',
         spanInst,
-        'sd_6oaugOlUcCsbWqNI'
+        'paymentService'
       );
     }
   }

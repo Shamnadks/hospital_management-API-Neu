@@ -6,8 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j from '../../appointments/filter_specfic/filter_specific_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from '../../doctors/filter_doctor/filter_doctor_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB from '../../filter/filterservice'; //_splitter_
 //append_imports_end
 export class auto_doctor_service {
   private sdService = new SDBaseService();
@@ -152,10 +151,17 @@ export class auto_doctor_service {
       parentSpanInst
     );
     try {
-      bh.input.doctor = { department_id: [bh.input.data] };
-      console.log(bh.input.doctor);
+      bh.input.filterdata = {
+        tablename: 'doctors',
+        columns: [
+          `${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name`,
+        ],
+        datas: {
+          department_id: [bh.input.data],
+        },
+      };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.doctorFlow(bh, parentSpanInst);
+      bh = await this.doctorFilter(bh, parentSpanInst);
       //appendnew_next_doctoScript
       return bh;
     } catch (e) {
@@ -169,32 +175,32 @@ export class auto_doctor_service {
     }
   }
 
-  async doctorFlow(bh, parentSpanInst) {
+  async doctorFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'doctorFlow',
+      'doctorFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance: SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service =
-        SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance.getADoctor(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
-          bh.input.doctor
+          bh.input.filterdata
         );
       bh.local.doctor_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_DhVyCYWHgkPpCUYX(bh, parentSpanInst);
-      //appendnew_next_doctorFlow
+      //appendnew_next_doctorFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_d5UnEr9GfEY9f67J',
+        'sd_lv5TdXG2PfceJn8T',
         spanInst,
-        'doctorFlow'
+        'doctorFilter'
       );
     }
   }
@@ -296,10 +302,9 @@ export class auto_doctor_service {
       bh.input.formattedDate = `${year}-${month < 10 ? '0' + month : month}-${
         day < 10 ? '0' + day : day
       }`;
-      console.log(bh.local?.doctor_response);
       let idArray = bh.local?.doctor_response?.map((doc) => doc.id);
-      console.log(idArray);
       bh.input.appoinmentfilter = {
+        tablename: 'appointments',
         columns: ['doctor_id', 'MAX(token_number) as max_token'],
         datas: {
           appointment_date: [bh.input.formattedDate],
@@ -307,9 +312,8 @@ export class auto_doctor_service {
         },
         groupby: ['doctor_id'],
       };
-      console.log(bh.input.appoinmentfilter);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.getAutoData(bh, parentSpanInst);
+      bh = await this.tokenFilter(bh, parentSpanInst);
       //appendnew_next_timeFinderFilter
       return bh;
     } catch (e) {
@@ -323,16 +327,16 @@ export class auto_doctor_service {
     }
   }
 
-  async getAutoData(bh, parentSpanInst) {
+  async tokenFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'getAutoData',
+      'tokenFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9jInstance: SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j.filter_specific_service =
-        SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j.filter_specific_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9jInstance.filterSpecific(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
           bh.input.appoinmentfilter
         );
@@ -340,15 +344,15 @@ export class auto_doctor_service {
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.appointmentErrorHandler(bh, parentSpanInst);
-      //appendnew_next_getAutoData
+      //appendnew_next_tokenFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_M9Hf5Mj34D1cAB3E',
+        'sd_yVIelUS1QZYySz6S',
         spanInst,
-        'getAutoData'
+        'tokenFilter'
       );
     }
   }
