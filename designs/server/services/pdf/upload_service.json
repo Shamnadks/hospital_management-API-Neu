@@ -41,17 +41,14 @@
         "script": "\nbh.local.cloudinary = require('cloudinary')\n\nbh.local.data={};\n// cloudinary Configuration \nbh.local.cloudinary.config({\n  cloud_name: process.env.CD_NAME,\n  api_key: process.env.CD_API_KEY,\n  api_secret: process.env.CD_API_SECRET\n});\n\nlet uploadPromise = new Promise((resolve) => {\n    bh.local.cloudinary.v2.uploader.upload_stream((error, uploadResult) => {\n         if (error) {\n            reject(error);\n        } else {\n            resolve(uploadResult);\n        }\n    }).end(bh.input.file);\n})\nlet uploadResult = await uploadPromise;\n        // Assigning data to rafh\nbh.local.data = uploadResult;\nconsole.log(bh.local.data)\n       ",
         "functionName": "sd_f2tNU0J51OFa6LCY",
         "category": "Function",
-        "x": 385,
-        "y": 120,
+        "x": 345,
+        "y": 260,
         "wires": [
-            [
-                "sd_8TLVnvrRSr6Kwcio"
-            ]
+            []
         ],
         "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "upload_service",
-        "generated": true
+        "generateNext": true,
+        "serviceName": "upload_service"
     },
     {
         "id": "sd_07iEQZ9DJSG3sXxR",
@@ -88,11 +85,53 @@
         "y": 120,
         "wires": [
             [
-                "sd_f2tNU0J51OFa6LCY"
+                "sd_geGBaexLpLBzeHCj"
             ]
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "upload_service"
+    },
+    {
+        "id": "sd_geGBaexLpLBzeHCj",
+        "type": "adf754bb-d0d5-6047-e7bd-27bf1b569fc7",
+        "z": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "fileupload",
+        "cloudinaryConfig": "sd_3B0fozcxSfLJ8EBg",
+        "file": "bh.input.file",
+        "folder": "\"upload\"",
+        "resultMapping": "bh.local.data",
+        "functionName": "fileupload",
+        "category": "General",
+        "x": 425,
+        "y": 120,
+        "wires": [
+            [
+                "sd_8TLVnvrRSr6Kwcio"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "file": {
+                "type": "bh.input",
+                "value": "file",
+                "constant": false
+            },
+            "folder": {
+                "type": "str",
+                "value": "upload",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "data",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "upload_service",
+        "generated": true
     }
 ]

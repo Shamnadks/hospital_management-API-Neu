@@ -3,6 +3,7 @@ let instance = null;
 //CORE_REFERENCE_IMPORTS
 //append_imports_start
 
+import * as cloudinary from 'cloudinary'; //_splitter_
 import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../services/TracerService'; //_splitter_
 import log from '../../utils/Logger'; //_splitter_
@@ -101,7 +102,7 @@ export class upload_service {
     try {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_f2tNU0J51OFa6LCY(bh, parentSpanInst);
+      bh = await this.fileupload(bh, parentSpanInst);
       //appendnew_next_fileUploadUsingCloudinary
       return (
         // formatting output variables
@@ -124,49 +125,38 @@ export class upload_service {
   }
   //appendnew_flow_upload_service_start
 
-  async sd_f2tNU0J51OFa6LCY(bh, parentSpanInst) {
+  async fileupload(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_f2tNU0J51OFa6LCY',
+      'fileupload',
       parentSpanInst
     );
     try {
-      bh.local.cloudinary = require('cloudinary');
+      let configObj = this.sdService.getConfigObj(
+        '983957c2-2197-2304-3ba8-02c9a111cd9d',
+        'sd_3B0fozcxSfLJ8EBg'
+      );
 
-      bh.local.data = {};
-      // cloudinary Configuration
-      bh.local.cloudinary.config({
-        cloud_name: process.env.CD_NAME,
-        api_key: process.env.CD_API_KEY,
-        api_secret: process.env.CD_API_SECRET,
+      cloudinary.v2.config({
+        cloud_name: configObj.cloud_name,
+        api_key: configObj.api_key,
+        api_secret: configObj.api_secret,
       });
 
-      let uploadPromise = new Promise((resolve) => {
-        bh.local.cloudinary.v2.uploader
-          .upload_stream((error, uploadResult) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(uploadResult);
-            }
-          })
-          .end(bh.input.file);
+      bh.local.data = await cloudinary.v2.uploader.upload(bh.input.file, {
+        folder: 'upload',
       });
-      let uploadResult = await uploadPromise;
-      // Assigning data to rafh
-      bh.local.data = uploadResult;
-      console.log(bh.local.data);
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_8TLVnvrRSr6Kwcio(bh, parentSpanInst);
-      //appendnew_next_sd_f2tNU0J51OFa6LCY
+      //appendnew_next_fileupload
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_f2tNU0J51OFa6LCY',
+        'sd_geGBaexLpLBzeHCj',
         spanInst,
-        'sd_f2tNU0J51OFa6LCY'
+        'fileupload'
       );
     }
   }

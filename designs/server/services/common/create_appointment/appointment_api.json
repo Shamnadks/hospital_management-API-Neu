@@ -30,6 +30,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": true,
+        "uploadFileOptions": "",
         "erd": "_DM_zlf6ik8qk",
         "erdName": "",
         "entity": "",
@@ -64,7 +65,7 @@
         "y": 80,
         "wires": [
             [
-                "sd_hjo0XAxNzyyBcAo6"
+                "sd_HZxUST9U2c5JQ9Nq"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -129,28 +130,6 @@
         "x": 905,
         "y": 80,
         "wires": [],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "appointment_api",
-        "generated": true
-    },
-    {
-        "id": "sd_hjo0XAxNzyyBcAo6",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_xBgpGrAxrMfgsKKs",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "// if(bh.input.body?.name?.trim()?.length){  \n// }\n// throw new Error(\"Enter some task\");\nconsole.log(bh.input.body)",
-        "functionName": "sd_hjo0XAxNzyyBcAo6",
-        "category": "Function",
-        "x": 425,
-        "y": 80,
-        "wires": [
-            [
-                "sd_HZxUST9U2c5JQ9Nq"
-            ]
-        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "appointment_api",
