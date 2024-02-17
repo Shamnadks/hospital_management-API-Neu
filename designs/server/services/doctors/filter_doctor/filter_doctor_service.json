@@ -39,7 +39,6 @@
         "nodeType": "flow",
         "name": "get_a_doctor_sql",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
-        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "resultdata"
@@ -51,7 +50,6 @@
         },
         "inputs": 1,
         "outputs": 1,
-        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "queryvalues"
@@ -78,7 +76,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "psql_query",
-        "script": "bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.doctors`\nbh.local.queryvalues=[]\nlet keys = Object.keys(bh.input.filter);\nlet count=0;\nif(keys.length>0){\n    bh.local.query+=' where '\n    keys.forEach((key, index) => {\n        bh.local.query+=key+` IN (`;\n        bh.input.filter[key].forEach((element, index)=>{\n            bh.local.query+= `$${count+1}`\n            bh.local.queryvalues.push(element)\n            if (bh.input.filter[key].length > 1 && index < bh.input.filter[key].length - 1) {\n                bh.local.query += \", \"\n            }\n            count ++;\n        })\n           bh.local.query+=`)`;  \n        if (keys.length > 1 && index < keys.length - 1) {\n            bh.local.query += \" AND \"\n        }\n})\n}",
+        "script": "bh.local.query = `SELECT ${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name FROM ${process.env.DB_SCHEMA}.doctors`\nbh.local.queryvalues=[]\nlet keys = Object.keys(bh.input?.filter);\nlet count=0;\nif(keys?.length>0){\n    bh.local.query+=' where '\n    keys.forEach((key, index) => {\n        bh.local.query+=key+` IN (`;\n        bh.input?.filter[key]?.forEach((element, index)=>{\n            bh.local.query+= `$${count+1}`\n            bh.local.queryvalues.push(element)\n            if (bh.input?.filter[key]?.length > 1 && index < bh.input?.filter[key]?.length - 1) {\n                bh.local.query += \", \"\n            }\n            count ++;\n        })\n           bh.local.query+=`)`;  \n        if (keys.length > 1 && index < keys.length - 1) {\n            bh.local.query += \" AND \"\n        }\n})\n}",
         "functionName": "psqlQuery",
         "category": "Function",
         "x": 285,

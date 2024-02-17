@@ -124,20 +124,20 @@ export class filter_doctor_service {
   async psqlQuery(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan('psqlQuery', parentSpanInst);
     try {
-      bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.doctors`;
+      bh.local.query = `SELECT ${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name FROM ${process.env.DB_SCHEMA}.doctors`;
       bh.local.queryvalues = [];
-      let keys = Object.keys(bh.input.filter);
+      let keys = Object.keys(bh.input?.filter);
       let count = 0;
-      if (keys.length > 0) {
+      if (keys?.length > 0) {
         bh.local.query += ' where ';
         keys.forEach((key, index) => {
           bh.local.query += key + ` IN (`;
-          bh.input.filter[key].forEach((element, index) => {
+          bh.input?.filter[key]?.forEach((element, index) => {
             bh.local.query += `$${count + 1}`;
             bh.local.queryvalues.push(element);
             if (
-              bh.input.filter[key].length > 1 &&
-              index < bh.input.filter[key].length - 1
+              bh.input?.filter[key]?.length > 1 &&
+              index < bh.input?.filter[key]?.length - 1
             ) {
               bh.local.query += ', ';
             }

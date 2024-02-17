@@ -1,0 +1,14 @@
+[
+    {
+        "type": "tab",
+        "id": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "disabled": false,
+        "info": "",
+        "label": "upload_api",
+        "createdDate": "2024-02-17T06:58:32.850Z",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "upload_api",
+        "relativeParentPath": "pdf"
+    }
+]

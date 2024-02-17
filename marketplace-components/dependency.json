@@ -727,6 +727,124 @@
                     }
                 }
             ]
+        },
+        {
+            "_id": "63844c209ae56c8d62a75f24",
+            "name": "neutrinos-delivery-cloudinary",
+            "averageRating": 0,
+            "description": "Cloudinary Upload Plugin",
+            "devid": "a6c3a0c8-a071-561c-c8a2-daa874c12e91",
+            "displayName": "Cloudinary_Beta",
+            "lastUpdated": "2022-11-28T05:50:24.025Z",
+            "numberOfDownloads": 0,
+            "packageType": [
+                "studio-nodes"
+            ],
+            "platformSupportVersion": "8.3.1",
+            "pluginImage": "neutrinos-delivery-cloudinary-1667982960044.jpg",
+            "publisher": "Neutrinos-TechVentures",
+            "uploadedDate": "2022-11-28T05:50:24.025Z",
+            "username": "supreeth.m.s@neutrinos.co",
+            "version": "1.0.0",
+            "versions": {
+                "1.0.0": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-delivery-cloudinary",
+                            "displayName": "Cloudinary_Beta",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.0",
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "983957c2-2197-2304-3ba8-02c9a111cd9d",
+                                        "displayName": "CloudinaryFileUploadConfig"
+                                    },
+                                    {
+                                        "name": "adf754bb-d0d5-6047-e7bd-27bf1b569fc7",
+                                        "displayName": "CloudinaryFileUpload",
+                                        "dependencies": [
+                                            {
+                                                "name": "cloudinary",
+                                                "version": "1.32.0"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "68b9efc6-900e-66b4-d48a-2f6f8f8a8c75",
+                                        "displayName": "CloudinaryUnsignedFileUpload"
+                                    }
+                                ]
+                            },
+                            "packageDependencies": {
+                                "cloudinary": "1.32.0"
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "8.3.1"
+                    },
+                    "metadata": {
+                        "devid": "a6c3a0c8-a071-561c-c8a2-daa874c12e91",
+                        "name": "neutrinos-delivery-cloudinary",
+                        "displayName": "Cloudinary_Beta",
+                        "version": "1.0.0",
+                        "username": "supreeth.m.s@neutrinos.co",
+                        "publisher": "Neutrinos-TechVentures",
+                        "platformSupportVersion": {
+                            "min": "8.3.1"
+                        },
+                        "description": "Cloudinary Upload Plugin",
+                        "pluginImage": "neutrinos-delivery-cloudinary-1667982960044.jpg"
+                    },
+                    "version": "1.0.0"
+                }
+            },
+            "archiveFile": "api/zips/undefined",
+            "guide": "63844c21a65114001a9f2f9b",
+            "icon": "api/resource/icons/63844c20a65114001a9f2f91",
+            "screenshots": [
+                "api/resource/screenshots/63844c20a65114001a9f2f93",
+                "api/resource/screenshots/63844c20a65114001a9f2f95",
+                "api/resource/screenshots/63844c20a65114001a9f2f97",
+                "api/resource/screenshots/63844c21a65114001a9f2f99"
+            ],
+            "no_of_downloads_by_packages": {
+                "neutrinos-delivery-cloudinary": 17
+            },
+            "dependencies": [
+                {
+                    "name": "neutrinos-delivery-cloudinary",
+                    "displayName": "Cloudinary_Beta",
+                    "packageType": "studio-nodes",
+                    "version": "1.0.0",
+                    "nodes": {
+                        "server": [
+                            {
+                                "name": "983957c2-2197-2304-3ba8-02c9a111cd9d",
+                                "displayName": "CloudinaryFileUploadConfig"
+                            },
+                            {
+                                "name": "adf754bb-d0d5-6047-e7bd-27bf1b569fc7",
+                                "displayName": "CloudinaryFileUpload",
+                                "dependencies": [
+                                    {
+                                        "name": "cloudinary",
+                                        "version": "1.32.0"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "68b9efc6-900e-66b4-d48a-2f6f8f8a8c75",
+                                "displayName": "CloudinaryUnsignedFileUpload"
+                            }
+                        ]
+                    },
+                    "packageDependencies": {
+                        "cloudinary": "1.32.0"
+                    }
+                }
+            ]
         }
     ]
 }

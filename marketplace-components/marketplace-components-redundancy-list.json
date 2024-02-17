@@ -1002,5 +1002,73 @@
                 }
             ]
         }
+    },
+    "63844c209ae56c8d62a75f24": {
+        "name": "63844c209ae56c8d62a75f24",
+        "version": "1.0.0",
+        "packageType": [
+            "studio-nodes"
+        ],
+        "deps": {
+            "neutrinos-delivery-cloudinary": {
+                "name": "neutrinos-delivery-cloudinary",
+                "version": "1.0.0",
+                "packageType": "studio-nodes",
+                "nodes": {
+                    "server": [
+                        {
+                            "name": "983957c2-2197-2304-3ba8-02c9a111cd9d",
+                            "displayName": "CloudinaryFileUploadConfig"
+                        },
+                        {
+                            "name": "adf754bb-d0d5-6047-e7bd-27bf1b569fc7",
+                            "displayName": "CloudinaryFileUpload",
+                            "dependencies": [
+                                {
+                                    "name": "cloudinary",
+                                    "version": "1.32.0"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "68b9efc6-900e-66b4-d48a-2f6f8f8a8c75",
+                            "displayName": "CloudinaryUnsignedFileUpload"
+                        }
+                    ]
+                }
+            }
+        },
+        "parentDeps": {}
+    },
+    "neutrinos-delivery-cloudinary": {
+        "name": "neutrinos-delivery-cloudinary",
+        "version": "1.0.0",
+        "packageType": "studio-nodes",
+        "deps": {},
+        "parentDeps": {
+            "63844c209ae56c8d62a75f24": "1.0.0"
+        },
+        "nodes": {
+            "server": [
+                {
+                    "name": "983957c2-2197-2304-3ba8-02c9a111cd9d",
+                    "displayName": "CloudinaryFileUploadConfig"
+                },
+                {
+                    "name": "adf754bb-d0d5-6047-e7bd-27bf1b569fc7",
+                    "displayName": "CloudinaryFileUpload",
+                    "dependencies": [
+                        {
+                            "name": "cloudinary",
+                            "version": "1.32.0"
+                        }
+                    ]
+                },
+                {
+                    "name": "68b9efc6-900e-66b4-d48a-2f6f8f8a8c75",
+                    "displayName": "CloudinaryUnsignedFileUpload"
+                }
+            ]
+        }
     }
 }

@@ -1,4 +1,6 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-upload_api-SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z
+import { upload_api as SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z } from './sd-services/pdf/upload_api';
 //CORE_REFERENCE_IMPORT-auto_doctor_service-SSD_SERVICE_ID_sd_bthY8bjd638CxsCf
 import { auto_doctor_service as SSD_SERVICE_ID_sd_bthY8bjd638CxsCf } from './sd-services/common/auto_doctor_select/auto_doctor_service';
 //CORE_REFERENCE_IMPORT-auto_doctor_api-SSD_SERVICE_ID_sd_ta2UPnAaBavHfvQ8
@@ -74,6 +76,8 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-upload_api-SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z
+SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-auto_doctor_service-SSD_SERVICE_ID_sd_bthY8bjd638CxsCf
 SSD_SERVICE_ID_sd_bthY8bjd638CxsCf,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-auto_doctor_api-SSD_SERVICE_ID_sd_ta2UPnAaBavHfvQ8
