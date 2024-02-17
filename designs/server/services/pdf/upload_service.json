@@ -1,0 +1,98 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "type": "tab",
+        "createdDate": "2024-02-17T06:58:32.850Z",
+        "label": "upload_service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "upload_service",
+        "relativeParentPath": "pdf"
+    },
+    {
+        "id": "sd_8TLVnvrRSr6Kwcio",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.local.data,\"trvrfcsd\")\nbh.local.response={\n    statusCode:200,\n    data:bh.local.data,\n}",
+        "functionName": "sd_8TLVnvrRSr6Kwcio",
+        "category": "Function",
+        "x": 645,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "upload_service",
+        "generated": true
+    },
+    {
+        "id": "sd_f2tNU0J51OFa6LCY",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\nbh.local.cloudinary = require('cloudinary')\n\nbh.local.data={};\n// cloudinary Configuration \nbh.local.cloudinary.config({\n  cloud_name: process.env.CD_NAME,\n  api_key: process.env.CD_API_KEY,\n  api_secret: process.env.CD_API_SECRET\n});\n\nlet uploadPromise = new Promise((resolve) => {\n    bh.local.cloudinary.v2.uploader.upload_stream((error, uploadResult) => {\n         if (error) {\n            reject(error);\n        } else {\n            resolve(uploadResult);\n        }\n    }).end(bh.input.file);\n})\nlet uploadResult = await uploadPromise;\n        // Assigning data to rafh\nbh.local.data = uploadResult;\nconsole.log(bh.local.data)\n       ",
+        "functionName": "sd_f2tNU0J51OFa6LCY",
+        "category": "Function",
+        "x": 385,
+        "y": 120,
+        "wires": [
+            [
+                "sd_8TLVnvrRSr6Kwcio"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "upload_service",
+        "generated": true
+    },
+    {
+        "id": "sd_07iEQZ9DJSG3sXxR",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "file_upload_using_cloudinary",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "file",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "fileUploadUsingCloudinary",
+        "category": "General",
+        "x": 240,
+        "y": 120,
+        "wires": [
+            [
+                "sd_f2tNU0J51OFa6LCY"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "upload_service"
+    }
+]

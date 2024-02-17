@@ -668,5 +668,36 @@ export default {
             },
             "__n_excludedFromValidation__": {}
         }
+    },
+    "983957c2-2197-2304-3ba8-02c9a111cd9d": {
+        "sd_3B0fozcxSfLJ8EBg": {
+            "id": "sd_3B0fozcxSfLJ8EBg",
+            "type": "983957c2-2197-2304-3ba8-02c9a111cd9d",
+            "viewType": "server",
+            "nodeType": "flow",
+            "name": "pdf_upload_cloudinary",
+            "cloud_name": process.env.CD_NAME,
+            "api_key": process.env.CD_API_KEY,
+            "api_secret": process.env.CD_API_SECRET,
+            "category": "config",
+            "__ssdTypeInputs__": {
+                "cloud_name": {
+                    "type": "process.env",
+                    "value": "CD_NAME",
+                    "constant": false
+                },
+                "api_key": {
+                    "type": "process.env",
+                    "value": "CD_API_KEY",
+                    "constant": false
+                },
+                "api_secret": {
+                    "type": "process.env",
+                    "value": "CD_API_SECRET",
+                    "constant": false
+                }
+            },
+            "__n_excludedFromValidation__": {}
+        }
     }
 }

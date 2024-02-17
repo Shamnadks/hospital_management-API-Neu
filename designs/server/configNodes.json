@@ -668,5 +668,36 @@
             },
             "__n_excludedFromValidation__": {}
         }
+    },
+    "983957c2-2197-2304-3ba8-02c9a111cd9d": {
+        "sd_3B0fozcxSfLJ8EBg": {
+            "id": "sd_3B0fozcxSfLJ8EBg",
+            "type": "983957c2-2197-2304-3ba8-02c9a111cd9d",
+            "viewType": "server",
+            "nodeType": "flow",
+            "name": "pdf_upload_cloudinary",
+            "cloud_name": "__ssd__env__process.env.CD_NAME__ssd__env__end",
+            "api_key": "__ssd__env__process.env.CD_API_KEY__ssd__env__end",
+            "api_secret": "__ssd__env__process.env.CD_API_SECRET__ssd__env__end",
+            "category": "config",
+            "__ssdTypeInputs__": {
+                "cloud_name": {
+                    "type": "process.env",
+                    "value": "CD_NAME",
+                    "constant": false
+                },
+                "api_key": {
+                    "type": "process.env",
+                    "value": "CD_API_KEY",
+                    "constant": false
+                },
+                "api_secret": {
+                    "type": "process.env",
+                    "value": "CD_API_SECRET",
+                    "constant": false
+                }
+            },
+            "__n_excludedFromValidation__": {}
+        }
     }
 }

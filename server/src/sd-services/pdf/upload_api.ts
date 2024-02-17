@@ -3,9 +3,11 @@ let instance = null;
 //CORE_REFERENCE_IMPORTS
 //append_imports_start
 
+import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../services/TracerService'; //_splitter_
 import log from '../../utils/Logger'; //_splitter_
+import * as SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z from './upload_service'; //_splitter_
 //append_imports_end
 export class upload_api {
   private sdService = new SDBaseService();
@@ -77,11 +79,110 @@ export class upload_api {
 
   private mountAllPaths() {
     log.debug('mounting all paths for service :: upload_api');
+
+    this.app['post'](
+      `${this.serviceBasePath}/uploadFile`,
+      cookieParser(),
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'pre',
+        this.generatedMiddlewares
+      ),
+      this.sdService.multipartParser({
+        type: 'path',
+        options: [{ name: 'newFile', maxCount: 1 }],
+      }),
+
+      async (req, res, next) => {
+        let bh: any = {};
+        try {
+          bh = this.sdService.__constructDefault(
+            { local: {}, input: {} },
+            req,
+            res,
+            next
+          );
+          let parentSpanInst = null;
+          bh = await this.sd_lSLMbmXY7jBZsltp(bh, parentSpanInst);
+          //appendnew_next_sd_TWuSo0c1NEzdhOG5
+        } catch (e) {
+          return await this.errorHandler(bh, e, 'sd_TWuSo0c1NEzdhOG5');
+        }
+      },
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'post',
+        this.generatedMiddlewares
+      )
+    );
     //appendnew_flow_upload_api_HttpIn
   }
   //   service flows_upload_api
 
   //appendnew_flow_upload_api_start
+
+  async sd_lSLMbmXY7jBZsltp(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_lSLMbmXY7jBZsltp',
+      parentSpanInst
+    );
+    try {
+      bh.local.file = bh.input.files?.newFile?.[0]?.buffer;
+      console.log(bh.local.file);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_IK8boM3iOe5vTvPT(bh, parentSpanInst);
+      //appendnew_next_sd_lSLMbmXY7jBZsltp
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_lSLMbmXY7jBZsltp',
+        spanInst,
+        'sd_lSLMbmXY7jBZsltp'
+      );
+    }
+  }
+
+  async sd_IK8boM3iOe5vTvPT(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_IK8boM3iOe5vTvPT',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1ZInstance: SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z.upload_service =
+        SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z.upload_service.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1ZInstance.fileUploadUsingCloudinary(
+          spanInst,
+          bh.local.file
+        );
+      bh.local.response = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_MpbyQa8lj0bkqLgS(bh, parentSpanInst);
+      //appendnew_next_sd_IK8boM3iOe5vTvPT
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_IK8boM3iOe5vTvPT',
+        spanInst,
+        'sd_IK8boM3iOe5vTvPT'
+      );
+    }
+  }
+
+  async sd_MpbyQa8lj0bkqLgS(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(bh.local.response.statusCode).send(bh.local.response);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_MpbyQa8lj0bkqLgS');
+    }
+  }
 
   //appendnew_node
 

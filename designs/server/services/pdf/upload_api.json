@@ -1,14 +1,238 @@
 [
     {
+        "id": "SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG",
         "type": "tab",
-        "id": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+        "createdDate": "2024-02-17T10:21:05.575Z",
+        "label": "upload_api",
         "disabled": false,
         "info": "",
-        "label": "upload_api",
-        "createdDate": "2024-02-17T06:58:32.850Z",
         "functionSeq": 0,
         "generateNext": true,
         "serviceName": "upload_api",
         "relativeParentPath": "pdf"
+    },
+    {
+        "id": "sd_TWuSo0c1NEzdhOG5",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "upload file",
+        "path": "uploadFile",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": true,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": {
+            "type": "path",
+            "fileOptions": [
+                {
+                    "name": "newFile",
+                    "maxCount": 1
+                }
+            ],
+            "path": ""
+        },
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "fileoptions": [
+                {
+                    "key": "newFile",
+                    "value": "1",
+                    "rowId": "sd_jOjiZQkY7VI9lQkY",
+                    "valid": true
+                }
+            ],
+            "responses": [],
+            "params": [
+                {
+                    "key": "data",
+                    "desc": "evrfdsax",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_X8BROZK0m22417lx",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": [
+                {
+                    "key": "multipart/form-data",
+                    "rowId": "sd_XlzgyUwVMEjFidJi",
+                    "valid": true
+                }
+            ]
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 100,
+        "wires": [
+            [
+                "sd_lSLMbmXY7jBZsltp"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "upload_api",
+        "functionName": "sd_TWuSo0c1NEzdhOG5"
+    },
+    {
+        "id": "sd_MpbyQa8lj0bkqLgS",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_MpbyQa8lj0bkqLgS",
+        "category": "HTTP",
+        "x": 645,
+        "y": 100,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "upload_api",
+        "generated": true
+    },
+    {
+        "id": "sd_IK8boM3iOe5vTvPT",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z",
+            "type": "tab",
+            "createdDate": "2024-02-17T06:58:32.850Z",
+            "label": "upload_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_07iEQZ9DJSG3sXxR",
+            "flowName": "fileUploadUsingCloudinary"
+        },
+        "inputVariables": [
+            {
+                "key": "file",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "file"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./upload_service",
+        "startName": "fileUploadUsingCloudinary",
+        "inputParams": [
+            "bh.local.file"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_IK8boM3iOe5vTvPT",
+        "category": "General",
+        "x": 500,
+        "y": 100,
+        "wires": [
+            [
+                "sd_MpbyQa8lj0bkqLgS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "upload_api",
+        "generated": true
+    },
+    {
+        "id": "sd_lSLMbmXY7jBZsltp",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.file=bh.input.files?.newFile?.[0]?.buffer;\nconsole.log(bh.local.file)",
+        "functionName": "sd_lSLMbmXY7jBZsltp",
+        "category": "Function",
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "sd_IK8boM3iOe5vTvPT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "upload_api",
+        "generated": true
     }
 ]
