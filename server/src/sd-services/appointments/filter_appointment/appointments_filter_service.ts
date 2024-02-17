@@ -130,23 +130,23 @@ export class appointments_filter_service {
       bh.local.queryvalues = [];
       let keys = Object.keys(bh.input.filter);
       let count = 0;
-      if (keys.length > 0) {
+      if (keys?.length > 0) {
         bh.local.query += ' where ';
         keys.forEach((key, index) => {
           bh.local.query += key + ` IN (`;
-          bh.input.filter[key].forEach((element, index) => {
+          bh.input?.filter[key]?.forEach((element, index) => {
             bh.local.query += `$${count + 1}`;
             bh.local.queryvalues.push(element);
             if (
-              bh.input.filter[key].length > 1 &&
-              index < bh.input.filter[key].length - 1
+              bh.input?.filter[key]?.length > 1 &&
+              index < bh.input?.filter[key]?.length - 1
             ) {
               bh.local.query += ', ';
             }
             count++;
           });
           bh.local.query += `)`;
-          if (keys.length > 1 && index < keys.length - 1) {
+          if (keys?.length > 1 && index < keys?.length - 1) {
             bh.local.query += ' AND ';
           }
         });

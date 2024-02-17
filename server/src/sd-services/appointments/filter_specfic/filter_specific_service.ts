@@ -144,14 +144,19 @@ export class filter_specific_service {
       if (filter) {
         let keys = Object.keys(filter);
         let count = 0;
-        if (keys.length > 0) {
+        if (keys?.length > 0) {
           bh.local.query += ' where ';
           keys.forEach((key, index) => {
             bh.local.query += key + ` IN (`;
-            filter[key].forEach((element, index) => {
+            console.log(bh.local.query);
+
+            filter?.[key]?.forEach((element, index) => {
               bh.local.query += `$${count + 1}`;
               bh.local.queryvalues.push(element);
-              if (filter[key].length > 1 && index < filter[key].length - 1) {
+              if (
+                filter?.[key]?.length > 1 &&
+                index < filter?.[key]?.length - 1
+              ) {
                 bh.local.query += ', ';
               }
               count++;
@@ -163,7 +168,7 @@ export class filter_specific_service {
           });
         }
       }
-      if (groupby.length > 0) {
+      if (groupby?.length > 0) {
         groupby = groupby.join(',');
         bh.local.query += ' GROUP BY ' + groupby;
       }

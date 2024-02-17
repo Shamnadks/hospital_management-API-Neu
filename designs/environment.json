@@ -22,7 +22,8 @@
             "DB_NAME": "server",
             "RAZORPAY_KEY_ID": "server",
             "RAZORPAY_SECRET": "server",
-            "STRIPE_SECRET_TEST_KEY": "server"
+            "STRIPE_SECRET_TEST_KEY": "server",
+            "CD_NAME": "server"
         }
     },
     "dev": {
@@ -48,7 +49,8 @@
             "DB_NAME": "postgres",
             "RAZORPAY_KEY_ID": "rzp_test_xAQNIRBNlka1mN",
             "RAZORPAY_SECRET": "u2ockIPVC5BLMt8dJvyHoegQ",
-            "STRIPE_SECRET_TEST_KEY": "sk_test_51NYQvISEp0SANuKNsRBAjWF0wRT860QT3UT5ZmYQO7NZ8yWA3OyK6Uxb9Vt6zf4qMW5AcEQCGtxx6FKuR0lae5Ts00L4bLTLPr"
+            "STRIPE_SECRET_TEST_KEY": "sk_test_51NYQvISEp0SANuKNsRBAjWF0wRT860QT3UT5ZmYQO7NZ8yWA3OyK6Uxb9Vt6zf4qMW5AcEQCGtxx6FKuR0lae5Ts00L4bLTLPr",
+            "CD_NAME": "rafhathdana"
         }
     },
     "prod": {
@@ -74,7 +76,8 @@
             "DB_NAME": "postgres",
             "RAZORPAY_KEY_ID": "rzp_test_xAQNIRBNlka1mN",
             "RAZORPAY_SECRET": "u2ockIPVC5BLMt8dJvyHoegQ",
-            "STRIPE_SECRET_TEST_KEY": "sk_test_51NYQvISEp0SANuKNsRBAjWF0wRT860QT3UT5ZmYQO7NZ8yWA3OyK6Uxb9Vt6zf4qMW5AcEQCGtxx6FKuR0lae5Ts00L4bLTLPr"
+            "STRIPE_SECRET_TEST_KEY": "sk_test_51NYQvISEp0SANuKNsRBAjWF0wRT860QT3UT5ZmYQO7NZ8yWA3OyK6Uxb9Vt6zf4qMW5AcEQCGtxx6FKuR0lae5Ts00L4bLTLPr",
+            "CD_NAME": "rafhathdana"
         }
     }
 }

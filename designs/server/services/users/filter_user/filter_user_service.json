@@ -78,7 +78,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "psql_query",
-        "script": "bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.users`\nbh.local.queryvalues=[]\nlet keys = Object.keys(bh.input.filter);\nlet count=0;\nif(keys.length>0){\n    bh.local.query+=' where '\n    keys.forEach((key, index) => {\n        bh.local.query+=key+` IN (`;\n        bh.input.filter[key].forEach((element, index)=>{\n            bh.local.query+= `$${count+1}`\n            bh.local.queryvalues.push(element)\n            if (bh.input.filter[key].length > 1 && index < bh.input.filter[key].length - 1) {\n                bh.local.query += \", \"\n            }\n            count ++;\n        })\n           bh.local.query+=`)`;  \n        if (keys.length > 1 && index < keys.length - 1) {\n            bh.local.query += \" AND \"\n        }\n})\n}",
+        "script": "bh.local.query = `SELECT * FROM ${process.env.DB_SCHEMA}.users`\nbh.local.queryvalues=[]\nlet keys = Object.keys(bh.input.filter);\nlet count=0;\nif(keys?.length>0){\n    bh.local.query+=' where '\n    keys.forEach((key, index) => {\n        bh.local.query+=key+` IN (`;\n        bh.input?.filter?.[key]?.forEach((element, index)=>{\n            bh.local.query+= `$${count+1}`\n            bh.local.queryvalues.push(element)\n            if (bh.input.filter?.[key]?.length > 1 && index < bh.input.filter?.[key]?.length - 1) {\n                bh.local.query += \", \"\n            }\n            count ++;\n        })\n           bh.local.query+=`)`;  \n        if (keys.length > 1 && index < keys.length - 1) {\n            bh.local.query += \" AND \"\n        }\n})\n}",
         "functionName": "psqlQuery",
         "category": "Function",
         "x": 345,
