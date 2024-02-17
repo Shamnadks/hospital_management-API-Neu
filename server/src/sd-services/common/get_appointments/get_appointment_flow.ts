@@ -6,9 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
-import * as SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j from '../../appointments/filter_specfic/filter_specific_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS from '../../doctors/filter_doctor/filter_doctor_service'; //_splitter_
-import * as SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD from '../../users/filter_user/filter_user_service'; //_splitter_
+import * as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB from '../../filter/filterservice'; //_splitter_
 //append_imports_end
 export class get_appointment_flow {
   private sdService = new SDBaseService();
@@ -100,7 +98,7 @@ export class get_appointment_flow {
     try {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_OBkekWCNAPRrws2O(bh, parentSpanInst);
+      bh = await this.sd_87AEBGnFzWoCPGMl(bh, parentSpanInst);
       //appendnew_next_getAppointmentFlow
       return (
         // formatting output variables
@@ -164,32 +162,60 @@ export class get_appointment_flow {
   }
   //appendnew_flow_get_appointment_flow_start
 
-  async sd_OBkekWCNAPRrws2O(bh, parentSpanInst) {
+  async sd_87AEBGnFzWoCPGMl(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_OBkekWCNAPRrws2O',
+      'sd_87AEBGnFzWoCPGMl',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9jInstance: SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j.filter_specific_service =
-        SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j.filter_specific_service.getInstance();
-      let outputVariables =
-        await SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9jInstance.filterSpecific(
-          spanInst,
-          bh.input.data
-        );
-      bh.local.appointment_response = outputVariables.local.response;
+      bh.input.filterdata = {
+        tablename: 'appointments',
+        ...bh.input.data,
+      };
+      console.log(bh.input.data);
+      console.log(bh.input.filterdata);
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.appointmentErrorHandler(bh, parentSpanInst);
-      //appendnew_next_sd_OBkekWCNAPRrws2O
+      bh = await this.appointmentFilter(bh, parentSpanInst);
+      //appendnew_next_sd_87AEBGnFzWoCPGMl
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_OBkekWCNAPRrws2O',
+        'sd_87AEBGnFzWoCPGMl',
         spanInst,
-        'sd_OBkekWCNAPRrws2O'
+        'sd_87AEBGnFzWoCPGMl'
+      );
+    }
+  }
+
+  async appointmentFilter(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'appointmentFilter',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
+          spanInst,
+          bh.input.filterdata
+        );
+      bh.local.appointment_response = outputVariables.local.response;
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.appointmentErrorHandler(bh, parentSpanInst);
+      //appendnew_next_appointmentFilter
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_5qprqxDDgqn12YnT',
+        spanInst,
+        'appointmentFilter'
       );
     }
   }
@@ -200,7 +226,6 @@ export class get_appointment_flow {
       parentSpanInst
     );
     try {
-      console.log(bh.local.appointment_response);
       if (bh.local?.appointment_response?.statusCode == 200) {
         bh.local.appointment_response = bh.local.appointment_response?.data;
       } else {
@@ -209,7 +234,7 @@ export class get_appointment_flow {
       console.log(bh.local.appointment_response);
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_2MS0cpOf9pSwLbYK(bh, parentSpanInst);
+      bh = await this.looping(bh, parentSpanInst);
       //appendnew_next_appointmentErrorHandler
       return bh;
     } catch (e) {
@@ -223,11 +248,8 @@ export class get_appointment_flow {
     }
   }
 
-  async sd_2MS0cpOf9pSwLbYK(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_2MS0cpOf9pSwLbYK',
-      parentSpanInst
-    );
+  async looping(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('looping', parentSpanInst);
     try {
       let outputVariables = await this.loop(
         spanInst,
@@ -237,8 +259,8 @@ export class get_appointment_flow {
       bh.local.response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_jIHgvHMx8VHrf6ux(bh, parentSpanInst);
-      //appendnew_next_sd_2MS0cpOf9pSwLbYK
+      bh = await this.response(bh, parentSpanInst);
+      //appendnew_next_looping
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -246,21 +268,18 @@ export class get_appointment_flow {
         e,
         'sd_2MS0cpOf9pSwLbYK',
         spanInst,
-        'sd_2MS0cpOf9pSwLbYK'
+        'looping'
       );
     }
   }
 
-  async sd_jIHgvHMx8VHrf6ux(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_jIHgvHMx8VHrf6ux',
-      parentSpanInst
-    );
+  async response(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('response', parentSpanInst);
     try {
       console.log(bh.local.response);
       console.log('bh.local.response');
       this.tracerService.sendData(spanInst, bh);
-      //appendnew_next_sd_jIHgvHMx8VHrf6ux
+      //appendnew_next_response
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -268,7 +287,7 @@ export class get_appointment_flow {
         e,
         'sd_jIHgvHMx8VHrf6ux',
         spanInst,
-        'sd_jIHgvHMx8VHrf6ux'
+        'response'
       );
     }
   }
@@ -311,51 +330,56 @@ export class get_appointment_flow {
       parentSpanInst
     );
     try {
-      bh.input.doctor = {
-        id: [bh.input.appointment_response?.[bh.input.count]?.doctor_id],
+      bh.input.filterdata = {
+        tablename: 'doctors',
+        columns: [
+          `${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name`,
+        ],
+        datas: {
+          id: [bh.input.appointment_response?.[bh.input.count]?.doctor_id],
+        },
       };
-      console.log(bh.input.doctor);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.doctorFlow(bh, parentSpanInst);
+      bh = await this.doctorFilter(bh, parentSpanInst);
       //appendnew_next_doctoScript
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_vnhSXb6eNc2IKpAt',
+        'sd_6XECdMWEQC6LVXAk',
         spanInst,
         'doctoScript'
       );
     }
   }
 
-  async doctorFlow(bh, parentSpanInst) {
+  async doctorFilter(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'doctorFlow',
+      'doctorFilter',
       parentSpanInst
     );
     try {
-      const SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance: SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service =
-        SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS.filter_doctor_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwSInstance.getADoctor(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
-          bh.input.doctor
+          bh.input.filterdata
         );
       bh.local.doctor_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.doctorErrorHandler(bh, parentSpanInst);
-      //appendnew_next_doctorFlow
+      //appendnew_next_doctorFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_Ca3pZvBga2AEYLXx',
+        'sd_YRGtP4EA2FSQ8kXW',
         spanInst,
-        'doctorFlow'
+        'doctorFilter'
       );
     }
   }
@@ -371,9 +395,10 @@ export class get_appointment_flow {
       } else {
         throw new Error('Some error Occured try again later');
       }
+      console.log(bh.local.doctor_response);
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.userScrip(bh, parentSpanInst);
+      bh = await this.userFinderScript(bh, parentSpanInst);
       //appendnew_next_doctorErrorHandler
       return bh;
     } catch (e) {
@@ -387,52 +412,59 @@ export class get_appointment_flow {
     }
   }
 
-  async userScrip(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan('userScrip', parentSpanInst);
+  async userFinderScript(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'userFinderScript',
+      parentSpanInst
+    );
     try {
-      bh.input.user = {
-        id: [bh.input.appointment_response?.[bh.input.count]?.user_id],
+      bh.input.filterdata = {
+        tablename: 'users',
+        datas: {
+          id: [bh.input.appointment_response?.[bh.input.count]?.user_id],
+        },
       };
-      console.log(bh.input.user);
-
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.userFlow(bh, parentSpanInst);
-      //appendnew_next_userScrip
+      bh = await this.userFilter(bh, parentSpanInst);
+      //appendnew_next_userFinderScript
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_840tHLvYcyik9wZs',
+        'sd_JOhJaV506A9wlvzb',
         spanInst,
-        'userScrip'
+        'userFinderScript'
       );
     }
   }
 
-  async userFlow(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan('userFlow', parentSpanInst);
+  async userFilter(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'userFilter',
+      parentSpanInst
+    );
     try {
-      const SSD_SERVICE_ID_sd_er58WUWxKEh6IEiDInstance: SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD.filter_user_service =
-        SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD.filter_user_service.getInstance();
+      const SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance: SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice =
+        SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB.filterservice.getInstance();
       let outputVariables =
-        await SSD_SERVICE_ID_sd_er58WUWxKEh6IEiDInstance.getAUser(
+        await SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkBInstance.filterSpecific(
           spanInst,
-          bh.input.user
+          bh.input.filterdata
         );
       bh.local.user_response = outputVariables.local.response;
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.userErrorHandler(bh, parentSpanInst);
-      //appendnew_next_userFlow
+      //appendnew_next_userFilter
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_PHWJqt75fbLJCnpi',
+        'sd_DQxfkQIFgVmHcO2Z',
         spanInst,
-        'userFlow'
+        'userFilter'
       );
     }
   }

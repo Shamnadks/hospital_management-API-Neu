@@ -30,7 +30,6 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
-        "uploadFileOptions": "",
         "erd": "_DM_kxoe18g2p",
         "erdName": "hospital",
         "entity": "department",
@@ -59,7 +58,7 @@
         "y": 120,
         "wires": [
             [
-                "sd_hrzNagdoVJSblmOm"
+                "sd_Kluq5isJjjSQXQDz"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -124,68 +123,6 @@
         "x": 585,
         "y": 120,
         "wires": [],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "filter_doctor_api",
-        "generated": true
-    },
-    {
-        "id": "sd_hrzNagdoVJSblmOm",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "filter department flow",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS",
-            "type": "tab",
-            "createdDate": "2024-02-12T17:09:46.935Z",
-            "label": "filter_doctor_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_8BHWhDa3GVzpn7tx",
-            "flowName": "getADoctor"
-        },
-        "inputVariables": [
-            {
-                "key": "filter",
-                "map": true,
-                "valueType": "bh.input",
-                "value": "body"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "response",
-                "valueType": "bh.local",
-                "value": "response",
-                "mapVarName": "response",
-                "localVar": "bh.local.response"
-            }
-        ],
-        "callService": "./filter_doctor_service",
-        "startName": "getADoctor",
-        "inputParams": [
-            "bh.input.body"
-        ],
-        "accept_bh": false,
-        "functionName": "filterDepartmentFlow",
-        "category": "General",
-        "x": 425,
-        "y": 120,
-        "wires": [
-            [
-                "sd_2lEfIThZi1GmM9pq"
-            ]
-        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "filter_doctor_api",
@@ -288,6 +225,90 @@
         "x": 525,
         "y": 300,
         "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_doctor_api",
+        "generated": true
+    },
+    {
+        "id": "sd_Kluq5isJjjSQXQDz",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "department_finder_script ",
+        "script": "bh.input.filterdata={\n      \"tablename\":\"doctors\",\n     datas:{...bh.input.body}\n}",
+        "functionName": "departmentFinderScript",
+        "category": "Function",
+        "x": 345,
+        "y": 80,
+        "wires": [
+            [
+                "sd_w91mvKR9DmiwMo3c"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "filter_doctor_api",
+        "generated": true
+    },
+    {
+        "id": "sd_w91mvKR9DmiwMo3c",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_WN1cwNteT7XRlirY",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "department_filter",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB",
+            "type": "tab",
+            "createdDate": "2024-02-17T18:43:47.614Z",
+            "label": "filterservice",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_wYU9zqSZwf22vVhQ",
+            "flowName": "filterSpecific"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "filterdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "../../filter/filterservice",
+        "startName": "filterSpecific",
+        "inputParams": [
+            "bh.input.filterdata"
+        ],
+        "accept_bh": false,
+        "functionName": "departmentFilter",
+        "category": "General",
+        "x": 485,
+        "y": 80,
+        "wires": [
+            [
+                "sd_2lEfIThZi1GmM9pq"
+            ]
+        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "filter_doctor_api",

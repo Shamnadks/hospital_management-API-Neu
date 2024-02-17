@@ -42,11 +42,11 @@
         "accept_bh": false,
         "functionName": "getAppointmentFlow",
         "category": "General",
-        "x": 165,
+        "x": 145,
         "y": 120,
         "wires": [
             [
-                "sd_OBkekWCNAPRrws2O"
+                "sd_87AEBGnFzWoCPGMl"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -63,8 +63,8 @@
         "script": "if(bh.local.user_response.statusCode==200){\n    bh.local.user_response=bh.local.user_response?.data?.[0]\n}\nelse{\n    throw new Error(\"Some error Occured try again later\")\n}",
         "functionName": "userErrorHandler",
         "category": "Function",
-        "x": 845,
-        "y": 340,
+        "x": 905,
+        "y": 240,
         "wires": [
             [
                 "sd_aYI6HbzDWk959stk"
@@ -82,76 +82,14 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "doctor_error_handler",
-        "script": "if(bh.local.doctor_response.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\n",
+        "script": "if(bh.local.doctor_response.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\nconsole.log(bh.local.doctor_response)\n",
         "functionName": "doctorErrorHandler",
         "category": "Function",
-        "x": 525,
-        "y": 340,
+        "x": 545,
+        "y": 240,
         "wires": [
             [
-                "sd_840tHLvYcyik9wZs"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
-    },
-    {
-        "id": "sd_OBkekWCNAPRrws2O",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_swLoHJcJEoaYFd9j",
-            "type": "tab",
-            "createdDate": "2024-02-13T14:53:43.091Z",
-            "label": "filter_specific_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_lCNeGGjlsbV1cOSW",
-            "flowName": "filterSpecific"
-        },
-        "inputVariables": [
-            {
-                "key": "filter",
-                "map": true,
-                "valueType": "bh.input",
-                "value": "data"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "response",
-                "valueType": "bh.local",
-                "value": "appointment_response",
-                "mapVarName": "response",
-                "localVar": "bh.local.appointment_response"
-            }
-        ],
-        "callService": "../../appointments/filter_specfic/filter_specific_service",
-        "startName": "filterSpecific",
-        "inputParams": [
-            "bh.input.data"
-        ],
-        "accept_bh": false,
-        "functionName": "sd_OBkekWCNAPRrws2O",
-        "category": "General",
-        "x": 345,
-        "y": 120,
-        "wires": [
-            [
-                "sd_XQjlPNnfq9rXrmpz"
+                "sd_JOhJaV506A9wlvzb"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -166,7 +104,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "appointment_error_handler",
-        "script": "console.log(bh.local.appointment_response);\nif(bh.local?.appointment_response?.statusCode==200){\n    bh.local.appointment_response=bh.local.appointment_response?.data\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\nconsole.log(bh.local.appointment_response);\n",
+        "script": "if(bh.local?.appointment_response?.statusCode==200){\n    bh.local.appointment_response=bh.local.appointment_response?.data\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\nconsole.log(bh.local.appointment_response);\n",
         "functionName": "appointmentErrorHandler",
         "category": "Function",
         "x": 525,
@@ -182,254 +120,6 @@
         "generated": true
     },
     {
-        "id": "sd_vnhSXb6eNc2IKpAt",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "docto_script",
-        "script": "bh.input.doctor={\"id\":[bh.input.appointment_response?.[bh.input.count]?.doctor_id]};\nconsole.log(bh.input.doctor)",
-        "functionName": "doctoScript",
-        "category": "Function",
-        "x": 265,
-        "y": 340,
-        "wires": [
-            [
-                "sd_Ca3pZvBga2AEYLXx"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
-    },
-    {
-        "id": "sd_Ca3pZvBga2AEYLXx",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "doctor_flow",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS",
-            "type": "tab",
-            "createdDate": "2024-02-12T17:09:46.935Z",
-            "label": "filter_doctor_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_8BHWhDa3GVzpn7tx",
-            "flowName": "getADoctor"
-        },
-        "inputVariables": [
-            {
-                "key": "filter",
-                "map": true,
-                "valueType": "bh.input",
-                "value": "doctor"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "response",
-                "valueType": "bh.local",
-                "value": "doctor_response",
-                "mapVarName": "response",
-                "localVar": "bh.local.doctor_response"
-            }
-        ],
-        "callService": "../../doctors/filter_doctor/filter_doctor_service",
-        "startName": "getADoctor",
-        "inputParams": [
-            "bh.input.doctor"
-        ],
-        "accept_bh": false,
-        "functionName": "doctorFlow",
-        "category": "General",
-        "x": 385,
-        "y": 340,
-        "wires": [
-            [
-                "sd_M3IfIl4c6OUbC4st"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
-    },
-    {
-        "id": "sd_840tHLvYcyik9wZs",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "user_scrip",
-        "script": "bh.input.user={\"id\":[bh.input.appointment_response?.[bh.input.count]?.user_id]};\nconsole.log(bh.input.user)\n",
-        "functionName": "userScrip",
-        "category": "Function",
-        "x": 625,
-        "y": 340,
-        "wires": [
-            [
-                "sd_PHWJqt75fbLJCnpi"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
-    },
-    {
-        "id": "sd_PHWJqt75fbLJCnpi",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "user_flow",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_er58WUWxKEh6IEiD",
-            "type": "tab",
-            "createdDate": "2024-02-12T17:20:03.261Z",
-            "label": "filter_user_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_h3q5cWmZNHfQSP9n",
-            "flowName": "getAUser"
-        },
-        "inputVariables": [
-            {
-                "key": "filter",
-                "map": true,
-                "valueType": "bh.input",
-                "value": "user"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "response",
-                "valueType": "bh.local",
-                "value": "user_response",
-                "mapVarName": "response",
-                "localVar": "bh.local.user_response"
-            }
-        ],
-        "callService": "../../users/filter_user/filter_user_service",
-        "startName": "getAUser",
-        "inputParams": [
-            "bh.input.user"
-        ],
-        "accept_bh": false,
-        "functionName": "userFlow",
-        "category": "General",
-        "x": 725,
-        "y": 340,
-        "wires": [
-            [
-                "sd_FbBsaqJcEphLsFUk"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
-    },
-    {
-        "id": "sd_rpTYE9YEeLLnSGMe",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "payment_script",
-        "script": "bh.input.doctor={\"id\":[bh.input?.data?.payment_id]};",
-        "functionName": "paymentScript",
-        "category": "Function",
-        "x": 1545,
-        "y": 120,
-        "wires": [
-            [
-                "sd_rHRVE5mwPKEN9jgu"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": true,
-        "serviceName": "get_appointment_flow"
-    },
-    {
-        "id": "sd_rHRVE5mwPKEN9jgu",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "payment_flow",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_FdlVrRt9r82JaAwS",
-            "type": "tab",
-            "createdDate": "2024-02-12T17:09:46.935Z",
-            "label": "filter_doctor_service",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_8BHWhDa3GVzpn7tx",
-            "flowName": "getADoctor"
-        },
-        "inputVariables": [
-            {
-                "key": "filter",
-                "map": true,
-                "valueType": "bh.input",
-                "value": "doctor"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "response",
-                "valueType": "bh.local",
-                "value": "doctor_response",
-                "mapVarName": "response",
-                "localVar": "bh.local.doctor_response"
-            }
-        ],
-        "callService": "../../doctors/filter_doctor/filter_doctor_service",
-        "startName": "getADoctor",
-        "inputParams": [
-            "bh.input.doctor"
-        ],
-        "accept_bh": false,
-        "functionName": "paymentFlow",
-        "category": "General",
-        "x": 1645,
-        "y": 120,
-        "wires": [
-            []
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": true,
-        "serviceName": "get_appointment_flow"
-    },
-    {
         "id": "sd_aYI6HbzDWk959stk",
         "type": "Script",
         "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
@@ -439,8 +129,8 @@
         "script": "Object.assign(bh.input.appointment_response[bh.input.count], {doctordetails:bh.local.doctor_response});\nObject.assign(bh.input.appointment_response[bh.input.count], {userdetails:bh.local.user_response});\nbh.input.count++;\nbh.local.response={\n    statusCode:200,\n    data:bh.input.appointment_response\n}\nconsole.log(bh.input.appointment_response)",
         "functionName": "sd_aYI6HbzDWk959stk",
         "category": "Function",
-        "x": 985,
-        "y": 340,
+        "x": 1045,
+        "y": 240,
         "wires": [
             [
                 "sd_OWSP1UQk0C9RaYol"
@@ -507,7 +197,7 @@
         "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
         "viewType": "common",
         "nodeType": "flow",
-        "name": "",
+        "name": "looping",
         "outputs": 1,
         "isValidNode": true,
         "noerr": 0,
@@ -556,9 +246,9 @@
             "bh.local.appointment_response"
         ],
         "accept_bh": false,
-        "functionName": "sd_2MS0cpOf9pSwLbYK",
+        "functionName": "looping",
         "category": "General",
-        "x": 700,
+        "x": 665,
         "y": 120,
         "wires": [
             [
@@ -627,8 +317,8 @@
         "accept_bh": false,
         "functionName": "sd_OWSP1UQk0C9RaYol",
         "category": "General",
-        "x": 1180,
-        "y": 340,
+        "x": 1165,
+        "y": 240,
         "wires": [
             []
         ],
@@ -643,9 +333,9 @@
         "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
         "viewType": "common",
         "nodeType": "flow",
-        "name": "",
+        "name": "response",
         "script": "console.log(bh.local.response)\nconsole.log(\"bh.local.response\")",
-        "functionName": "sd_jIHgvHMx8VHrf6ux",
+        "functionName": "response",
         "category": "Function",
         "x": 880,
         "y": 120,
@@ -687,7 +377,7 @@
         "y": 320,
         "wires": [
             [
-                "sd_vnhSXb6eNc2IKpAt"
+                "sd_6XECdMWEQC6LVXAk"
             ],
             [
                 "sd_nQHChrsnrwjwxJwN"
@@ -709,7 +399,7 @@
         "functionName": "sd_nQHChrsnrwjwxJwN",
         "category": "Function",
         "x": 245,
-        "y": 220,
+        "y": 380,
         "wires": [
             []
         ],
@@ -763,5 +453,257 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "get_appointment_flow"
+    },
+    {
+        "id": "sd_87AEBGnFzWoCPGMl",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.input.filterdata={\n     \"tablename\":\"appointments\",\n    ...bh.input.data,\n}\nconsole.log(bh.input.data)\nconsole.log(bh.input.filterdata)\n   ",
+        "functionName": "sd_87AEBGnFzWoCPGMl",
+        "category": "Function",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "sd_5qprqxDDgqn12YnT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_5qprqxDDgqn12YnT",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "appointment_filter",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB",
+            "type": "tab",
+            "createdDate": "2024-02-17T18:43:47.614Z",
+            "label": "filterservice",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_wYU9zqSZwf22vVhQ",
+            "flowName": "filterSpecific"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "filterdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "appointment_response",
+                "mapVarName": "response",
+                "localVar": "bh.local.appointment_response"
+            }
+        ],
+        "callService": "../../filter/filterservice",
+        "startName": "filterSpecific",
+        "inputParams": [
+            "bh.input.filterdata"
+        ],
+        "accept_bh": false,
+        "functionName": "appointmentFilter",
+        "category": "General",
+        "x": 385,
+        "y": 120,
+        "wires": [
+            [
+                "sd_XQjlPNnfq9rXrmpz"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_6XECdMWEQC6LVXAk",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "docto_script",
+        "script": "bh.input.filterdata={\ntablename:\"doctors\",\ncolumns:[`${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name`],\ndatas:{\n    \"id\":[bh.input.appointment_response?.[bh.input.count]?.doctor_id]\n}\n}",
+        "functionName": "doctoScript",
+        "category": "Function",
+        "x": 305,
+        "y": 240,
+        "wires": [
+            [
+                "sd_YRGtP4EA2FSQ8kXW"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_YRGtP4EA2FSQ8kXW",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "doctor_filter",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB",
+            "type": "tab",
+            "createdDate": "2024-02-17T18:43:47.614Z",
+            "label": "filterservice",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_wYU9zqSZwf22vVhQ",
+            "flowName": "filterSpecific"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "filterdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "doctor_response",
+                "mapVarName": "response",
+                "localVar": "bh.local.doctor_response"
+            }
+        ],
+        "callService": "../../filter/filterservice",
+        "startName": "filterSpecific",
+        "inputParams": [
+            "bh.input.filterdata"
+        ],
+        "accept_bh": false,
+        "functionName": "doctorFilter",
+        "category": "General",
+        "x": 425,
+        "y": 240,
+        "wires": [
+            [
+                "sd_M3IfIl4c6OUbC4st"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_JOhJaV506A9wlvzb",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "user_finder_script ",
+        "script": "bh.input.filterdata={\n      \"tablename\":\"users\",\n      \"datas\":{\n        \"id\":[bh.input.appointment_response?.[bh.input.count]?.user_id]\n              }\n}",
+        "functionName": "userFinderScript",
+        "category": "Function",
+        "x": 685,
+        "y": 240,
+        "wires": [
+            [
+                "sd_DQxfkQIFgVmHcO2Z"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_DQxfkQIFgVmHcO2Z",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_r0H8vsrn1p2lt1Ok",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "user_filter",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB",
+            "type": "tab",
+            "createdDate": "2024-02-17T18:43:47.614Z",
+            "label": "filterservice",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_wYU9zqSZwf22vVhQ",
+            "flowName": "filterSpecific"
+        },
+        "inputVariables": [
+            {
+                "key": "filter",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "filterdata"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "user_response",
+                "mapVarName": "response",
+                "localVar": "bh.local.user_response"
+            }
+        ],
+        "callService": "../../filter/filterservice",
+        "startName": "filterSpecific",
+        "inputParams": [
+            "bh.input.filterdata"
+        ],
+        "accept_bh": false,
+        "functionName": "userFilter",
+        "category": "General",
+        "x": 805,
+        "y": 240,
+        "wires": [
+            [
+                "sd_FbBsaqJcEphLsFUk"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_appointment_flow",
+        "generated": true
     }
 ]

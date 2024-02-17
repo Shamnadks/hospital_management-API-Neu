@@ -64,7 +64,7 @@
         "y": 100,
         "wires": [
             [
-                "sd_dclWlg04ZFKPNXXG"
+                "sd_H4XatPBmkz1SZrBi"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -79,7 +79,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "get_appointment_api",
-        "functionName": "sd_wsNVTVmwWivqRej0"
+        "functionName": "sd_wsNVTVmwWivqRej0",
+        "generated": false
     },
     {
         "id": "sd_qg9b7pmCegv5dYQI",
@@ -135,28 +136,6 @@
         "generated": true
     },
     {
-        "id": "sd_dclWlg04ZFKPNXXG",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "// if(bh.input.body?.name?.trim()?.length){  \n// }\n// throw new Error(\"Enter some task\");\nconsole.log(bh.input.body)",
-        "functionName": "sd_dclWlg04ZFKPNXXG",
-        "category": "Function",
-        "x": 425,
-        "y": 100,
-        "wires": [
-            [
-                "sd_H4XatPBmkz1SZrBi"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "get_appointment_api",
-        "generated": true
-    },
-    {
         "id": "sd_uLH869UGuLEvSF1B",
         "type": "Script",
         "z": "SSD_SERVICE_ID_sd_s7Dqt2H83bRphca8",
@@ -203,7 +182,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "get_appointment_api"
+        "serviceName": "get_appointment_api",
+        "generated": false
     },
     {
         "id": "sd_YB6pfx8ZpUqi1tMZ",
@@ -308,7 +288,7 @@
         "accept_bh": false,
         "functionName": "sd_H4XatPBmkz1SZrBi",
         "category": "General",
-        "x": 565,
+        "x": 385,
         "y": 100,
         "wires": [
             [
@@ -316,8 +296,8 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "get_appointment_api",
-        "generated": true
+        "serviceName": "get_appointment_api"
     }
 ]
