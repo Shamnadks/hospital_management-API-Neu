@@ -237,7 +237,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "department_finder_script ",
-        "script": "bh.input.filterdata={\n      \"tablename\":\"doctors\",\n     datas:{...bh.input.body}\n}",
+        "script": "bh.input.filterdata={\n      \"tablename\":\"doctors\",\n     columns:[`${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name`],\n     datas:{...bh.input.body}\n}",
         "functionName": "departmentFinderScript",
         "category": "Function",
         "x": 345,

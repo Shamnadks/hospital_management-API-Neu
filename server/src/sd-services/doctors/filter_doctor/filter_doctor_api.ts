@@ -125,6 +125,9 @@ export class filter_doctor_api {
     try {
       bh.input.filterdata = {
         tablename: 'doctors',
+        columns: [
+          `${process.env.DB_SCHEMA}.doctors.*, (SELECT name FROM ${process.env.DB_SCHEMA}.department WHERE id = doctors.department_id) AS department_name`,
+        ],
         datas: { ...bh.input.body },
       };
       this.tracerService.sendData(spanInst, bh);
