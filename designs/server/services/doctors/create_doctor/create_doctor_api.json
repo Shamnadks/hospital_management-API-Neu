@@ -70,7 +70,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "create_doctor_api",
-        "functionName": "sd_dPbu5IPabD0WeD8s"
+        "functionName": "sd_dPbu5IPabD0WeD8s",
+        "generated": false
     },
     {
         "id": "sd_zLmu8x4U6yS6ZtqN",
@@ -98,6 +99,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -182,9 +184,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "create_doctor_api",
-        "generated": true
+        "serviceName": "create_doctor_api"
     },
     {
         "id": "sd_HhMbUZEjozpxkHLr",
@@ -255,7 +257,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "create_doctor_api"
+        "serviceName": "create_doctor_api",
+        "generated": false
     },
     {
         "id": "sd_eWP5HZJvOvaFZFbT",
@@ -283,6 +286,7 @@
             "send": "bh.local.response"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",

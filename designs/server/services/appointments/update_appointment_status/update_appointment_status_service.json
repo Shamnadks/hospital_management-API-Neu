@@ -111,7 +111,6 @@
         "nodeType": "flow",
         "name": "update_a_payment_sql",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
-        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "resultdata"
@@ -123,7 +122,6 @@
         },
         "inputs": 1,
         "outputs": 1,
-        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "queryvalues"

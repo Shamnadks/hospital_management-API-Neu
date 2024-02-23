@@ -1,0 +1,126 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE",
+        "type": "tab",
+        "createdDate": "2024-02-23T12:29:21.860Z",
+        "label": "updateHolidaysService",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "updateHolidaysService",
+        "relativeParentPath": "holidays/updateHolidays"
+    },
+    {
+        "id": "sd_Rt8qmYnnikB6rxAK",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "updateHolidays",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "updateHolidays",
+        "category": "General",
+        "x": 145,
+        "y": 220,
+        "wires": [
+            [
+                "sd_vz2AMx2O6ZUe2ati"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "updateHolidaysService"
+    },
+    {
+        "id": "sd_4ZQ9u8oR0rcwqEy2",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.result\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 425,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "updateHolidaysService",
+        "generated": true
+    },
+    {
+        "id": "sd_vz2AMx2O6ZUe2ati",
+        "type": "update",
+        "z": "SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_4bddbqrhwd",
+        "_UI_entityName": "holidays",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "operationType": "updateByID",
+        "filterBy": "bh.input.data",
+        "updateObject": "bh.input.data",
+        "resultMapping": "bh.local.result",
+        "functionName": "sd_vz2AMx2O6ZUe2ati",
+        "category": "Data Model",
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "sd_4ZQ9u8oR0rcwqEy2"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "filterBy": {
+                "type": "bh.input",
+                "value": "data",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            },
+            "updateObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "filterBy": true
+        },
+        "generateNext": false,
+        "serviceName": "updateHolidaysService",
+        "generated": true
+    }
+]

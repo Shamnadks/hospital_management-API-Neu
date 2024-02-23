@@ -1,4 +1,20 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-getHolidaysService-SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2
+import { getHolidaysService as SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2 } from './sd-services/holidays/getHolidays/getHolidaysService';
+//CORE_REFERENCE_IMPORT-getHolidaysApi-SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9
+import { getHolidaysApi as SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9 } from './sd-services/holidays/getHolidays/getHolidaysApi';
+//CORE_REFERENCE_IMPORT-addHolidaysService-SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP
+import { addHolidaysService as SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP } from './sd-services/holidays/addHolidays/addHolidaysService';
+//CORE_REFERENCE_IMPORT-addHolidaysApi-SSD_SERVICE_ID_sd_Zcqf1QAleVhvLaS6
+import { addHolidaysApi as SSD_SERVICE_ID_sd_Zcqf1QAleVhvLaS6 } from './sd-services/holidays/addHolidays/addHolidaysApi';
+//CORE_REFERENCE_IMPORT-deleteholidayService-SSD_SERVICE_ID_sd_u54J74Bt7KK7No30
+import { deleteholidayService as SSD_SERVICE_ID_sd_u54J74Bt7KK7No30 } from './sd-services/holidays/deleteHolidays/deleteholidayService';
+//CORE_REFERENCE_IMPORT-deleteHolidayApi-SSD_SERVICE_ID_sd_5HTHp6toKWteyttX
+import { deleteHolidayApi as SSD_SERVICE_ID_sd_5HTHp6toKWteyttX } from './sd-services/holidays/deleteHolidays/deleteHolidayApi';
+//CORE_REFERENCE_IMPORT-updateHolidaysService-SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE
+import { updateHolidaysService as SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE } from './sd-services/holidays/updateHolidays/updateHolidaysService';
+//CORE_REFERENCE_IMPORT-updateHolidaysApi-SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl
+import { updateHolidaysApi as SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl } from './sd-services/holidays/updateHolidays/updateHolidaysApi';
 //CORE_REFERENCE_IMPORT-filterservice-SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB
 import { filterservice as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB } from './sd-services/filter/filterservice';
 //CORE_REFERENCE_IMPORT-upload_api-SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG
@@ -60,6 +76,22 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-getHolidaysService-SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2
+SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-getHolidaysApi-SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9
+SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-addHolidaysService-SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP
+SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-addHolidaysApi-SSD_SERVICE_ID_sd_Zcqf1QAleVhvLaS6
+SSD_SERVICE_ID_sd_Zcqf1QAleVhvLaS6,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-deleteholidayService-SSD_SERVICE_ID_sd_u54J74Bt7KK7No30
+SSD_SERVICE_ID_sd_u54J74Bt7KK7No30,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-deleteHolidayApi-SSD_SERVICE_ID_sd_5HTHp6toKWteyttX
+SSD_SERVICE_ID_sd_5HTHp6toKWteyttX,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-updateHolidaysService-SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE
+SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-updateHolidaysApi-SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl
+SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-filterservice-SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB
 SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-upload_api-SSD_SERVICE_ID_sd_ob3CnQ0ND87WDPUG

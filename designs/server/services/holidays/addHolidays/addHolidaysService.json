@@ -1,0 +1,117 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP",
+        "type": "tab",
+        "createdDate": "2024-02-23T09:33:19.266Z",
+        "label": "addHolidaysService",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "addHolidaysService",
+        "relativeParentPath": "holidays/addHolidays"
+    },
+    {
+        "id": "sd_bXcz2eA9ndZWVOeC",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "addHolidays",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "addHolidays",
+        "category": "General",
+        "x": 85,
+        "y": 220,
+        "wires": [
+            [
+                "sd_E5Kp5ssnXwkUgw5B"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "addHolidaysService"
+    },
+    {
+        "id": "sd_E5Kp5ssnXwkUgw5B",
+        "type": "insert",
+        "z": "SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_4bddbqrhwd",
+        "_UI_entityName": "holidays",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "insertObject": "bh.input.data",
+        "resultMapping": "bh.local.result",
+        "functionName": "sd_E5Kp5ssnXwkUgw5B",
+        "category": "Data Model",
+        "x": 205,
+        "y": 220,
+        "wires": [
+            [
+                "sd_p5lAk2cYzFeZpwFo"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "insertObject": {
+                "type": "bh.input",
+                "value": "data",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "addHolidaysService",
+        "generated": true
+    },
+    {
+        "id": "sd_p5lAk2cYzFeZpwFo",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.result\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 365,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "addHolidaysService",
+        "generated": true
+    }
+]

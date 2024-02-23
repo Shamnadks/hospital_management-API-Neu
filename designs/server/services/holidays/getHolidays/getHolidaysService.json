@@ -1,0 +1,124 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2",
+        "type": "tab",
+        "createdDate": "2024-02-23T13:41:36.795Z",
+        "label": "getHolidaysService",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "getHolidaysService",
+        "relativeParentPath": "holidays/getHolidays"
+    },
+    {
+        "id": "sd_0928IuPYLP2vWpTG",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getHolidays",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "getHolidays",
+        "category": "General",
+        "x": 145,
+        "y": 140,
+        "wires": [
+            [
+                "sd_wY1ZbVKeVCqFfKVF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "getHolidaysService"
+    },
+    {
+        "id": "sd_uavIGPNPf3kGdUfR",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.result\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 465,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getHolidaysService",
+        "generated": true
+    },
+    {
+        "id": "sd_yWhSWiX5hlJg5L5O",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "sqldb",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "result"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "query"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "dbType": "postgres",
+        "functionName": "sqldb",
+        "category": "Storage",
+        "x": 345,
+        "y": 140,
+        "wires": [
+            [
+                "sd_uavIGPNPf3kGdUfR"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getHolidaysService",
+        "generated": true
+    },
+    {
+        "id": "sd_wY1ZbVKeVCqFfKVF",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.query=`SELECT * FROM ${process.env.DB_SCHEMA}.holidays`",
+        "functionName": "sd_wY1ZbVKeVCqFfKVF",
+        "category": "Function",
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "sd_yWhSWiX5hlJg5L5O"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getHolidaysService",
+        "generated": true
+    }
+]
