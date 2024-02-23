@@ -1,0 +1,128 @@
+{
+    "name": "holidays",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_4bddbqrhwd",
+    "y": 84.39999961853027,
+    "properties": {
+        "id": {
+            "name": "id",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_98xoxxqdfe",
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": true,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {
+                    "primaryGenerated": true
+                }
+            }
+        },
+        "starting_date": {
+            "name": "starting_date",
+            "format": "date-time",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_mg8qzd99x1",
+                "subCategoryType": "date",
+                "nullable": false,
+                "dbType": "timestamp with time zone",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "end_date": {
+            "name": "end_date",
+            "format": "date-time",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_kf9rmn4mcl",
+                "subCategoryType": "date",
+                "nullable": false,
+                "dbType": "timestamp with time zone",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "name": {
+            "name": "name",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_ybuf9k87ub",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "days": {
+            "name": "days",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_nvk13qudl6",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        }
+    },
+    "required": [
+        "starting_date",
+        "end_date",
+        "name",
+        "days"
+    ],
+    "value": "",
+    "__attributeExpansion__": true,
+    "__operationExpansion__": false,
+    "x": 2144,
+    "userList": {
+        "SSD_SERVICE_ID_sd_Z1cnyfcmgp7odfpP": [
+            "sd_E5Kp5ssnXwkUgw5B"
+        ],
+        "SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE": [
+            "sd_vz2AMx2O6ZUe2ati"
+        ],
+        "SSD_SERVICE_ID_sd_u54J74Bt7KK7No30": [
+            "sd_hirIC6AvnRxnJCKk"
+        ],
+        "SSD_SERVICE_ID_sd_Zcqf1QAleVhvLaS6": [
+            "sd_3UfWTU6I5bi06vlR"
+        ],
+        "SSD_SERVICE_ID_sd_5HTHp6toKWteyttX": [],
+        "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl": [
+            "sd_aYfNYSja8PGQvqsc"
+        ],
+        "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9": [
+            "sd_E8AdO1A0XtmEzH0o"
+        ],
+        "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2": []
+    }
+}

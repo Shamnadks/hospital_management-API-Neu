@@ -1,0 +1,22 @@
+{
+    "/holiday/delete": {
+        "delete": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "query",
+                    "name": "id",
+                    "description": "holiday id",
+                    "required": true
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "deleteHolidayApi"
+            ]
+        }
+    }
+}

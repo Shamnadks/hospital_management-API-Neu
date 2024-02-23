@@ -1,0 +1,129 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_u54J74Bt7KK7No30",
+        "type": "tab",
+        "createdDate": "2024-02-23T12:35:14.297Z",
+        "label": "deleteholidayService",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "deleteholidayService",
+        "relativeParentPath": "holidays/deleteHolidays"
+    },
+    {
+        "id": "sd_3sZhdtbtCU6QRO9q",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_u54J74Bt7KK7No30",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "deleteHolidays",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "deleteHolidays",
+        "category": "General",
+        "x": 185,
+        "y": 180,
+        "wires": [
+            [
+                "sd_hirIC6AvnRxnJCKk"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "deleteholidayService"
+    },
+    {
+        "id": "sd_jh29wkh2yBiAFR0H",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_u54J74Bt7KK7No30",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Status Report",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.result\n}",
+        "functionName": "statusReport",
+        "category": "Function",
+        "x": 465,
+        "y": 180,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "deleteholidayService",
+        "generated": true
+    },
+    {
+        "id": "sd_hirIC6AvnRxnJCKk",
+        "type": "remove",
+        "z": "SSD_SERVICE_ID_sd_u54J74Bt7KK7No30",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "erd": "_DM_kxoe18g2p",
+        "entityId": "_EN_4bddbqrhwd",
+        "_UI_entityName": "holidays",
+        "dbConfigId": "sd_JFEzq9BaWr7Csm3t",
+        "primayKey": "id",
+        "operationType": "deleteByID",
+        "_ID": "bh.input.data.id",
+        "filterBy": "",
+        "resultMapping": "bh.local.result",
+        "functionName": "sd_hirIC6AvnRxnJCKk",
+        "category": "Data Model",
+        "x": 305,
+        "y": 180,
+        "wires": [
+            [
+                "sd_jh29wkh2yBiAFR0H"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "_ID": {
+                "type": "bh.input",
+                "value": "data.id",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            },
+            "filterBy": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "filterBy": true
+        },
+        "generateNext": false,
+        "serviceName": "deleteholidayService",
+        "generated": true
+    }
+]

@@ -1,0 +1,233 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl",
+        "type": "tab",
+        "createdDate": "2024-02-23T12:29:12.284Z",
+        "label": "updateHolidaysApi",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "updateHolidaysApi",
+        "relativeParentPath": "holidays/updateHolidays"
+    },
+    {
+        "id": "sd_aYfNYSja8PGQvqsc",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/holiday/put",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "put",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": true,
+        "dataModelIsArray": false,
+        "erd": "_DM_kxoe18g2p",
+        "erdName": "hospital",
+        "entity": "holidays",
+        "entityId": "_EN_4bddbqrhwd",
+        "ref": "#/definitions/hospital ~ holidays",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 125,
+        "y": 180,
+        "wires": [
+            [
+                "sd_jxyZhGNZs8OJ8glq"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "updateHolidaysApi",
+        "functionName": "sd_aYfNYSja8PGQvqsc"
+    },
+    {
+        "id": "sd_jxyZhGNZs8OJ8glq",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_CMgNkPiuQLSMYrJE",
+            "type": "tab",
+            "createdDate": "2024-02-23T12:29:21.860Z",
+            "label": "updateHolidaysService",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_Rt8qmYnnikB6rxAK",
+            "flowName": "updateHolidays"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body?.holidays"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./updateHolidaysService",
+        "startName": "updateHolidays",
+        "inputParams": [
+            "bh.input.body?.holidays"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_jxyZhGNZs8OJ8glq",
+        "category": "General",
+        "x": 265,
+        "y": 180,
+        "wires": [
+            [
+                "sd_Tp7Vy9RfMnRJiC9K"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "updateHolidaysApi",
+        "generated": true
+    },
+    {
+        "id": "sd_Tp7Vy9RfMnRJiC9K",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_Tp7Vy9RfMnRJiC9K",
+        "category": "HTTP",
+        "x": 430,
+        "y": 180,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "updateHolidaysApi",
+        "generated": true
+    },
+    {
+        "id": "sd_pW0287GRZ3cTznB6",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": "",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_8weGiDjhIPKKFIYu",
+            "sd_Tp7Vy9RfMnRJiC9K"
+        ],
+        "functionName": "sd_pW0287GRZ3cTznB6",
+        "category": "General",
+        "x": 265,
+        "y": 320,
+        "wires": [
+            [
+                "sd_8weGiDjhIPKKFIYu"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "updateHolidaysApi"
+    },
+    {
+        "id": "sd_8weGiDjhIPKKFIYu",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_O56mCG7Vk1hZBjdl",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "",
+        "functionName": "sd_8weGiDjhIPKKFIYu",
+        "category": "Function",
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "sd_Tp7Vy9RfMnRJiC9K"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "updateHolidaysApi",
+        "generated": true
+    }
+]

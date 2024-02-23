@@ -1,0 +1,29 @@
+{
+    "/holiday/put": {
+        "put": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "holidays",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "holidays": {
+                                "$ref": "#/definitions/hospital ~ holidays"
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "updateHolidaysApi"
+            ]
+        }
+    }
+}

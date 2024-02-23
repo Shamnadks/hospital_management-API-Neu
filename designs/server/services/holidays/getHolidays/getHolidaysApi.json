@@ -1,0 +1,224 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9",
+        "type": "tab",
+        "createdDate": "2024-02-23T13:40:58.010Z",
+        "label": "getHolidaysApi",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "getHolidaysApi",
+        "relativeParentPath": "holidays/getHolidays"
+    },
+    {
+        "id": "sd_E8AdO1A0XtmEzH0o",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/holiday/get",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "_DM_kxoe18g2p",
+        "erdName": "hospital",
+        "entity": "holidays",
+        "entityId": "_EN_4bddbqrhwd",
+        "ref": "#/definitions/hospital ~ holidays",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 125,
+        "y": 140,
+        "wires": [
+            [
+                "sd_wXIucguvTSCz9gpg"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "getHolidaysApi",
+        "functionName": "sd_E8AdO1A0XtmEzH0o"
+    },
+    {
+        "id": "sd_wXIucguvTSCz9gpg",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2",
+            "type": "tab",
+            "createdDate": "2024-02-23T13:41:36.795Z",
+            "label": "getHolidaysService",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_0928IuPYLP2vWpTG",
+            "flowName": "getHolidays"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh.local",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.local.response"
+            }
+        ],
+        "callService": "./getHolidaysService",
+        "startName": "getHolidays",
+        "inputParams": [],
+        "accept_bh": false,
+        "functionName": "sd_wXIucguvTSCz9gpg",
+        "category": "General",
+        "x": 265,
+        "y": 140,
+        "wires": [
+            [
+                "sd_3MwnlcZhsGOF0FLS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getHolidaysApi",
+        "generated": true
+    },
+    {
+        "id": "sd_3MwnlcZhsGOF0FLS",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "response.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.response.statusCode",
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_3MwnlcZhsGOF0FLS",
+        "category": "HTTP",
+        "x": 430,
+        "y": 140,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getHolidaysApi",
+        "generated": true
+    },
+    {
+        "id": "sd_Dh9O5ehtK4UAgBlQ",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": "",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_ygMsPtuMPJ5lCD33",
+            "sd_3MwnlcZhsGOF0FLS"
+        ],
+        "functionName": "sd_Dh9O5ehtK4UAgBlQ",
+        "category": "General",
+        "x": 265,
+        "y": 280,
+        "wires": [
+            [
+                "sd_ygMsPtuMPJ5lCD33"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "getHolidaysApi"
+    },
+    {
+        "id": "sd_ygMsPtuMPJ5lCD33",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.response={\n    statusCode:400,\n    message:bh?.error?.message\n}",
+        "functionName": "sd_ygMsPtuMPJ5lCD33",
+        "category": "Function",
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "sd_3MwnlcZhsGOF0FLS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getHolidaysApi",
+        "generated": true
+    }
+]
