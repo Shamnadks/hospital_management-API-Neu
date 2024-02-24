@@ -172,8 +172,8 @@ export class get_appointment_flow {
         tablename: 'appointments',
         ...bh.input.data,
       };
-      console.log(bh.input.data);
-      console.log(bh.input.filterdata);
+      // console.log(bh.input.data)
+      // console.log(bh.input.filterdata)
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.appointmentFilter(bh, parentSpanInst);
@@ -276,7 +276,7 @@ export class get_appointment_flow {
   async response(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan('response', parentSpanInst);
     try {
-      console.log(bh.local.response);
+      // console.log(bh.local.response)
       console.log('bh.local.response');
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_response
@@ -395,7 +395,7 @@ export class get_appointment_flow {
       } else {
         throw new Error('Some error Occured try again later');
       }
-      console.log(bh.local.doctor_response);
+      // console.log(bh.local.doctor_response)
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.userFinderScript(bh, parentSpanInst);

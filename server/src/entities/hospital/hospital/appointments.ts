@@ -32,4 +32,13 @@ export class appointments {
   status: string;
   @Column({ name: 'url', nullable: false, type: 'text', primary: false })
   url: string;
+  @Column({ name: 'sla', nullable: false, type: 'bigint', primary: false })
+  sla: number;
+  @Column({
+    name: 'sla_date',
+    nullable: false,
+    type: 'timestamp with time zone',
+    primary: false,
+  })
+  sla_date: Date;
 }

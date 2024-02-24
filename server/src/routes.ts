@@ -1,4 +1,8 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-cron_job_flow-SSD_SERVICE_ID_sd_yvdMdu530ENNca20
+import { cron_job_flow as SSD_SERVICE_ID_sd_yvdMdu530ENNca20 } from './sd-services/cron/cron_job_flow';
+//CORE_REFERENCE_IMPORT-cron_job-SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR
+import { cron_job as SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR } from './sd-services/cron/cron_job';
 //CORE_REFERENCE_IMPORT-getHolidaysService-SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2
 import { getHolidaysService as SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2 } from './sd-services/holidays/getHolidays/getHolidaysService';
 //CORE_REFERENCE_IMPORT-getHolidaysApi-SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9
@@ -76,6 +80,10 @@ import { create_department_api as SSD_SERVICE_ID_sd_gphBUqeiZIyZQsAq } from './s
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-cron_job_flow-SSD_SERVICE_ID_sd_yvdMdu530ENNca20
+SSD_SERVICE_ID_sd_yvdMdu530ENNca20,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-cron_job-SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR
+SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-getHolidaysService-SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2
 SSD_SERVICE_ID_sd_YQsrEeWXyNrlkzy2,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-getHolidaysApi-SSD_SERVICE_ID_sd_OuQVJCoggX0aNlA9

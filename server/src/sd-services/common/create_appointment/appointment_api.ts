@@ -99,7 +99,7 @@ export class appointment_api {
             next
           );
           let parentSpanInst = null;
-          bh = await this.sd_HZxUST9U2c5JQ9Nq(bh, parentSpanInst);
+          bh = await this.sd_tr1clh3yGRvEMYE5(bh, parentSpanInst);
           //appendnew_next_sd_0UfJ8MQ7hEc6pMEi
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_0UfJ8MQ7hEc6pMEi');
@@ -116,6 +116,28 @@ export class appointment_api {
   //   service flows_appointment_api
 
   //appendnew_flow_appointment_api_start
+
+  async sd_tr1clh3yGRvEMYE5(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_tr1clh3yGRvEMYE5',
+      parentSpanInst
+    );
+    try {
+      console.log(bh.input.body, 'reeeee');
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_HZxUST9U2c5JQ9Nq(bh, parentSpanInst);
+      //appendnew_next_sd_tr1clh3yGRvEMYE5
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_tr1clh3yGRvEMYE5',
+        spanInst,
+        'sd_tr1clh3yGRvEMYE5'
+      );
+    }
+  }
 
   async sd_HZxUST9U2c5JQ9Nq(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(

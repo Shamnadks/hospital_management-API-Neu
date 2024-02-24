@@ -39,6 +39,7 @@
         "nodeType": "flow",
         "name": "filter_sql",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "resultdata"
@@ -50,6 +51,7 @@
         },
         "inputs": 1,
         "outputs": 1,
+        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "queryvalues"
@@ -79,7 +81,7 @@
         "script": "let fields=\"*\";\nlet tablename=bh.input.filter?.tablename;\nif(!tablename){throw new Error(\"something is missing\");}\nlet sorttable=bh.input.filter?.sorttable;\nlet sorttype=bh.input.filter?.sorttype || `ASC`;\nlet limitdata=bh.input.filter?.limit;\nlet skip=bh.input.filter?.skip;\nlet filter=bh.input.filter?.datas;\nlet groupby=bh.input.filter?.groupby;\nlet joins=bh.input.filter?.joins;\nif(bh.input.filter?.columns?.length>0){\n fields=bh.input.filter?.columns?.join(\",\");\n}\nbh.local.query = `SELECT ${fields} FROM ${process.env.DB_SCHEMA}.${tablename}`\nif(joins?.length>0){\n    joins=joins.join(\" \");\n     bh.local.query += \" \"+ joins \n\n}\nbh.local.queryvalues=[]\nif(filter){\n  let keys = Object.keys(filter);\n  let count=0;\n  if(keys?.length>0){\n    bh.local.query+=' where '\n    keys.forEach((key, index) => {\n        bh.local.query+=key+` IN (`;\n        filter?.[key]?.forEach((element, index)=>{\n            bh.local.query+= `$${count+1}`\n            bh.local.queryvalues.push(element)\n            if (filter?.[key]?.length > 1 && index < filter?.[key]?.length - 1) {\n                bh.local.query += \", \"\n            }\n            count ++;\n        })\n           bh.local.query+=`)`;  \n        if (keys.length > 1 && index < keys.length - 1) {\n            bh.local.query += \" AND \"\n        }\n        })\n        }}\n\nif(groupby?.length>0){\n    groupby=groupby.join(\",\");\n     bh.local.query += \" GROUP BY \"+ groupby \n\n}\nif(sorttable){\n     bh.local.query += \" ORDER BY \"+ sorttable +\" \" + sorttype\n}\nif(skip){\n     bh.local.query += \" OFFSET \"+ skip\n}\nif(limitdata){\n     bh.local.query += \" LIMIT \"+ limitdata +\" ;\"\n}\nconsole.log(bh.local.query)",
         "functionName": "psqlQuery",
         "category": "Function",
-        "x": 365,
+        "x": 325,
         "y": 120,
         "wires": [
             [

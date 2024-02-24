@@ -6,6 +6,7 @@ let instance = null;
 import { SDBaseService } from '../../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../../services/TracerService'; //_splitter_
 import log from '../../../utils/Logger'; //_splitter_
+import { GenericRDBMSOperations } from '../../../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
 import * as SSD_SERVICE_ID_sd_Fm1xxqvPxjmjZV2a from '../../appointments/create_appointment/create_appointment_service'; //_splitter_
 import * as SSD_SERVICE_ID_sd_YH9aqPJ68KAnCtkB from '../../filter/filterservice'; //_splitter_
 import * as SSD_SERVICE_ID_sd_sebhAvpyjJHu1R1Z from '../../pdf/upload_service'; //_splitter_
@@ -106,7 +107,7 @@ export class appointment_service {
     try {
       bh = this.sdService.__constructDefault(bh);
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.userFinderScript(bh, parentSpanInst);
+      bh = await this.sd_ub2HTobvKknrOkkB(bh, parentSpanInst);
       //appendnew_next_createAppointmentFlow
       return (
         // formatting output variables
@@ -127,7 +128,95 @@ export class appointment_service {
       );
     }
   }
+
+  async appointmentFetch(parentSpanInst, data: any = undefined, ...others) {
+    const spanInst = this.tracerService.createSpan(
+      'appointmentFetch',
+      parentSpanInst
+    );
+    let bh: any = {
+      input: {
+        data,
+      },
+      local: {
+        result: undefined,
+      },
+    };
+    try {
+      bh = this.sdService.__constructDefault(bh);
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.handleMain(bh, parentSpanInst);
+      //appendnew_next_appointmentFetch
+      return (
+        // formatting output variables
+        {
+          input: {},
+          local: {
+            result: bh.local.result,
+          },
+        }
+      );
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_MWcGSkxK6E1H5XuI',
+        spanInst,
+        'appointmentFetch'
+      );
+    }
+  }
   //appendnew_flow_appointment_service_start
+
+  async sd_ub2HTobvKknrOkkB(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_ub2HTobvKknrOkkB',
+      parentSpanInst
+    );
+    try {
+      let outputVariables = await this.appointmentFetch(
+        spanInst,
+        bh.input.data
+      );
+      bh.local.slaDate = outputVariables.local.result;
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_yNNcL6dmd2RYNDWe(bh, parentSpanInst);
+      //appendnew_next_sd_ub2HTobvKknrOkkB
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_ub2HTobvKknrOkkB',
+        spanInst,
+        'sd_ub2HTobvKknrOkkB'
+      );
+    }
+  }
+
+  async sd_yNNcL6dmd2RYNDWe(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_yNNcL6dmd2RYNDWe',
+      parentSpanInst
+    );
+    try {
+      console.log(bh.input.data, 'serrrr');
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.userFinderScript(bh, parentSpanInst);
+      //appendnew_next_sd_yNNcL6dmd2RYNDWe
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_yNNcL6dmd2RYNDWe',
+        spanInst,
+        'sd_yNNcL6dmd2RYNDWe'
+      );
+    }
+  }
 
   async userFinderScript(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
@@ -530,6 +619,8 @@ export class appointment_service {
         age: bh.input.age,
         url: bh.local?.uploaddata?.data?.url,
         status: bh.input.status,
+        sla: bh.input.data.sla,
+        sla_date: bh.local?.slaDate?.slaEndDate,
       };
       this.tracerService.sendData(spanInst, bh);
       bh = await this.appoinmentFlow(bh, parentSpanInst);
@@ -703,7 +794,7 @@ export class appointment_service {
           url: bh.local.paymentresponse,
         },
       };
-      console.log(bh.local.response);
+      // console.log(bh.local.response)
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport
       return bh;
@@ -804,6 +895,150 @@ export class appointment_service {
         'sd_83rrv4qrlNpagft5',
         spanInst,
         'userErrorHandler'
+      );
+    }
+  }
+
+  async handleMain(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'handleMain',
+      parentSpanInst
+    );
+    try {
+      console.log(bh.input.data.sla, 'appointment data');
+      const sla_end_date = new Date();
+      const current_date = new Date();
+
+      console.log(sla_end_date, 'dateeeeeeeeeeeeeeeeeeeeeeeeee');
+      sla_end_date.setDate(sla_end_date.getDate() + Number(bh.input.data.sla));
+
+      console.log(sla_end_date, 'slaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
+      bh.local.holidayFilterQuery = `SELECT *
+FROM ${process.env.DB_SCHEMA}.holidays
+WHERE starting_date > $1;
+`;
+      bh.local.holidayFilterQueryParams = [current_date];
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_8Xl230whNHogyHin(bh, parentSpanInst);
+      //appendnew_next_handleMain
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_2bqBS1IoF0aK5AfG',
+        spanInst,
+        'handleMain'
+      );
+    }
+  }
+
+  async sd_8Xl230whNHogyHin(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_8Xl230whNHogyHin',
+      parentSpanInst
+    );
+    try {
+      let configObj = this.sdService.getConfigObj(
+        'db-config',
+        'sd_JFEzq9BaWr7Csm3t'
+      );
+      let connectionName;
+      if (
+        configObj &&
+        configObj.hasOwnProperty('dbOption') &&
+        configObj.dbOption.hasOwnProperty('name')
+      ) {
+        connectionName = configObj.dbOption.name;
+      } else {
+        throw new Error('Cannot find the selected config name');
+      }
+      let params = bh.local.holidayFilterQueryParams;
+      params = params ? params : [];
+      bh.local.result = await new GenericRDBMSOperations().executeSQL(
+        connectionName,
+        bh.local.holidayFilterQuery,
+        params
+      );
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.extendedDays(bh, parentSpanInst);
+      //appendnew_next_sd_8Xl230whNHogyHin
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_8Xl230whNHogyHin',
+        spanInst,
+        'sd_8Xl230whNHogyHin'
+      );
+    }
+  }
+
+  async extendedDays(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'extendedDays',
+      parentSpanInst
+    );
+    try {
+      // console.log(bh.local.result,"holiday")
+
+      const holidays = bh.local?.result;
+
+      function daysBetween(startDate, endDate) {
+        const oneDay = 24 * 60 * 60 * 1000;
+        return Math.round(Math.abs((startDate - endDate) / oneDay));
+      }
+
+      const slaStartDate = new Date();
+      const slaEndDate = new Date();
+      slaEndDate.setDate(slaStartDate.getDate() + Number(bh.input.data.sla));
+
+      let holidayDays = 0;
+      for (const holiday of holidays) {
+        const asianStartDate = new Date(holiday.starting_date);
+        asianStartDate.setMinutes(
+          asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset()
+        );
+        const holidayStartDate = new Date(
+          asianStartDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
+        );
+        if (slaEndDate < holidayStartDate) {
+          continue;
+        }
+        console.log(holidayStartDate, 'holidayStartDate');
+        const asianEndDate = new Date(holiday.end_date);
+        asianEndDate.setMinutes(
+          asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset()
+        );
+
+        const holidayEndDate = new Date(
+          asianEndDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
+        );
+        console.log(holidayEndDate, 'holidayEndDate');
+
+        holidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;
+        slaEndDate.setDate(slaEndDate.getDate() + Number(holidayDays));
+        console.log(holidayDays, 'holidayDays');
+      }
+
+      console.log('Extended end date:', slaEndDate);
+
+      bh.local.result = {
+        slaEndDate: slaEndDate,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_extendedDays
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_mHmNplxHPL3B56Uf',
+        spanInst,
+        'extendedDays'
       );
     }
   }

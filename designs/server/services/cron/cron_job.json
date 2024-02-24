@@ -1,0 +1,101 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR",
+        "type": "tab",
+        "createdDate": "2024-02-24T14:31:31.828Z",
+        "label": "cron_job",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "cron_job",
+        "relativeParentPath": "cron"
+    },
+    {
+        "id": "sd_ifVezXirS1daO6Bp",
+        "type": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+        "z": "SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "expression": "\"*/30 * * * * *\"",
+        "scheduled": true,
+        "timezone": "\"\"",
+        "functionName": "sd_ifVezXirS1daO6Bp",
+        "category": "Cron",
+        "x": 185,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "expression": {
+                "type": "str",
+                "value": "*/30 * * * * *",
+                "constant": false
+            },
+            "scheduled": {
+                "type": "bool",
+                "value": "true"
+            },
+            "timezone": {
+                "type": "str",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "cron_job"
+    },
+    {
+        "id": "sd_3myxsmlkbQLkQAga",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_Uy1XPRMfDfVizRhR",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+            "type": "tab",
+            "createdDate": "2024-02-24T14:40:49.904Z",
+            "label": "cron_job_flow",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_KYwyoLelYmDT8g8I",
+            "flowName": "sd_KYwyoLelYmDT8g8I"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "bh.local",
+                "value": "result",
+                "mapVarName": "result",
+                "localVar": "bh.local.result"
+            }
+        ],
+        "callService": "./cron_job_flow",
+        "startName": "sd_KYwyoLelYmDT8g8I",
+        "inputParams": [],
+        "accept_bh": false,
+        "functionName": "sd_3myxsmlkbQLkQAga",
+        "category": "General",
+        "x": 305,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "cron_job"
+    }
+]

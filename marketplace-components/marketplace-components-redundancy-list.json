@@ -1070,5 +1070,57 @@
                 }
             ]
         }
+    },
+    "6076884ccd274f75ac8553da": {
+        "name": "6076884ccd274f75ac8553da",
+        "version": "1.0.5",
+        "packageType": [
+            "studio-nodes"
+        ],
+        "deps": {
+            "neutrinos-cron": {
+                "name": "neutrinos-cron",
+                "version": "1.0.5",
+                "packageType": "studio-nodes",
+                "nodes": {
+                    "server": [
+                        {
+                            "name": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+                            "displayName": "Cron",
+                            "dependencies": [
+                                {
+                                    "name": "node-cron",
+                                    "version": "3.0.0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "parentDeps": {}
+    },
+    "neutrinos-cron": {
+        "name": "neutrinos-cron",
+        "version": "1.0.5",
+        "packageType": "studio-nodes",
+        "deps": {},
+        "parentDeps": {
+            "6076884ccd274f75ac8553da": "1.0.5"
+        },
+        "nodes": {
+            "server": [
+                {
+                    "name": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+                    "displayName": "Cron",
+                    "dependencies": [
+                        {
+                            "name": "node-cron",
+                            "version": "3.0.0"
+                        }
+                    ]
+                }
+            ]
+        }
     }
 }

@@ -190,6 +190,7 @@ export class getHolidaysService {
         statusCode: 200,
         data: bh.local.result,
       };
+      console.log(bh.local.response.data, 'vyshnavv');
       this.tracerService.sendData(spanInst, bh);
       //appendnew_next_statusReport
       return bh;

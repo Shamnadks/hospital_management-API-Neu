@@ -21,7 +21,7 @@
         "script": "bh.local.paymentdata={    \n      \"appointment_id\":bh.local.resultdata?.id,\n      \"user_id\":bh.local.resultdata?.user_id,\n      \"doctor_id\":bh.local.resultdata?.doctor_id,\n      \"payment_method\":bh.input.data?.payment_method,\n      \"cash\":bh.local.resultdata?.cash,\n      \"status\":bh.input.status,\n      \"sucess_url\":bh.input.data?.sucess_url,\n      \"cancel_url\": bh.input.data?.cancel_url\n      }",
         "functionName": "paymentData",
         "category": "Function",
-        "x": 2525,
+        "x": 2585,
         "y": 220,
         "wires": [
             [
@@ -64,16 +64,17 @@
         "accept_bh": false,
         "functionName": "createAppointmentFlow",
         "category": "General",
-        "x": 125,
+        "x": 85,
         "y": 100,
         "wires": [
             [
-                "sd_zrqZR5wZuM9EEWTE"
+                "sd_ub2HTobvKknrOkkB"
             ]
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "appointment_service"
+        "serviceName": "appointment_service",
+        "generated": false
     },
     {
         "id": "sd_1lhDY9ucbweZ5nGv",
@@ -210,7 +211,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "appointment",
-        "script": "bh.local.appointment={\n    id:0,\n    user_id :bh.local?.user_response?.id,\n    doctor_id :bh.input?.data?.doctor_id,\n    appointment_date: bh.input.formattedDate,\n    token_number :bh.local.token+1,\n    cash :bh.input?.data?.cash,\n    age:bh.input.age,\n    url:bh.local?.uploaddata?.data?.url,\n    status : bh.input.status\n}",
+        "script": "bh.local.appointment={\n    id:0,\n    user_id :bh.local?.user_response?.id,\n    doctor_id :bh.input?.data?.doctor_id,\n    appointment_date: bh.input.formattedDate,\n    token_number :bh.local.token+1,\n    cash :bh.input?.data?.cash,\n    age:bh.input.age,\n    url:bh.local?.uploaddata?.data?.url,\n    status : bh.input.status,\n    sla:bh.input.data.sla,\n    sla_date:bh.local?.slaDate?.slaEndDate\n}",
         "functionName": "appointment",
         "category": "Function",
         "x": 2125,
@@ -385,7 +386,7 @@
         "script": "bh.input.filterdata={\n      \"tablename\":\"users\",\n      \"datas\":{\n        \"name\": [bh.input?.data?.name],\n        \"phone_no\": [bh.input?.data?.phone_no],\n        \"dob\": [bh.input?.data?.dob],\n      }\n}",
         "functionName": "userFinderScript",
         "category": "Function",
-        "x": 305,
+        "x": 445,
         "y": 100,
         "wires": [
             [
@@ -423,7 +424,7 @@
         "outputs": 2,
         "functionName": "userDublicateHandler",
         "category": "Function",
-        "x": 605,
+        "x": 665,
         "y": 100,
         "wires": [
             [
@@ -510,7 +511,7 @@
         "accept_bh": false,
         "functionName": "paymentService",
         "category": "General",
-        "x": 2645,
+        "x": 2685,
         "y": 220,
         "wires": [
             [
@@ -551,7 +552,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "Status Report",
-        "script": "bh.local.response={\n    statusCode:200,\n    data:{\n        data:bh.local.resultdata,\n        url:bh.local.paymentresponse\n    }\n}\nconsole.log(bh.local.response)",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:{\n        data:bh.local.resultdata,\n        url:bh.local.paymentresponse\n    }\n}\n// console.log(bh.local.response)",
         "functionName": "statusReport",
         "category": "Function",
         "x": 2965,
@@ -574,7 +575,7 @@
         "script": "if(bh.local.resultdata?.statusCode==200){\n    bh.local.resultdata=bh.local.resultdata?.data\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}",
         "functionName": "appointmentErrorHandler",
         "category": "Function",
-        "x": 2385,
+        "x": 2425,
         "y": 220,
         "wires": [
             [
@@ -698,7 +699,7 @@
         "accept_bh": false,
         "functionName": "userFilter",
         "category": "General",
-        "x": 425,
+        "x": 545,
         "y": 100,
         "wires": [
             [
@@ -849,6 +850,213 @@
         "wires": [
             [
                 "sd_WY01PFLnaJqS39rG"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_yNNcL6dmd2RYNDWe",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.input.data,\"serrrr\")\n\n\n",
+        "functionName": "sd_yNNcL6dmd2RYNDWe",
+        "category": "Function",
+        "x": 325,
+        "y": 100,
+        "wires": [
+            [
+                "sd_zrqZR5wZuM9EEWTE"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_MWcGSkxK6E1H5XuI",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "appointment fetch",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "result",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "appointmentFetch",
+        "category": "General",
+        "x": 85,
+        "y": 380,
+        "wires": [
+            [
+                "sd_2bqBS1IoF0aK5AfG"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "appointment_service",
+        "generated": false
+    },
+    {
+        "id": "sd_2bqBS1IoF0aK5AfG",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "handle Main",
+        "script": "console.log(bh.input.data.sla,\"appointment data\")\nconst sla_end_date= new Date()\nconst current_date=new Date()\n\nconsole.log(sla_end_date,\"dateeeeeeeeeeeeeeeeeeeeeeeeee\")\nsla_end_date.setDate(sla_end_date.getDate()+Number(bh.input.data.sla))\n\nconsole.log(sla_end_date,\"slaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\nbh.local.holidayFilterQuery=`SELECT *\nFROM ${process.env.DB_SCHEMA}.holidays\nWHERE starting_date > $1;\n`\nbh.local.holidayFilterQueryParams=[current_date]\n",
+        "functionName": "handleMain",
+        "category": "Function",
+        "x": 205,
+        "y": 380,
+        "wires": [
+            [
+                "sd_8Xl230whNHogyHin"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_ub2HTobvKknrOkkB",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+            "type": "tab",
+            "createdDate": "2024-02-13T12:57:35.383Z",
+            "label": "appointment_service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_MWcGSkxK6E1H5XuI",
+            "flowName": "appointmentFetch"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "data"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "bh.local",
+                "value": "slaDate",
+                "mapVarName": "result",
+                "localVar": "bh.local.slaDate"
+            }
+        ],
+        "callService": "./appointment_service",
+        "startName": "appointmentFetch",
+        "inputParams": [
+            "bh.input.data"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_ub2HTobvKknrOkkB",
+        "category": "General",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "sd_yNNcL6dmd2RYNDWe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "appointment_service"
+    },
+    {
+        "id": "sd_mHmNplxHPL3B56Uf",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "extendedDays",
+        "script": "// console.log(bh.local.result,\"holiday\")\n\nconst holidays = bh.local?.result\n\nfunction daysBetween(startDate, endDate) {\n    const oneDay = 24 * 60 * 60 * 1000; \n    return Math.round(Math.abs((startDate - endDate) / oneDay));\n}\n\n\nconst slaStartDate = new Date();\nconst slaEndDate = new Date();\nslaEndDate.setDate(slaStartDate.getDate()+Number(bh.input.data.sla))\n\n\nlet holidayDays = 0;\nfor (const holiday of holidays) {\n\n    const asianStartDate = new Date(holiday.starting_date);\nasianStartDate.setMinutes(asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset());\nconst holidayStartDate = new Date(asianStartDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nif( slaEndDate < holidayStartDate ){\n continue\n}\nconsole.log(holidayStartDate,\"holidayStartDate\")\n    const asianEndDate = new Date(holiday.end_date);\nasianEndDate.setMinutes(asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset());\n\nconst holidayEndDate = new Date(asianEndDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nconsole.log(holidayEndDate,\"holidayEndDate\")\n\nholidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;\nslaEndDate.setDate(slaEndDate.getDate()+Number(holidayDays))\nconsole.log(holidayDays,\"holidayDays\")\n}\n\nconsole.log(\"Extended end date:\", slaEndDate);\n\nbh.local.result={\n    slaEndDate:slaEndDate\n}",
+        "functionName": "extendedDays",
+        "category": "Function",
+        "x": 425,
+        "y": 380,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "appointment_service",
+        "generated": true
+    },
+    {
+        "id": "sd_8Xl230whNHogyHin",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_eBuPhijos3M7fnVJ",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "result"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "holidayFilterQuery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "holidayFilterQueryParams"
+        },
+        "dbType": "postgres",
+        "functionName": "sd_8Xl230whNHogyHin",
+        "category": "Storage",
+        "x": 325,
+        "y": 380,
+        "wires": [
+            [
+                "sd_mHmNplxHPL3B56Uf"
             ]
         ],
         "__n_excludedFromValidation__": {},
