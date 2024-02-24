@@ -51,10 +51,10 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "Status Report",
-        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.result\n}",
+        "script": "bh.local.response={\n    statusCode:200,\n    data:bh.local.result\n}\nconsole.log(bh.local.response.data,\"vyshnavv\")",
         "functionName": "statusReport",
         "category": "Function",
-        "x": 465,
+        "x": 525,
         "y": 140,
         "wires": [
             []
@@ -87,7 +87,7 @@
         "dbType": "postgres",
         "functionName": "sqldb",
         "category": "Storage",
-        "x": 345,
+        "x": 365,
         "y": 140,
         "wires": [
             [

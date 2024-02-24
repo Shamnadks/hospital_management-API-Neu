@@ -51,7 +51,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "get_appointment_flow"
+        "serviceName": "get_appointment_flow",
+        "generated": false
     },
     {
         "id": "sd_FbBsaqJcEphLsFUk",
@@ -82,7 +83,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "doctor_error_handler",
-        "script": "if(bh.local.doctor_response.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\nconsole.log(bh.local.doctor_response)\n",
+        "script": "if(bh.local.doctor_response.statusCode==200){\n    bh.local.doctor_response=bh.local.doctor_response?.data?.[0]\n}else{\n    throw new Error(\"Some error Occured try again later\")\n}\n// console.log(bh.local.doctor_response)\n",
         "functionName": "doctorErrorHandler",
         "category": "Function",
         "x": 545,
@@ -189,7 +190,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "get_appointment_flow"
+        "serviceName": "get_appointment_flow",
+        "generated": false
     },
     {
         "id": "sd_2MS0cpOf9pSwLbYK",
@@ -256,9 +258,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
+        "serviceName": "get_appointment_flow"
     },
     {
         "id": "sd_OWSP1UQk0C9RaYol",
@@ -323,9 +325,9 @@
             []
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "get_appointment_flow",
-        "generated": true
+        "serviceName": "get_appointment_flow"
     },
     {
         "id": "sd_jIHgvHMx8VHrf6ux",
@@ -334,7 +336,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "response",
-        "script": "console.log(bh.local.response)\nconsole.log(\"bh.local.response\")",
+        "script": "// console.log(bh.local.response)\nconsole.log(\"bh.local.response\")",
         "functionName": "response",
         "category": "Function",
         "x": 880,
@@ -452,7 +454,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "get_appointment_flow"
+        "serviceName": "get_appointment_flow",
+        "generated": false
     },
     {
         "id": "sd_87AEBGnFzWoCPGMl",
@@ -461,7 +464,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.input.filterdata={\n     \"tablename\":\"appointments\",\n    ...bh.input.data,\n}\nconsole.log(bh.input.data)\nconsole.log(bh.input.filterdata)\n   ",
+        "script": "bh.input.filterdata={\n     \"tablename\":\"appointments\",\n    ...bh.input.data,\n}\n// console.log(bh.input.data)\n// console.log(bh.input.filterdata)\n   ",
         "functionName": "sd_87AEBGnFzWoCPGMl",
         "category": "Function",
         "x": 260,

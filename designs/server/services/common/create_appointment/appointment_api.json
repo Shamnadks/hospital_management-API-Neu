@@ -60,11 +60,11 @@
         "outputs": 1,
         "validateRequestUsingSwaggerDocs": false,
         "category": "HTTP",
-        "x": 225,
+        "x": 185,
         "y": 80,
         "wires": [
             [
-                "sd_HZxUST9U2c5JQ9Nq"
+                "sd_tr1clh3yGRvEMYE5"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -79,7 +79,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "appointment_api",
-        "functionName": "sd_0UfJ8MQ7hEc6pMEi"
+        "functionName": "sd_0UfJ8MQ7hEc6pMEi",
+        "generated": false
     },
     {
         "id": "sd_Szkt0BtttEI7aGrB",
@@ -181,7 +182,8 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "appointment_api"
+        "serviceName": "appointment_api",
+        "generated": false
     },
     {
         "id": "sd_NntvQ1e63azDJXPb",
@@ -291,6 +293,28 @@
         "wires": [
             [
                 "sd_Szkt0BtttEI7aGrB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "appointment_api"
+    },
+    {
+        "id": "sd_tr1clh3yGRvEMYE5",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_xBgpGrAxrMfgsKKs",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.input.body,\"reeeee\")",
+        "functionName": "sd_tr1clh3yGRvEMYE5",
+        "category": "Function",
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "sd_HZxUST9U2c5JQ9Nq"
             ]
         ],
         "__n_excludedFromValidation__": {},

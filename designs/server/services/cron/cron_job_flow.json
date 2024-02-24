@@ -1,0 +1,573 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "type": "tab",
+        "createdDate": "2024-02-24T14:40:49.904Z",
+        "label": "cron_job_flow",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "cron_job_flow",
+        "relativeParentPath": "cron"
+    },
+    {
+        "id": "sd_KYwyoLelYmDT8g8I",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [
+            {
+                "key": "result",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "sd_KYwyoLelYmDT8g8I",
+        "category": "General",
+        "x": 85,
+        "y": 60,
+        "wires": [
+            [
+                "sd_TsvJGRm6oahD2OTA"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "cron_job_flow",
+        "generated": false
+    },
+    {
+        "id": "sd_TsvJGRm6oahD2OTA",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.getAppointmentsQuery=`SELECT * FROM ${process.env.DB_SCHEMA}.appointments;`;\n",
+        "functionName": "sd_TsvJGRm6oahD2OTA",
+        "category": "Function",
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "sd_loMeuOC6borV7BQR"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_loMeuOC6borV7BQR",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "result"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "getAppointmentsQuery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "dbType": "postgres",
+        "functionName": "sd_loMeuOC6borV7BQR",
+        "category": "Storage",
+        "x": 290,
+        "y": 60,
+        "wires": [
+            [
+                "sd_9Hn5Wy6CPyNYVovS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_9Hn5Wy6CPyNYVovS",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.local.result,\"got appointments\")\n",
+        "functionName": "sd_9Hn5Wy6CPyNYVovS",
+        "category": "Function",
+        "x": 405,
+        "y": 60,
+        "wires": [
+            [
+                "sd_rHcMFcbojDmdkbrT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_rHcMFcbojDmdkbrT",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+            "type": "tab",
+            "createdDate": "2024-02-24T14:40:49.904Z",
+            "label": "cron_job_flow",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_RZaBq8nROHOJZPNV",
+            "flowName": "recursion"
+        },
+        "inputVariables": [
+            {
+                "key": "appointments",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "result"
+            },
+            {
+                "key": "count",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "result.length"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./cron_job_flow",
+        "startName": "recursion",
+        "inputParams": [
+            "bh.local.result",
+            "bh.local.result.length"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_rHcMFcbojDmdkbrT",
+        "category": "General",
+        "x": 525,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "cron_job_flow"
+    },
+    {
+        "id": "sd_RZaBq8nROHOJZPNV",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "recursion",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "appointments",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "count",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "accept_bh": false,
+        "functionName": "recursion",
+        "category": "General",
+        "x": 25,
+        "y": 300,
+        "wires": [
+            [
+                "sd_zPKCX78NJUvdm5XD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "cron_job_flow",
+        "generated": false
+    },
+    {
+        "id": "sd_zPKCX78NJUvdm5XD",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "count",
+        "propertyType": "bh.input",
+        "propertyGv": "bh.input.count",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num",
+                "gv": "0"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_zPKCX78NJUvdm5XD",
+        "category": "Function",
+        "x": 165,
+        "y": 300,
+        "wires": [
+            [
+                "sd_Xn8Gin3Qu1PIwlOJ"
+            ],
+            [
+                "sd_uRf4gBTmkg04xLSV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_Xn8Gin3Qu1PIwlOJ",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.input.count--\n\nconsole.log(bh.input.count)\n",
+        "functionName": "sd_Xn8Gin3Qu1PIwlOJ",
+        "category": "Function",
+        "x": 205,
+        "y": 160,
+        "wires": [
+            [
+                "sd_txfC9qaYXhkybDLn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_uRf4gBTmkg04xLSV",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "return",
+        "functionName": "sd_uRf4gBTmkg04xLSV",
+        "category": "Function",
+        "x": 325,
+        "y": 400,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_HAnzjg9elOIuaHlt",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+            "type": "tab",
+            "createdDate": "2024-02-24T14:40:49.904Z",
+            "label": "cron_job_flow",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_RZaBq8nROHOJZPNV",
+            "flowName": "recursion"
+        },
+        "inputVariables": [
+            {
+                "key": "appointments",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "appointments"
+            },
+            {
+                "key": "count",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "count"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./cron_job_flow",
+        "startName": "recursion",
+        "inputParams": [
+            "bh.input.appointments",
+            "bh.input.count"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_HAnzjg9elOIuaHlt",
+        "category": "General",
+        "x": 965,
+        "y": 360,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "cron_job_flow"
+    },
+    {
+        "id": "sd_txfC9qaYXhkybDLn",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "handle Main",
+        "script": "console.log(bh.input.appointments?.[bh.input?.count]?.sla,\"appointment data\")\n\nbh.local.currentAppointment=bh.input.appointments?.[bh.input.count]\n\nconst current_date=new Date(bh.local?.currentAppointment?.appointment_date)\n\nbh.local.holidayFilterQuery=`SELECT *\nFROM ${process.env.DB_SCHEMA}.holidays\nWHERE starting_date > $1;\n`\nbh.local.holidayFilterQueryParams=[current_date]\n",
+        "functionName": "handleMain",
+        "category": "Function",
+        "x": 325,
+        "y": 160,
+        "wires": [
+            [
+                "sd_UtsAun4YGrIVLeiu"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_GRQuvS9cpOx9m81p",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "extendedDays",
+        "script": "const holidays = bh.local?.result\n\nfunction daysBetween(startDate, endDate) {\n    const oneDay = 24 * 60 * 60 * 1000; \n    return Math.round(Math.abs((startDate - endDate) / oneDay));\n}\n\n\nconst slaStartDate = new Date(bh.local.currentAppointment.appointment_date);\nconst slaEndDate = new Date(bh.local.currentAppointment.appointment_date);\nslaEndDate.setDate(slaStartDate.getDate()+Number(bh.local.currentAppointment.sla))\n\n\nlet holidayDays = 0;\nfor (const holiday of holidays) {\n\n    const asianStartDate = new Date(holiday.starting_date);\nasianStartDate.setMinutes(asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset());\nconst holidayStartDate = new Date(asianStartDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nif( slaEndDate < holidayStartDate ){\n continue\n}\nconsole.log(holidayStartDate,\"holidayStartDate\")\n    const asianEndDate = new Date(holiday.end_date);\nasianEndDate.setMinutes(asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset());\n\nconst holidayEndDate = new Date(asianEndDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nconsole.log(holidayEndDate,\"holidayEndDate\")\n\nholidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;\nslaEndDate.setDate(slaEndDate.getDate()+Number(holidayDays))\nconsole.log(holidayDays,\"holidayDays\")\n}\n\nconsole.log(\"Extended end date:\", slaEndDate);\n\nbh.local.result={\n    slaEndDate:slaEndDate,\n    previous_date:new Date(bh.local.currentAppointment?.sla_date),\n    id:bh.local.currentAppointment?.id\n}",
+        "functionName": "extendedDays",
+        "category": "Function",
+        "x": 505,
+        "y": 360,
+        "wires": [
+            [
+                "sd_09V5A3bfkq69z8e9"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_UtsAun4YGrIVLeiu",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "result"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "holidayFilterQuery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "holidayFilterQueryParams"
+        },
+        "dbType": "postgres",
+        "functionName": "sd_UtsAun4YGrIVLeiu",
+        "category": "Storage",
+        "x": 465,
+        "y": 160,
+        "wires": [
+            [
+                "sd_GRQuvS9cpOx9m81p"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_09V5A3bfkq69z8e9",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "result.slaEndDate",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.result.slaEndDate",
+        "rules": [
+            {
+                "t": "sne",
+                "v": "result.previous_date",
+                "vt": "bh.local",
+                "gv": "bh.local.result.previous_date"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_09V5A3bfkq69z8e9",
+        "category": "Function",
+        "x": 705,
+        "y": 360,
+        "wires": [
+            [
+                "sd_M92f68LX0HFHU8IE"
+            ],
+            [
+                "sd_HAnzjg9elOIuaHlt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_M92f68LX0HFHU8IE",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.updateAppointmentquery=`UPDATE ${process.env.DB_SCHEMA}.appointments\nSET sla_date = $1\nWHERE id=$2;\n`;\nbh.local.updateAppointmentqueryParams=[bh.local.result?.slaEndDate,bh.local.result?.id]",
+        "functionName": "sd_M92f68LX0HFHU8IE",
+        "category": "Function",
+        "x": 685,
+        "y": 180,
+        "wires": [
+            [
+                "sd_qZzSkpzWiFapFQpt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_qZzSkpzWiFapFQpt",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "response"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "updateAppointmentquery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "paramMappingObj": {
+            "type": "bh.local",
+            "value": "updateAppointmentqueryParams"
+        },
+        "dbType": "postgres",
+        "functionName": "sd_qZzSkpzWiFapFQpt",
+        "category": "Storage",
+        "x": 805,
+        "y": 60,
+        "wires": [
+            [
+                "sd_dokv0wG4MEU3zsvr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    },
+    {
+        "id": "sd_dokv0wG4MEU3zsvr",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_yvdMdu530ENNca20",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.local.response,\"responseeeeee\")",
+        "functionName": "sd_dokv0wG4MEU3zsvr",
+        "category": "Function",
+        "x": 905,
+        "y": 60,
+        "wires": [
+            [
+                "sd_HAnzjg9elOIuaHlt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "cron_job_flow",
+        "generated": true
+    }
+]

@@ -845,6 +845,195 @@
                     }
                 }
             ]
+        },
+        {
+            "_id": "6076884ccd274f75ac8553da",
+            "name": "neutrinos-cron",
+            "averageRating": 5,
+            "description": "Cron node is time based job scheduler.",
+            "devid": "2edbc2c1-f546-ca38-0f97-944ff2cbbd86",
+            "displayName": "Cron",
+            "lastUpdated": "2023-02-15T06:41:55.372Z",
+            "numberOfDownloads": 0,
+            "packageType": [
+                "studio-nodes"
+            ],
+            "platformSupportVersion": "9.1.0",
+            "pluginImage": "neutrinos-cron-1617867631548.png",
+            "publisher": "Neutrinos",
+            "uploadedDate": "2021-04-14T06:14:36.559Z",
+            "username": "sajan.grover@neutrinos.co",
+            "version": "1.0.5",
+            "versions": {
+                "1.0.0": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-cron",
+                            "displayName": "Cron",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.0",
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+                                        "displayName": "Cron",
+                                        "dependencies": [
+                                            {
+                                                "name": "node-cron",
+                                                "version": "3.0.0"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "packageDependencies": {
+                                "node-cron": "3.0.0"
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "7.4.0"
+                    },
+                    "metadata": {
+                        "devid": "2edbc2c1-f546-ca38-0f97-944ff2cbbd86",
+                        "name": "neutrinos-cron",
+                        "displayName": "Cron",
+                        "version": "1.0.0",
+                        "username": "sajan.grover@neutrinos.co",
+                        "publisher": "Neutrinos",
+                        "platformSupportVersion": {
+                            "min": "7.4.0"
+                        },
+                        "description": "Cron node is time based job scheduler.",
+                        "pluginImage": "neutrinos-cron-1617867631548.png"
+                    },
+                    "version": "1.0.0"
+                },
+                "1.0.4": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-cron",
+                            "displayName": "Cron",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.4",
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+                                        "displayName": "Cron",
+                                        "dependencies": [
+                                            {
+                                                "name": "node-cron",
+                                                "version": "3.0.0"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "packageDependencies": {
+                                "node-cron": "3.0.0"
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "7.4.0"
+                    },
+                    "metadata": {
+                        "devid": "2edbc2c1-f546-ca38-0f97-944ff2cbbd86",
+                        "name": "neutrinos-cron",
+                        "displayName": "Cron",
+                        "version": "1.0.4",
+                        "username": "sajan.grover@neutrinos.co",
+                        "publisher": "Neutrinos",
+                        "platformSupportVersion": {
+                            "min": "7.4.0"
+                        },
+                        "description": "Cron node is time based job scheduler.",
+                        "pluginImage": "neutrinos-cron-1617867631548.png"
+                    },
+                    "version": "1.0.4"
+                },
+                "1.0.5": {
+                    "packages": [
+                        {
+                            "name": "neutrinos-cron",
+                            "displayName": "Cron",
+                            "packageType": "studio-nodes",
+                            "version": "1.0.5",
+                            "nodes": {
+                                "server": [
+                                    {
+                                        "name": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+                                        "displayName": "Cron",
+                                        "dependencies": [
+                                            {
+                                                "name": "node-cron",
+                                                "version": "3.0.0"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "packageDependencies": {
+                                "node-cron": "3.0.0"
+                            }
+                        }
+                    ],
+                    "platformSupportVersion": {
+                        "min": "9.1.0"
+                    },
+                    "metadata": {
+                        "devid": "2edbc2c1-f546-ca38-0f97-944ff2cbbd86",
+                        "name": "neutrinos-cron",
+                        "displayName": "Cron",
+                        "version": "1.0.5",
+                        "username": "sajan.grover@neutrinos.co",
+                        "publisher": "Neutrinos",
+                        "platformSupportVersion": {
+                            "min": "9.1.0"
+                        },
+                        "description": "Cron node is time based job scheduler.",
+                        "pluginImage": "neutrinos-cron-1617867631548.png"
+                    },
+                    "version": "1.0.5"
+                }
+            },
+            "archiveFile": "api/zips/undefined",
+            "guide": "63ec7eb4784221001acb8840",
+            "icon": "api/resource/icons/63ec7eb3784221001acb8838",
+            "screenshots": [
+                "api/resource/screenshots/63ec7eb3784221001acb883a",
+                "api/resource/screenshots/63ec7eb4784221001acb883c",
+                "api/resource/screenshots/63ec7eb4784221001acb883e"
+            ],
+            "no_of_downloads_by_packages": {
+                "neutrinos-cron": 213
+            },
+            "dependencies": [
+                {
+                    "name": "neutrinos-cron",
+                    "displayName": "Cron",
+                    "packageType": "studio-nodes",
+                    "version": "1.0.5",
+                    "nodes": {
+                        "server": [
+                            {
+                                "name": "7a5b491e-93f0-6514-41ec-b24726e833b0",
+                                "displayName": "Cron",
+                                "dependencies": [
+                                    {
+                                        "name": "node-cron",
+                                        "version": "3.0.0"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "packageDependencies": {
+                        "node-cron": "3.0.0"
+                    }
+                }
+            ]
         }
     ]
 }

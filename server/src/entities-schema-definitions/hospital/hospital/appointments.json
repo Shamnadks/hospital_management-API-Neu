@@ -159,6 +159,40 @@
                 "dbColName": "",
                 "constraints": {}
             }
+        },
+        "sla": {
+            "name": "sla",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_uzzrv0bsr5",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "bigint",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "sla_date": {
+            "name": "sla_date",
+            "format": "date-time",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_h15omzuvs7",
+                "subCategoryType": "date",
+                "nullable": false,
+                "dbType": "timestamp with time zone",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
         }
     },
     "required": [
@@ -169,7 +203,9 @@
         "cash",
         "status",
         "age",
-        "url"
+        "url",
+        "sla",
+        "sla_date"
     ],
     "value": "",
     "__attributeExpansion__": true,
