@@ -987,41 +987,42 @@ WHERE starting_date > $1;
 
       const holidays = bh.local?.result;
 
-      function daysBetween(startDate, endDate) {
-        const oneDay = 24 * 60 * 60 * 1000;
-        return Math.round(Math.abs((startDate - endDate) / oneDay));
+      function getHoliday(date, holidays) {
+        for (const holiday of holidays) {
+          if (
+            date >= new Date(holiday.starting_date) &&
+            date <= new Date(holiday.end_date)
+          ) {
+            return holiday;
+          }
+        }
+        return null;
       }
-
       const slaStartDate = new Date();
-      const slaEndDate = new Date();
-      slaEndDate.setDate(slaStartDate.getDate() + Number(bh.input.data.sla));
+      let slaEndDate = new Date(slaStartDate);
+      const millisecondsPerDay = 24 * 60 * 60 * 1000;
+      const slaDays = Number(bh.input?.data?.sla) + 1;
+      for (let i = 0; i < slaDays; ) {
+        // Increment end date by one day
+        slaEndDate.setTime(slaEndDate.getTime() + millisecondsPerDay);
 
-      let holidayDays = 0;
-      for (const holiday of holidays) {
-        const asianStartDate = new Date(holiday.starting_date);
-        asianStartDate.setMinutes(
-          asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset()
-        );
-        const holidayStartDate = new Date(
-          asianStartDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
-        );
-        if (slaEndDate < holidayStartDate) {
+        // Check if the end date falls on a weekend (Saturday or Sunday)
+        if (slaEndDate.getDay() === 0 || slaEndDate.getDay() === 6) {
+          // Skip weekends
           continue;
         }
-        console.log(holidayStartDate, 'holidayStartDate');
-        const asianEndDate = new Date(holiday.end_date);
-        asianEndDate.setMinutes(
-          asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset()
-        );
 
-        const holidayEndDate = new Date(
-          asianEndDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
-        );
-        console.log(holidayEndDate, 'holidayEndDate');
+        // Check if the end date falls within any holiday range
+        // const formattedEndDate = formatDate(slaEndDate);
+        const holiday = getHoliday(slaEndDate, holidays);
+        if (holiday) {
+          // Skip holidays
+          slaEndDate = new Date(holiday.end_date);
+          continue;
+        }
 
-        holidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;
-        slaEndDate.setDate(slaEndDate.getDate() + Number(holidayDays));
-        console.log(holidayDays, 'holidayDays');
+        // Increment SLA day count if it's a valid working day
+        i++;
       }
 
       console.log('Extended end date:', slaEndDate);

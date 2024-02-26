@@ -73,8 +73,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "appointment_service",
-        "generated": false
+        "serviceName": "appointment_service"
     },
     {
         "id": "sd_1lhDY9ucbweZ5nGv",
@@ -919,8 +918,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "appointment_service",
-        "generated": false
+        "serviceName": "appointment_service"
     },
     {
         "id": "sd_2bqBS1IoF0aK5AfG",
@@ -1002,9 +1000,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "appointment_service"
+        "serviceName": "appointment_service",
+        "generated": true
     },
     {
         "id": "sd_mHmNplxHPL3B56Uf",
@@ -1013,7 +1011,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "extendedDays",
-        "script": "// console.log(bh.local.result,\"holiday\")\n\nconst holidays = bh.local?.result\n\nfunction daysBetween(startDate, endDate) {\n    const oneDay = 24 * 60 * 60 * 1000; \n    return Math.round(Math.abs((startDate - endDate) / oneDay));\n}\n\n\nconst slaStartDate = new Date();\nconst slaEndDate = new Date();\nslaEndDate.setDate(slaStartDate.getDate()+Number(bh.input.data.sla))\n\n\nlet holidayDays = 0;\nfor (const holiday of holidays) {\n\n    const asianStartDate = new Date(holiday.starting_date);\nasianStartDate.setMinutes(asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset());\nconst holidayStartDate = new Date(asianStartDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nif( slaEndDate < holidayStartDate ){\n continue\n}\nconsole.log(holidayStartDate,\"holidayStartDate\")\n    const asianEndDate = new Date(holiday.end_date);\nasianEndDate.setMinutes(asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset());\n\nconst holidayEndDate = new Date(asianEndDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nconsole.log(holidayEndDate,\"holidayEndDate\")\n\nholidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;\nslaEndDate.setDate(slaEndDate.getDate()+Number(holidayDays))\nconsole.log(holidayDays,\"holidayDays\")\n}\n\nconsole.log(\"Extended end date:\", slaEndDate);\n\nbh.local.result={\n    slaEndDate:slaEndDate\n}",
+        "script": "// console.log(bh.local.result,\"holiday\")\n\nconst holidays = bh.local?.result\n\nfunction getHoliday(date, holidays) {\n    for (const holiday of holidays) {\n        if (date >= new Date(holiday.starting_date) && date <=  new Date(holiday.end_date)) {\n            return holiday;\n        }\n    }\n    return null;\n}\nconst slaStartDate = new Date();\nlet slaEndDate = new Date(slaStartDate);\nconst millisecondsPerDay = 24 * 60 * 60 * 1000;\nconst slaDays=Number(bh.input?.data?.sla)+1\nfor (let i = 0; i < slaDays; ) {\n        // Increment end date by one day\n        slaEndDate.setTime(slaEndDate.getTime() + millisecondsPerDay);\n\n        // Check if the end date falls on a weekend (Saturday or Sunday)\n        if (slaEndDate.getDay() === 0 || slaEndDate.getDay() === 6) {\n            // Skip weekends\n            continue;\n        }\n\n        // Check if the end date falls within any holiday range\n        // const formattedEndDate = formatDate(slaEndDate);\n        const holiday = getHoliday(slaEndDate, holidays);\n        if (holiday) {\n            // Skip holidays\n            slaEndDate = new Date(holiday.end_date);\n            continue;\n        }\n\n        // Increment SLA day count if it's a valid working day\n        i++;\n}\n\nconsole.log(\"Extended end date:\", slaEndDate);\n\nbh.local.result={\n    slaEndDate:slaEndDate\n}",
         "functionName": "extendedDays",
         "category": "Function",
         "x": 425,
@@ -1034,6 +1032,7 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "result"
@@ -1045,6 +1044,7 @@
         },
         "inputs": 1,
         "outputs": 1,
+        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "holidayFilterQueryParams"

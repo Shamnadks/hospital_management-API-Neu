@@ -42,8 +42,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "cron_job_flow",
-        "generated": false
+        "serviceName": "cron_job_flow"
     },
     {
         "id": "sd_TsvJGRm6oahD2OTA",
@@ -75,6 +74,7 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "result"
@@ -87,6 +87,7 @@
         "inputs": 1,
         "outputs": 1,
         "params": [],
+        "paramMappingObj": {},
         "dbType": "postgres",
         "functionName": "sd_loMeuOC6borV7BQR",
         "category": "Storage",
@@ -178,9 +179,9 @@
             []
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "cron_job_flow"
+        "serviceName": "cron_job_flow",
+        "generated": true
     },
     {
         "id": "sd_RZaBq8nROHOJZPNV",
@@ -221,8 +222,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "cron_job_flow",
-        "generated": false
+        "serviceName": "cron_job_flow"
     },
     {
         "id": "sd_zPKCX78NJUvdm5XD",
@@ -361,9 +361,9 @@
             []
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "cron_job_flow"
+        "serviceName": "cron_job_flow",
+        "generated": true
     },
     {
         "id": "sd_txfC9qaYXhkybDLn",
@@ -394,7 +394,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "extendedDays",
-        "script": "const holidays = bh.local?.result\n\nfunction daysBetween(startDate, endDate) {\n    const oneDay = 24 * 60 * 60 * 1000; \n    return Math.round(Math.abs((startDate - endDate) / oneDay));\n}\n\n\nconst slaStartDate = new Date(bh.local.currentAppointment.appointment_date);\nconst slaEndDate = new Date(bh.local.currentAppointment.appointment_date);\nslaEndDate.setDate(slaStartDate.getDate()+Number(bh.local.currentAppointment.sla))\n\n\nlet holidayDays = 0;\nfor (const holiday of holidays) {\n\n    const asianStartDate = new Date(holiday.starting_date);\nasianStartDate.setMinutes(asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset());\nconst holidayStartDate = new Date(asianStartDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nif( slaEndDate < holidayStartDate ){\n continue\n}\nconsole.log(holidayStartDate,\"holidayStartDate\")\n    const asianEndDate = new Date(holiday.end_date);\nasianEndDate.setMinutes(asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset());\n\nconst holidayEndDate = new Date(asianEndDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\nconsole.log(holidayEndDate,\"holidayEndDate\")\n\nholidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;\nslaEndDate.setDate(slaEndDate.getDate()+Number(holidayDays))\nconsole.log(holidayDays,\"holidayDays\")\n}\n\nconsole.log(\"Extended end date:\", slaEndDate);\n\nbh.local.result={\n    slaEndDate:slaEndDate,\n    previous_date:new Date(bh.local.currentAppointment?.sla_date),\n    id:bh.local.currentAppointment?.id\n}",
+        "script": "const holidays = bh.local?.result\n\nfunction getHoliday(date, holidays) {\n    for (const holiday of holidays) {\n        if (date >= new Date(holiday.starting_date) && date <=  new Date(holiday.end_date)) {\n            return holiday;\n        }\n    }\n    return null;\n}\nconst slaStartDate = new Date(bh.local.currentAppointment.appointment_date);\nlet slaEndDate = new Date(slaStartDate);\nconst millisecondsPerDay = 24 * 60 * 60 * 1000;\nconst slaDays=Number(bh.local.currentAppointment.sla)+1\nfor (let i = 0; i < slaDays; ) {\n        // Increment end date by one day\n        slaEndDate.setTime(slaEndDate.getTime() + millisecondsPerDay);\n\n        // Check if the end date falls on a weekend (Saturday or Sunday)\n        if (slaEndDate.getDay() === 0 || slaEndDate.getDay() === 6) {\n            // Skip weekends\n            continue;\n        }\n\n        // Check if the end date falls within any holiday range\n        // const formattedEndDate = formatDate(slaEndDate);\n        const holiday = getHoliday(slaEndDate, holidays);\n        if (holiday) {\n            // Skip holidays\n            slaEndDate = new Date(holiday.end_date);\n            continue;\n        }\n\n        // Increment SLA day count if it's a valid working day\n        i++;\n}\n\n\n\n\n// function daysBetween(startDate, endDate) {\n//     const oneDay = 24 * 60 * 60 * 1000; \n//     return Math.round(Math.abs((startDate - endDate) / oneDay));\n// }\n\n\n// const slaStartDate = new Date(bh.local.currentAppointment.appointment_date);\n// const slaEndDate = new Date(bh.local.currentAppointment.appointment_date);\n// slaEndDate.setDate(slaStartDate.getDate()+Number(bh.local.currentAppointment.sla))\n\n\n// let holidayDays = 0;\n// for (const holiday of holidays) {\n\n//     const asianStartDate = new Date(holiday.starting_date);\n// asianStartDate.setMinutes(asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset());\n// const holidayStartDate = new Date(asianStartDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\n// if( slaEndDate < holidayStartDate ){\n//  continue\n// }\n// console.log(holidayStartDate,\"holidayStartDate\")\n//     const asianEndDate = new Date(holiday.end_date);\n// asianEndDate.setMinutes(asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset());\n\n// const holidayEndDate = new Date(asianEndDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));\n// console.log(holidayEndDate,\"holidayEndDate\")\n\n// holidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;\n\n// slaEndDate.setDate(slaEndDate.getDate()+Number(holidayDays))\n// console.log(holidayDays,\"holidayDays\")\n// }\n\nconsole.log(\"Extended end date:\", slaEndDate);\n\nbh.local.result={\n    slaEndDate:slaEndDate,\n    previous_date:new Date(bh.local.currentAppointment?.sla_date),\n    id:bh.local.currentAppointment?.id\n}",
         "functionName": "extendedDays",
         "category": "Function",
         "x": 505,
@@ -417,6 +417,7 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "result"
@@ -428,6 +429,7 @@
         },
         "inputs": 1,
         "outputs": 1,
+        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "holidayFilterQueryParams"
@@ -518,6 +520,7 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_JFEzq9BaWr7Csm3t",
+        "queryType": "",
         "resultMap": {
             "type": "bh.local",
             "value": "response"
@@ -529,6 +532,7 @@
         },
         "inputs": 1,
         "outputs": 1,
+        "params": [],
         "paramMappingObj": {
             "type": "bh.local",
             "value": "updateAppointmentqueryParams"
