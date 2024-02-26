@@ -199,7 +199,7 @@ export class cron_job_flow {
       } else {
         throw new Error('Cannot find the selected config name');
       }
-      let params = [];
+      let params = undefined;
       params = params ? params : [];
       bh.local.result = await new GenericRDBMSOperations().executeSQL(
         connectionName,
@@ -409,46 +409,76 @@ WHERE starting_date > $1;
     try {
       const holidays = bh.local?.result;
 
-      function daysBetween(startDate, endDate) {
-        const oneDay = 24 * 60 * 60 * 1000;
-        return Math.round(Math.abs((startDate - endDate) / oneDay));
+      function getHoliday(date, holidays) {
+        for (const holiday of holidays) {
+          if (
+            date >= new Date(holiday.starting_date) &&
+            date <= new Date(holiday.end_date)
+          ) {
+            return holiday;
+          }
+        }
+        return null;
       }
-
       const slaStartDate = new Date(
         bh.local.currentAppointment.appointment_date
       );
-      const slaEndDate = new Date(bh.local.currentAppointment.appointment_date);
-      slaEndDate.setDate(
-        slaStartDate.getDate() + Number(bh.local.currentAppointment.sla)
-      );
+      let slaEndDate = new Date(slaStartDate);
+      const millisecondsPerDay = 24 * 60 * 60 * 1000;
+      const slaDays = Number(bh.local.currentAppointment.sla) + 1;
+      for (let i = 0; i < slaDays; ) {
+        // Increment end date by one day
+        slaEndDate.setTime(slaEndDate.getTime() + millisecondsPerDay);
 
-      let holidayDays = 0;
-      for (const holiday of holidays) {
-        const asianStartDate = new Date(holiday.starting_date);
-        asianStartDate.setMinutes(
-          asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset()
-        );
-        const holidayStartDate = new Date(
-          asianStartDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
-        );
-        if (slaEndDate < holidayStartDate) {
+        // Check if the end date falls on a weekend (Saturday or Sunday)
+        if (slaEndDate.getDay() === 0 || slaEndDate.getDay() === 6) {
+          // Skip weekends
           continue;
         }
-        console.log(holidayStartDate, 'holidayStartDate');
-        const asianEndDate = new Date(holiday.end_date);
-        asianEndDate.setMinutes(
-          asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset()
-        );
 
-        const holidayEndDate = new Date(
-          asianEndDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
-        );
-        console.log(holidayEndDate, 'holidayEndDate');
+        // Check if the end date falls within any holiday range
+        // const formattedEndDate = formatDate(slaEndDate);
+        const holiday = getHoliday(slaEndDate, holidays);
+        if (holiday) {
+          // Skip holidays
+          slaEndDate = new Date(holiday.end_date);
+          continue;
+        }
 
-        holidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;
-        slaEndDate.setDate(slaEndDate.getDate() + Number(holidayDays));
-        console.log(holidayDays, 'holidayDays');
+        // Increment SLA day count if it's a valid working day
+        i++;
       }
+
+      // function daysBetween(startDate, endDate) {
+      //     const oneDay = 24 * 60 * 60 * 1000;
+      //     return Math.round(Math.abs((startDate - endDate) / oneDay));
+      // }
+
+      // const slaStartDate = new Date(bh.local.currentAppointment.appointment_date);
+      // const slaEndDate = new Date(bh.local.currentAppointment.appointment_date);
+      // slaEndDate.setDate(slaStartDate.getDate()+Number(bh.local.currentAppointment.sla))
+
+      // let holidayDays = 0;
+      // for (const holiday of holidays) {
+
+      //     const asianStartDate = new Date(holiday.starting_date);
+      // asianStartDate.setMinutes(asianStartDate.getMinutes() + asianStartDate.getTimezoneOffset());
+      // const holidayStartDate = new Date(asianStartDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));
+      // if( slaEndDate < holidayStartDate ){
+      //  continue
+      // }
+      // console.log(holidayStartDate,"holidayStartDate")
+      //     const asianEndDate = new Date(holiday.end_date);
+      // asianEndDate.setMinutes(asianEndDate.getMinutes() + asianEndDate.getTimezoneOffset());
+
+      // const holidayEndDate = new Date(asianEndDate.toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));
+      // console.log(holidayEndDate,"holidayEndDate")
+
+      // holidayDays = daysBetween(holidayStartDate, holidayEndDate) + 1;
+
+      // slaEndDate.setDate(slaEndDate.getDate()+Number(holidayDays))
+      // console.log(holidayDays,"holidayDays")
+      // }
 
       console.log('Extended end date:', slaEndDate);
 
